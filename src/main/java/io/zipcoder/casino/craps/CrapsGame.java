@@ -6,12 +6,12 @@ import io.zipcoder.casino.utilities.Console;
 import java.util.List;
 
 public class CrapsGame {
-    Player player;
-    Console console;
-    List<CrapsBet> betList;
-    CrapsRoll comeOutRoll;
-    CrapsRoll currentRoll;
-    Boolean exit;
+    private Player player;
+    private Console console;
+    private List<CrapsBet> betList;
+    private CrapsRoll comeOutRoll;
+    private CrapsRoll currentRoll;
+    private Boolean exit;
 
     public CrapsGame(Player player, Console console){
 
