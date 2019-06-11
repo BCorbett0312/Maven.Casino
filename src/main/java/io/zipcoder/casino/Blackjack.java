@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Casino;
+package io.zipcoder.casino;
 
 public class Blackjack {
     //Will need New Deck
