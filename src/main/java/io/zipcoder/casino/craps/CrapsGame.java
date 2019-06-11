@@ -10,34 +10,53 @@ public class CrapsGame {
     Console console;
     List<CrapsBet> betList;
     CrapsRoll comeOutRoll;
+    CrapsRoll currentRoll;
+    Boolean exit;
 
     public CrapsGame(Player player, Console console){
 
     }
 
-    public String betPayoutTable(){
+    public void playRound() { }
+
+    public void betOnComeoutPhase(){
+
+    }
+
+    public void rollComeOutPhase(){
+
+    }
+
+    public void betOnPointPhase(){
+
+    }
+
+    public void rollPointPhase() {
+
+    }
+
+    public String statusOfBets(){
         return null;
     }
 
-    public CrapsRoll rollComeOutPhase(){
-        return null;
-    }
+    public String printBetPayoutTable(){
+        return null;}
 
-    public CrapsRoll rollPointPhase() {
-        return null;
-    }
-
-    public String betStatus(){
-        return null;
-    }
 
     public CrapsBet makeNewBet(){
         return null;
     }
 
+    public Boolean getExit(){
+        return null;
+    }
 
     private CrapsRoll rollDice(){
         return null;
+    }
+
+    private void settleBets(){
+
     }
 
 }
