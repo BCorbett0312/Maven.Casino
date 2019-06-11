@@ -1,5 +1,6 @@
 package io.zipcoder.casino.craps;
 
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.List;
