@@ -14,8 +14,8 @@ public class Deck {
     }
 
 
-    public ArrayList<> shuffleDeck(){
+    public void shuffleDeck(){
         //shuffle and return deck
-        return null;
+
     }
 }
