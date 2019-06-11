@@ -10,27 +10,17 @@ public class Blackjack {
 
 
     public void checkHand(){
-
+        //check hand is bust or blackjack will be called after every hit
     }
 
-    public void displayHand(){
-
-    }
 
     public void offerInsurance(){
-
+        //gives player chance for insurance if dealer has Ace showing
     }
 
-    public void showDealerHand(){
-
-    }
-
-    public void showHand(){
-
-    }
 
     public void getNewDeck(){
-
+        //called when deck item has 10 or less cards
     }
 
 }

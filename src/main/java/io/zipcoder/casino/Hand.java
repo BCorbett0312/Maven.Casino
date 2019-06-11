@@ -8,15 +8,15 @@ public class Hand {
 
 
     public void displayHand(){
-
+        //get hand and send to console for display
     }
 
     public void discard(){
-
+        //discard specific card from hand
     }
 
     public void drawCard(){
-
+        //draw card into hand
     }
 
 }
