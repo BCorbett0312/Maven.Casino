@@ -1,8 +1,18 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.blackJack;
+
+import io.zipcoder.casino.Deck;
+import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.continental.Continental;
+
 
 public class Blackjack {
-    //Will need New Deck
-    //Will need new Hand
+    private Hand playerHand;
+    private Hand dealerHand;
+    private Deck theDeck;
+    private BlackjackPlayer player;
+    private BlackjackPlayer dealer;
+
+
 
     public Blackjack(){
 
@@ -22,5 +32,7 @@ public class Blackjack {
     public void getNewDeck(){
         //called when deck item has 10 or less cards
     }
+
+
 
 }
