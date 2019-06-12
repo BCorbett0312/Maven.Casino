@@ -1,6 +1,15 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.blackJack;
+
+import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.Player;
 
 public class BlackjackPlayer {
+
+    private Player player;
+    private Player dealer;
+    private Hand playerHand;
+    private Hand dealerHand;
+
 
     public void hit(){
         //adds card from deck to hand
@@ -18,8 +27,6 @@ public class BlackjackPlayer {
         //create a second hand for player using 1 of each card of starting hand and dealing a single card to each hand
     }
 
-    public void dealerPlay(){
-        //logic for dealer playing the game
-    }
+
 
 }
