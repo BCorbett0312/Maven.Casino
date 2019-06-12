@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class DeckBuilder {
 
-    private ArrayList<Card> cards;
+    private Deck dedk;
 
     public DeckBuilder() {
-        cards = new ArrayList<>();
+
     }
 
 }
