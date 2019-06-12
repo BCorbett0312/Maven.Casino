@@ -14,6 +14,7 @@ public class CrapsGame implements Game, Gamble {
     private CrapsRoll comeOutRoll;
     private CrapsRoll currentRoll;
     private Boolean exit;
+    private CrapsMediator mediator;
 
     public CrapsGame(Player player, Console console){
 
