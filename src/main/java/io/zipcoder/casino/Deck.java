@@ -3,6 +3,7 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 
 public class Deck {
+
     //New Arraylist of Deck
     //new cards
     public Deck(){
@@ -18,4 +19,5 @@ public class Deck {
         //shuffle and return deck
 
     }
+
 }
