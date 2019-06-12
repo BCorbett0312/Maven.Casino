@@ -1,8 +1,9 @@
 package io.zipcoder.casino.roulette;
 
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.SpinGame;
 
-public class Roulette {
+public class Roulette implements SpinGame {
 
 
     private Chips chips;
