@@ -3,7 +3,7 @@ package io.zipcoder.casino.roulette;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.SpinGame;
 
-public class Roulette implements SpinGame {
+public class Roulette extends SpinGame {
 
 
     private Chips chips;
@@ -54,6 +54,10 @@ public class Roulette implements SpinGame {
     public boolean clearchips() {
         return false;
     }
+
+   
+
+
 
 
 

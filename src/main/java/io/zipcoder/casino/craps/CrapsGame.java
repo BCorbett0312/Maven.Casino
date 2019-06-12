@@ -7,7 +7,7 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.util.List;
 
-public class CrapsGame implements Game, Gamble {
+public class CrapsGame extends Game implements Gamble {
     private CrapsPlayer player;
     private Console console;
     private List<CrapsBet> betList;

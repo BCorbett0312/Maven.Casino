@@ -2,7 +2,7 @@ package io.zipcoder.casino.GoFish;
 
 import io.zipcoder.casino.*;
 
-public class GoFish implements CardGame {
+public class GoFish extends CardGame {
 
     private GoFishMediator mediator;
     private Deck deck;

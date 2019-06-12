@@ -1,5 +1,6 @@
 package io.zipcoder.casino.blackJack;
 
+import io.zipcoder.casino.GamblingPlayer;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Player;
 
@@ -20,19 +21,19 @@ public class BlackjackPlayer implements GamblingPlayer {
         return null;
     }
 
-    public void hit(ArrayList<Hand>){
+    public void hit(ArrayList<Hand> hands){
         //adds card from deck to hand
     }
 
-    public void stay(ArrayList<Hand>){
+    public void stay(ArrayList<Hand> hands){
         //passes priority to dealer to play
     }
 
-    public void doubleDown(ArrayList<Hand>){
+    public void doubleDown(ArrayList<Hand> hands){
         //doubles bet and a single hit
     }
 
-    public void split(ArrayList<Hand>){
+    public void split(ArrayList<Hand> hands){
         //create a second hand for player using 1 of each card of starting hand and dealing a single card to each hand
     }
 

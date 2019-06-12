@@ -5,7 +5,7 @@ import io.zipcoder.casino.*;
 import java.util.ArrayList;
 
 
-public class Blackjack implements CardGame, GamblingGame {
+public class Blackjack extends CardGame implements Gamble {
     private Hand playerHand;
     private Hand dealerHand;
     private Deck theDeck;
