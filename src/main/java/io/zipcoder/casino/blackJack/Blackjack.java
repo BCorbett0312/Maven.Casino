@@ -1,11 +1,13 @@
 package io.zipcoder.casino.blackJack;
 
+import io.zipcoder.casino.CardGame;
 import io.zipcoder.casino.Deck;
+import io.zipcoder.casino.Gamble;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.continental.Continental;
 
 
-public class Blackjack {
+public class Blackjack implements CardGame, Gamble {
     private Hand playerHand;
     private Hand dealerHand;
     private Deck theDeck;
