@@ -6,6 +6,7 @@ public class Card implements Comparable<Card> {
 
     private final CardSuit suit;
     private final CardValue value;
+    private Integer numValue;
 
     public Card(CardSuit suit, CardValue value) {
         this.suit = suit;
@@ -20,6 +21,8 @@ public class Card implements Comparable<Card> {
     public CardValue getValue() {
         return value;
     }
+
+    public Integer aceValue(Integer num) { return null; }
 
 
     public int compareTo(Card card) {

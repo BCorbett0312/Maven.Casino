@@ -5,10 +5,13 @@ import io.zipcoder.casino.*;
 import java.util.Stack;
 
 
-public class Continental {
+public class Continental implements CardGame{
 
     private Deck deck;
     private Stack<Card> pile;
+    private ContinentalPlayer player;
+    private ContinentalMediator mediator;
+    private Hand dealerHand;
 
 
     /**
@@ -32,5 +35,7 @@ public class Continental {
     /**
      *
      */
+
+
 
 }
