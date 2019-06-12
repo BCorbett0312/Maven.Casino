@@ -1,13 +1,11 @@
 package io.zipcoder.casino.blackJack;
 
-import io.zipcoder.casino.CardGame;
-import io.zipcoder.casino.Deck;
-import io.zipcoder.casino.Gamble;
-import io.zipcoder.casino.Hand;
-import io.zipcoder.casino.continental.Continental;
+import io.zipcoder.casino.*;
+
+import java.util.ArrayList;
 
 
-public class Blackjack implements CardGame, Gamble {
+public class Blackjack implements CardGame, GamblingGame {
     private Hand playerHand;
     private Hand dealerHand;
     private Deck theDeck;
@@ -16,12 +14,12 @@ public class Blackjack implements CardGame, Gamble {
 
 
 
-    public Blackjack(){
+    public Blackjack(Player player){
 
     }
 
 
-    public void checkHand(){
+    public void checkHand(ArrayList<Hand> handToCheck){
         //check hand is bust or blackjack will be called after every hit
     }
 
