@@ -1,17 +1,20 @@
 package io.zipcoder.casino.craps;
 
+import io.zipcoder.casino.Gamble;
+import io.zipcoder.casino.Game;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.List;
 
-public class CrapsGame {
-    private Player player;
+public class CrapsGame implements Game, Gamble {
+    private CrapsPlayer player;
     private Console console;
     private List<CrapsBet> betList;
     private CrapsRoll comeOutRoll;
     private CrapsRoll currentRoll;
     private Boolean exit;
+    private CrapsMediator mediator;
 
     public CrapsGame(Player player, Console console){
 

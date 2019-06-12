@@ -1,13 +1,13 @@
 package io.zipcoder.casino.GoFish;
 
-import io.zipcoder.casino.Deck;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.*;
 
-public class GoFish {
+public class GoFish implements CardGame {
 
-
+    private GoFishMediator mediator;
     private Deck deck;
     private Hand hand;
+    private GoFishPlayer player;
 
     public GoFish (){}
 
