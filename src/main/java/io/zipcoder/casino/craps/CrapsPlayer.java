@@ -10,7 +10,9 @@ public class CrapsPlayer implements GamblingPlayer {
 
     }
 
-    public void bet(Integer betValue){
 
+    @Override
+    public Integer bet() {
+        return null;
     }
 }
