@@ -4,21 +4,20 @@ import java.util.ArrayList;
 
 public class Deck {
 
-    private ArrayList<Card> cards;
+    //New Arraylist of Deck
+    //new cards
+    public Deck(){
 
-    public Deck(ArrayList<Card> cards){
-        this.cards = cards;
     }
 
-    /**
-     * takes the top card off of the deck
-     * @return removes and returns the first card in the arraylist
-     */
-    public Card draw() { return null; }
+    public void getDeck(){
+        //create new deck of cards
+    }
 
 
-    /**
-     * Shuffles the deck
-     */
-    public void shuffle() {}
+    public void shuffleDeck(){
+        //shuffle and return deck
+
+    }
+
 }
