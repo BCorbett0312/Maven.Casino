@@ -17,11 +17,14 @@ public class Roulette {
         return null;
     }
 
+
+    public Integer spin() { return null; }
+
     /**
      *
      * @return the bet the player has placed
      */
-    public Integer bet () {
+    public Integer bet (Player player) {
         return null;
     }
 
@@ -29,27 +32,29 @@ public class Roulette {
      *
      * @return the money that will be collected after the bet is placed
      */
-    public Integer collectMoney() {
+    public Integer collectMoney(Player player) {
         return null;
     }
 
     /**
      *
-     * @param player decides to continue game
+     *
      * @return if they continue game or not
      */
-    public boolean continueGame(Player player) {
+    public boolean continueGame() {
         return false;
     }
 
     /**
      *
-     * @param player decides to clear chips on table
+     *
      * @return if they clear chips or not
      */
-    public boolean clearchips(Player player) {
+    public boolean clearchips() {
         return false;
     }
+
+
 
 
 
