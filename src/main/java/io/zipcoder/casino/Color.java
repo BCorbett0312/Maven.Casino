@@ -1,6 +1,9 @@
 package io.zipcoder.casino;
 
+public class Color  {
 
-public class CasinoTest {
+
+
+
 
 }

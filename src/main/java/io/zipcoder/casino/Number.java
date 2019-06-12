@@ -1,6 +1,4 @@
 package io.zipcoder.casino;
 
-
-public class CasinoTest {
-
+public enum Number {
 }
