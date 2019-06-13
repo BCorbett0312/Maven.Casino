@@ -10,13 +10,24 @@ public class Deck {
 
     public Deck(){
 
+        stack = new Stack<>();
+
     }
 
+    public Deck(Card... cards) {
+
+        stack = new Stack<>();
+        for(Card card : cards) {
+            stack.add(card);
+        }
+    }
+
+
     /**
-     * Gets the top card of the deck
+     * Gets the top card of the deck and removes it from the deck
      */
     public Card draw(){
-        //create new deck of cards
+
         return null;
     }
 
@@ -29,6 +40,12 @@ public class Deck {
     }
 
     /**
+     * Adds an array of cards to the top of the deck
+     * @param cards an array of Cards
+     */
+    public void add(Card[] cards) {}
+
+    /**
      * Randomly shuffles the deck
      */
     public void shuffleDeck(){
@@ -36,10 +53,23 @@ public class Deck {
 
     }
 
+    /**
+     * Removes all cards within the deck
+     */
+    public void clear() {
 
+    }
+
+    /**
+     * Check to see if there are any cards in the deck
+     * @return
+     */
     public Boolean isEmpty(){
         return null;
     }
+
+
+    public Card[] toArray() { return null; }
 
 
 }

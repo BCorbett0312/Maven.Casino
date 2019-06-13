@@ -24,14 +24,16 @@ public class Card implements Comparable<Card> {
 
     public Integer aceValue(Integer num) { return null; }
 
+    public Integer getBlackJackValue() { return null; }
+
 
     public int compareTo(Card card) {
         return 0;
     }
 
-    public int compareValues(Card card) { return 0; }
+    public int compareValueTo(Card card) { return 0; }
 
-    public int compareSuits(Card card) { return 0; }
+    public int compareSuitTo(Card card) { return 0; }
 
     @Override
     public String toString() { return null; }
