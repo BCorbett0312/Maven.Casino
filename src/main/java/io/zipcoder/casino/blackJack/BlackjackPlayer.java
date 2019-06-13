@@ -35,13 +35,15 @@ public class BlackjackPlayer extends Player implements GamblingPlayer {
 
     }
 
+
     public Integer getHandValue(){
         return null;
     }
 
+    public Integer bet(){ return null; }
 
-    @Override
-    public Integer bet() {
-        return null;
-    }
+
+
+
+
 }
