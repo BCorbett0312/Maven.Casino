@@ -1,22 +1,23 @@
 package io.zipcoder.casino.craps;
 
-public class FieldBet implements CrapsBet {
+public class FieldBet extends CrapsBet {
 
-    private Integer value;
     private Integer payoutMultiplier;
     private Boolean won;
     private Boolean lost;
+    private BetType type;
 
     public FieldBet(Integer value){
-        this.value = value;
+        super(value);
         this.payoutMultiplier = null;
         this.won = false;
         this.lost = false;
+        this.type = BetType.FIELD;
     }
 
     public Integer payout() {
         if(won && !lost){
-            return value * payoutMultiplier;
+            return getValue() * payoutMultiplier;
         }
         else {
             return null;
@@ -40,6 +41,20 @@ public class FieldBet implements CrapsBet {
 
     public String printBet() {
         return null;
+    }
+
+    @Override
+    public BetType getType() {
+        return type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o != null && getClass() == o.getClass()){
+            CrapsBet bet = (CrapsBet)o;
+            return (type.equals(bet.getType()) && getValue().equals(bet.getValue()));
+        }
+        return false;
     }
 
     public Boolean hasLost() {

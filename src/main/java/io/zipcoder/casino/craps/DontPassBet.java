@@ -1,26 +1,27 @@
 package io.zipcoder.casino.craps;
 
 
-public class DontPassBet implements CrapsBet {
+public class DontPassBet extends CrapsBet {
 
     private CrapsRoll point;
-    private Integer value;
     private Integer payoutMultiplier;
     private Boolean won;
     private Boolean lost;
+    private BetType type;
 
     public DontPassBet(Integer value){
-        this.value = value;
+        super(value);
         this.lost = false;
         this.won = false;
         this.point = null;
         this.payoutMultiplier = null;
+        this.type = BetType.DONTPASS;
     }
 
 
     public Integer payout() {
         if(won && !lost) {
-            return value * payoutMultiplier;
+            return getValue() * payoutMultiplier;
         }
         else {
             return null;
@@ -57,6 +58,20 @@ public class DontPassBet implements CrapsBet {
 
     public String printBet() {
         return null;
+    }
+
+    @Override
+    public BetType getType() {
+        return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o != null && getClass() == o.getClass()){
+            CrapsBet bet = (CrapsBet)o;
+            return (type.equals(bet.getType()) && getValue().equals(bet.getValue()));
+        }
+        return false;
     }
 
     public Boolean hasLost() {
