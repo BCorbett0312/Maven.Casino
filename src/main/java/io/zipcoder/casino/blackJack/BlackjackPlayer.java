@@ -16,7 +16,13 @@ public class BlackjackPlayer extends Player implements GamblingPlayer {
 
 
     public BlackjackPlayer(Player player){
+        this.player = player;
+        this.playerHand = new Hand();
+    }
 
+    public BlackjackPlayer(){
+        this.dealer = new Player(0, "Dealer");
+        this.dealerHand = new Hand();
     }
 
     public ArrayList<Card> getHand(){

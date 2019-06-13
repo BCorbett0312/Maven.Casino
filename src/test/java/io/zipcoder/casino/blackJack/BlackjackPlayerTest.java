@@ -15,15 +15,44 @@ import static org.junit.Assert.*;
 
 public class BlackjackPlayerTest {
 
+
+
+    @Test
+    public void BlackJackPlayerConstructorTest(){
+        Player player1 = new Player(500, "Charles");
+        BlackjackPlayer bjPlayer = new BlackjackPlayer(player1);
+
+        String expected = "Charles";
+
+        assertEquals(expected, bjPlayer.getName());
+
+
+    }
+
+
+    @Test
+    public void BlackJackPlayerDealerConstructor(){
+        BlackjackPlayer bjPlayer = new BlackjackPlayer();
+        String expectedName = "Dealer";
+        Integer expectedWallet = 0;
+        ArrayList<Card> hand = bjPlayer.getHand();
+
+        assertEquals(expectedWallet, bjPlayer.getMoney());
+        assertEquals(expectedName, bjPlayer.getName());
+        assertTrue(hand.isEmpty());
+    }
+
+
+
+
+
+
     @Test
     public void discardHandTest() {
         Card kHearts = new Card(HEART, CardValue.KING);
         Card jSpades = new Card(SPADE, CardValue.JACK);
         Player player1 = new Player();
-
         BlackjackPlayer player = new BlackjackPlayer(player1);
-
-
         player.hit(kHearts);
         player.hit(jSpades);
 
