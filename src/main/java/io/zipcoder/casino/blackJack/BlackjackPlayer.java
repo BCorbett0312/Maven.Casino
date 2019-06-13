@@ -1,42 +1,47 @@
 package io.zipcoder.casino.blackJack;
 
+import io.zipcoder.casino.Card;
 import io.zipcoder.casino.GamblingPlayer;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Player;
 
 import java.util.ArrayList;
 
-public class BlackjackPlayer implements GamblingPlayer {
+public class BlackjackPlayer extends Player implements GamblingPlayer {
 
     private Player player;
     private Player dealer;
     private Hand playerHand;
     private Hand dealerHand;
 
-    public BlackjackPlayer(Player ascendToBlackJackPlayer){
+
+    public BlackjackPlayer(Player player){
 
     }
 
-    public ArrayList<Hand> getDealt(){
+    public ArrayList<Card> getHand(){
         return null;
     }
 
-    public void hit(ArrayList<Hand> hands){
+    public void discardHand(){
+
+    }
+
+    public void hit(Card cardToAdd){
         //adds card from deck to hand
     }
 
-    public void stay(ArrayList<Hand> hands){
-        //passes priority to dealer to play
+    public void newSplitHand(){
+
     }
 
-    public void doubleDown(ArrayList<Hand> hands){
-        //doubles bet and a single hit
-    }
-
-    public void split(ArrayList<Hand> hands){
-        //create a second hand for player using 1 of each card of starting hand and dealing a single card to each hand
+    public Integer getHandValue(){
+        return null;
     }
 
 
-
+    @Override
+    public Integer bet() {
+        return null;
+    }
 }
