@@ -6,13 +6,14 @@ import io.zipcoder.casino.Player;
 public class CrapsPlayer implements GamblingPlayer {
     private Player player;
 
-    public CrapsPlayer(Player player){
+    public CrapsPlayer(Player player) {
 
     }
-
 
     @Override
     public Integer bet() {
         return null;
     }
 }
+
+
