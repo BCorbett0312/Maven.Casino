@@ -9,6 +9,7 @@ public class CrapsPlayer implements GamblingPlayer {
     public CrapsPlayer(Player player) {
 
     }
+    
 
     @Override
     public Integer bet() {
