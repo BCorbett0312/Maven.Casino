@@ -15,7 +15,12 @@ public class PassBet implements CrapsBet {
 
 
     public Integer payout() {
-        return value * 2;
+        if(won && !lost) {
+            return value * 2;
+        }
+        else {
+            return null;
+        }
     }
 
     public void checkRoll(CrapsRoll roll){

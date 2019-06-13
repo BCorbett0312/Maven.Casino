@@ -2,7 +2,7 @@ package io.zipcoder.casino.craps;
 
 public class FieldBet implements CrapsBet {
 
-    private Integer payOutMultiplier;
+    private Integer payoutMultiplier;
 
     public FieldBet(Integer value){
     }

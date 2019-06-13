@@ -11,7 +11,7 @@ public class PassBetTest {
     public void payoutTest1(){
         // Arrange
         CrapsBet bet = new PassBet(1);
-        Integer expected = 2;
+        Integer expected = null;
 
         // Act
         Integer actual = bet.payout();
@@ -24,9 +24,11 @@ public class PassBetTest {
     public void payoutTest2(){
         // Arrange
         CrapsBet bet = new PassBet(10);
+        CrapsRoll roll = new CrapsRoll(4,3);
         Integer expected = 20;
 
         // Act
+        bet.checkRoll(roll);
         Integer actual = bet.payout();
 
         // Assert
@@ -37,7 +39,8 @@ public class PassBetTest {
     public void payoutTest3(){
         // Arrange
         CrapsBet bet = new PassBet(6);
-        Integer expected = 12;
+        CrapsRoll roll = new CrapsRoll(6,6);
+        Integer expected = null;
 
         // Act
         Integer actual = bet.payout();
