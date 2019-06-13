@@ -12,33 +12,36 @@ public class CrapsGame extends Game implements Gamble {
     private Console console;
     private List<CrapsBet> betList;
     private CrapsRoll comeOutRoll;
-    private CrapsRoll currentRoll;
     private Boolean exit;
-    private CrapsMediator mediator;
+    private Boolean leaveBets;
+    private Phase phase;
 
-    public CrapsGame(Player player, Console console){
 
-    }
-
-    public void playRound() { }
-
-    public void betOnComeoutPhase(){
+    public CrapsGame(CrapsPlayer player){
 
     }
 
-    public void rollComeOutPhase(){
-
+    public String nextPhase(){
+        return null;
     }
 
-    public void betOnPointPhase(){
-
+    public InputResult processInput(String input){
+        return null;
     }
 
-    public void rollPointPhase() {
-
+    public String processBet(String input){
+        return null;
     }
 
-    public String statusOfBets(){
+    public String rollComeOut(){
+        return null;
+    }
+
+    public String rollPoint(){
+        return null;
+    }
+
+    public String currentBets(){
         return null;
     }
 
@@ -62,4 +65,8 @@ public class CrapsGame extends Game implements Gamble {
 
     }
 
+}
+
+enum Phase{
+    WALKUP, COMEOUT, POINT;
 }
