@@ -35,11 +35,11 @@ public class BlackjackPlayerTest {
         BlackjackPlayer bjPlayer = new BlackjackPlayer();
         String expectedName = "Dealer";
         Integer expectedWallet = 0;
-        Hand hand = bjPlayer.getHand();
 
-        //assertEquals(expectedWallet, bjPlayer.getWalletBalance());
+
+        assertEquals(expectedWallet, bjPlayer.getWalletBalance());
         assertEquals(expectedName, bjPlayer.getPlayerName());
-        assertTrue(hand.isEmpty());
+        assertTrue(bjPlayer.getHand().isEmpty());
 
 
     }
@@ -51,18 +51,17 @@ public class BlackjackPlayerTest {
     public void discardHandTest() {
         Card kHearts = new Card(HEART, CardValue.KING);
         Card jSpades = new Card(SPADE, CardValue.JACK);
-        Player player1 = new Player();
-        BlackjackPlayer player = new BlackjackPlayer(player1);
+        BlackjackPlayer player = new BlackjackPlayer();
         player.hitForPlayer(kHearts);
         player.hitForPlayer(jSpades);
+        Hand testHand = player.getHand();
 
-        Hand myHand = player.getHand();
+        assertFalse(testHand.isEmpty());
 
-        assertFalse(myHand.isEmpty());
 
         player.discardHand();
 
-        assertTrue(myHand.isEmpty());
+        assertTrue(testHand.isEmpty());
 
 
     }
@@ -70,7 +69,7 @@ public class BlackjackPlayerTest {
     @Test
     public void hitForPlayerTest() {
         Card jSpades = new Card(SPADE, CardValue.JACK);
-        Player player1 = new Player();
+        Player player1 = new Player(33, "Clive");
         BlackjackPlayer player = new BlackjackPlayer(player1);
         Hand myHand = player.getHand();
 
@@ -81,19 +80,7 @@ public class BlackjackPlayerTest {
 
     }
 
-    @Test
-    public void hitForDealerTest(){
-        Card jSpades = new Card(SPADE, CardValue.JACK);
-        BlackjackPlayer dealer = new BlackjackPlayer();
-        Hand dealerHand = dealer.getHand();
 
-
-        assertTrue(dealerHand.isEmpty());
-
-        dealer.hitForDealer(jSpades);
-
-        assertFalse(dealerHand.isEmpty());
-    }
 
     @Test
     public void hitForSplitHandTest(){
@@ -109,14 +96,14 @@ public class BlackjackPlayerTest {
 
     @Test
     public void newSplitHand() {
-        Player genPlayer = new Player(500, "Edward");
-        BlackjackPlayer player1 = new BlackjackPlayer(genPlayer);
+        Player userPlayer = new Player(300, "George");
+        BlackjackPlayer player1 = new BlackjackPlayer(userPlayer);
         Card jSpades = new Card(SPADE, CardValue.JACK);
         Card jHearts = new Card(HEART, CardValue.JACK);
         player1.hitForPlayer(jSpades);
         player1.hitForPlayer(jHearts);
 
-        //Hand handToSplit = player1.getHand();
+
 
 
         player1.newSplitHand();
@@ -165,19 +152,19 @@ public class BlackjackPlayerTest {
 
     }
 
-    @Test
-    public void getDealerHandTest(){
-        Card jSpades = new Card(SPADE, CardValue.JACK);
-        BlackjackPlayer dealer = new BlackjackPlayer();
-        dealer.hitForDealer(jSpades);
-        Hand dealerHand = dealer.getDealerHand();
-        assertEquals(dealerHand, dealer.getDealerHand());
+//    @Test
+//    public void getDealerHandTest(){
+//        Card jSpades = new Card(SPADE, CardValue.JACK);
+//        BlackjackPlayer dealer = new BlackjackPlayer();
+//        dealer.hitForDealer(jSpades);
+//        Hand dealerHand = dealer.getDealerHand();
+//        assertEquals(dealerHand, dealer.getDealerHand());
 
 
 
 
 
-    }
+//    }
 
     @Test
     public void getSplitHandTest(){
