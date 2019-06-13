@@ -51,5 +51,8 @@ public class BlackjackPlayer extends Player implements GamblingPlayer {
 
 
 
-
+    @Override
+    public Integer bet() {
+        return null;
+    }
 }
