@@ -271,5 +271,30 @@ public class FieldBetTest {
         Assert.assertNull(actual);
     }
 
+    @Test
+    public void printBetTest1(){
+        // Arrange
+        CrapsBet bet = new DontPassBet(5);
+        String expected = "Field for $5";
+
+        // Act
+        String actual = bet.printBet();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test public void printBetTest2(){
+        // Arrange
+        CrapsBet bet = new DontPassBet(8);
+        String expected = "Don't Pass for $8\nPoint: 10";
+
+        // Act
+        String actual = bet.printBet();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
 
 }

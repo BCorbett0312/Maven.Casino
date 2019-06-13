@@ -242,6 +242,33 @@ public class DontPassBetTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void printBetTest1(){
+        // Arrange
+        CrapsBet bet = new DontPassBet(5);
+        String expected = "Don't Pass for $5\nPoint: TBD";
+
+        // Act
+        String actual = bet.printBet();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test public void printBetTest2(){
+        // Arrange
+        CrapsBet bet = new DontPassBet(8);
+        CrapsRoll roll = new CrapsRoll(6,4);
+        String expected = "Don't Pass for $8\nPoint: 10";
+
+        // Act
+        bet.checkRoll(roll);
+        String actual = bet.printBet();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
 
 
 

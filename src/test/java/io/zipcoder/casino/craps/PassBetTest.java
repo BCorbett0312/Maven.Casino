@@ -241,6 +241,33 @@ public class PassBetTest {
         Assert.assertTrue(actual);
     }
 
+    @Test
+    public void printBetTest1(){
+        // Arrange
+        CrapsBet bet = new DontPassBet(5);
+        String expected = "Pass Line for $5\nPoint: TBD";
+
+        // Act
+        String actual = bet.printBet();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test public void printBetTest2(){
+        // Arrange
+        CrapsBet bet = new DontPassBet(8);
+        CrapsRoll roll = new CrapsRoll(6,4);
+        String expected = "Pass Line for $8\nPoint: 10";
+
+        // Act
+        bet.checkRoll(roll);
+        String actual = bet.printBet();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
 
 
 
