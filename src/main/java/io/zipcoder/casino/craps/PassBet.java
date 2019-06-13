@@ -47,6 +47,10 @@ public class PassBet implements CrapsBet {
         }
     }
 
+    public String printBet() {
+        return null;
+    }
+
     public Boolean hasLost() {
         return lost;
     }

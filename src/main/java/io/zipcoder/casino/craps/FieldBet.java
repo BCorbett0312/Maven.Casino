@@ -38,6 +38,10 @@ public class FieldBet implements CrapsBet {
 
     }
 
+    public String printBet() {
+        return null;
+    }
+
     public Boolean hasLost() {
         return lost;
     }
