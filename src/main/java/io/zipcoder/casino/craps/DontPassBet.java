@@ -1,15 +1,23 @@
 package io.zipcoder.casino.craps;
 
 
-public class DontPassBet extends CrapsBet {
+public class DontPassBet implements CrapsBet {
 
     private CrapsRoll point;
 
     public DontPassBet(Integer value){
-        super(value);
+
     }
 
-    public Integer payOut() {
+    public Boolean hasLost() {
+        return null;
+    }
+
+    public Boolean hasWon() {
+        return null;
+    }
+
+    public Integer payout() {
         return null;
     }
 

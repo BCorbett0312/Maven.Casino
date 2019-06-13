@@ -1,31 +1,14 @@
 package io.zipcoder.casino.craps;
 
-public abstract class CrapsBet {
-    private Integer value;
-    private Boolean wonBet;
-    private Boolean lostBet;;
+public interface CrapsBet {
 
-    protected CrapsBet(Integer value){
+    public Boolean hasLost();
 
-    }
 
-    public Boolean hasLost(){
-        return null;
-    }
+    public Boolean hasWon();
 
-    public Boolean hasWon(){
-        return null;
-    }
+    abstract public Integer payout();
 
-    protected void setWonBet(){
-
-    }
-
-    protected void setLostBet(){
-
-    }
-
-    abstract public Integer payOut();
-    public abstract void checkRoll(CrapsRoll roll);
+    abstract public void checkRoll(CrapsRoll roll);
 
 }

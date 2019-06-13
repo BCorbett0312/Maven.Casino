@@ -60,6 +60,19 @@ public class CrapsRollTest {
     }
 
     @Test
+    public void getValueTest5(){
+        // Arrange
+        CrapsRoll roll = new CrapsRoll(4,3);
+        Integer expected = 7;
+
+        // Act
+        Integer actual = roll.getValue();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void toStringTest1(){
         // Arrange
         CrapsRoll roll = new CrapsRoll(6,6);
