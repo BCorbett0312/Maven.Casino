@@ -29,6 +29,10 @@ public class Card implements Comparable<Card> {
         return 0;
     }
 
+    public int compareValues(Card card) { return 0; }
+
+    public int compareSuits(Card card) { return 0; }
+
     @Override
     public String toString() { return null; }
 }

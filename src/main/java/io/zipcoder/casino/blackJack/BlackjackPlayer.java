@@ -37,6 +37,8 @@ public class BlackjackPlayer implements GamblingPlayer {
         //create a second hand for player using 1 of each card of starting hand and dealing a single card to each hand
     }
 
+    public Integer bet(){ return null; }
+
 
 
 }
