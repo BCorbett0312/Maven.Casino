@@ -2,13 +2,19 @@ package io.zipcoder.casino.continental;
 
 import io.zipcoder.casino.*;
 
+import java.util.List;
 import java.util.Stack;
 
 
-public class Continental {
+public class Continental extends CardGame{
 
     private Deck deck;
     private Stack<Card> pile;
+    private ContinentalPlayer player;
+    private ContinentalMediator mediator;
+    private Hand dealerHand;
+    private List<ValueSet> valueSets;
+    private List<StraightSet> straightSets;
 
 
     /**
@@ -17,6 +23,8 @@ public class Continental {
     public Card drawFromDeck() {
         return null;
     }
+
+    public Card drawFromPile() { return null; }
 
     /**
      * This method compares all cards see if they have the same value.
@@ -32,5 +40,8 @@ public class Continental {
     /**
      *
      */
+
+
+
 
 }
