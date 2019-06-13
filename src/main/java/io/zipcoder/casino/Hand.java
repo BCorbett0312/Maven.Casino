@@ -97,6 +97,14 @@ public class Hand {
      * @return a formatted representaion of the hand with the Cards and the position they are in
      *
      */
+
+    public Boolean isEmpty(){return cards.isEmpty();}
+
+    public void clear(){
+        cards.clear();
+    }
+
+
     @Override
     public String toString() { return ""; }
 

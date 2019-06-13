@@ -15,6 +15,7 @@ public class Player {
 
     public Player (){
         this.name = "Dealer";
+        this.money = 0;
     }
 
     public Integer getMoney() {
