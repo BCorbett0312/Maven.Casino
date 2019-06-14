@@ -91,4 +91,5 @@ public class BlackjackPlayer implements GamblingPlayer {
     public Integer bet() {
         return null;
     }
+
 }

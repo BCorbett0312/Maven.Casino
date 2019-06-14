@@ -1,6 +1,8 @@
 package io.zipcoder.casino;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 public class Deck {
@@ -27,8 +29,7 @@ public class Deck {
      * Gets the top card of the deck and removes it from the deck
      */
     public Card draw(){
-
-        return null;
+        return stack.pop();
     }
 
     /**
@@ -36,20 +37,31 @@ public class Deck {
      * @param card the Card to put on top of the deck
      */
     public void add(Card card){
-
+        stack.push(card);
     }
 
     /**
      * Adds an array of cards to the top of the deck
      * @param cards an array of Cards
      */
-    public void add(Card[] cards) {}
+    public void add(Card[] cards) {
+        for(Card card : cards) stack.push(card);
+    }
 
     /**
      * Randomly shuffles the deck
      */
     public void shuffleDeck(){
-        //shuffle and return deck
+
+        ArrayList<Card> list = new ArrayList<>(stack);
+        stack.clear();
+        Random random = new Random();
+
+        while(list.size() > 0) {
+            int randomNum = random.nextInt(list.size());
+            stack.push(list.get(randomNum));
+            list.remove(randomNum);
+        }
 
     }
 
@@ -57,7 +69,7 @@ public class Deck {
      * Removes all cards within the deck
      */
     public void clear() {
-
+        stack.clear();
     }
 
     /**
@@ -65,11 +77,24 @@ public class Deck {
      * @return
      */
     public Boolean isEmpty(){
-        return null;
+        return stack.isEmpty();
     }
 
 
-    public Card[] toArray() { return null; }
+    public Card[] toArray() {
+
+        ArrayList<Card> cards = new ArrayList<>(stack);
+        Card[] array = new Card[cards.size()];
+        int i = 0;
+
+        for(Card card : cards) {
+            array[i] = card;
+            i++;
+        }
+
+        return array;
+
+    }
 
 
 }
