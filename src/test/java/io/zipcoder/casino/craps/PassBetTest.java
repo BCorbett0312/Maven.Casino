@@ -244,7 +244,7 @@ public class PassBetTest {
     @Test
     public void printBetTest1(){
         // Arrange
-        CrapsBet bet = new DontPassBet(5);
+        CrapsBet bet = new PassBet(5);
         String expected = "Pass Line for $5\nPoint: TBD";
 
         // Act
@@ -256,8 +256,9 @@ public class PassBetTest {
 
     @Test public void printBetTest2(){
         // Arrange
-        CrapsBet bet = new DontPassBet(8);
+        CrapsBet bet = new PassBet(8);
         CrapsRoll roll = new CrapsRoll(6,4);
+        bet.checkRoll(roll);
         String expected = "Pass Line for $8\nPoint: 10";
 
         // Act

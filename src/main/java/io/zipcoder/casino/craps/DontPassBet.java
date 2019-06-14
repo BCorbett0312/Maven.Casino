@@ -57,12 +57,21 @@ public class DontPassBet extends CrapsBet {
     }
 
     public String printBet() {
-        return null;
+            StringBuilder sbuild = new StringBuilder("Don't Pass for $");
+            sbuild.append(getValue());
+            sbuild.append("\nPoint: ");
+            if(point == null){
+                sbuild.append("TBD");
+            }
+            else{
+                sbuild.append(point.getValue());
+            }
+            return sbuild.toString();
     }
 
     @Override
     public BetType getType() {
-        return null;
+        return type;
     }
 
     @Override

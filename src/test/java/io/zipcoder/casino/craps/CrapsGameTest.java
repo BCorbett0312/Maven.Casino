@@ -98,7 +98,7 @@ public class CrapsGameTest {
     public void rollDiceTest(){
         // Arrange
         Boolean allGood = true;
-        Pattern p = Pattern.compile("\\d, \\d");
+        Pattern p = Pattern.compile("[123456], [123456]");
 
         // Act
         for(int i = 0; i < 10000; i++){

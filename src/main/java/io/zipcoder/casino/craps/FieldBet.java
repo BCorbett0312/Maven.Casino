@@ -40,7 +40,9 @@ public class FieldBet extends CrapsBet {
     }
 
     public String printBet() {
-        return null;
+        StringBuilder sbuild = new StringBuilder("Field bet for $");
+        sbuild.append(getValue());
+        return sbuild.toString();
     }
 
     @Override

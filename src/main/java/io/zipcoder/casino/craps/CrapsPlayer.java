@@ -7,7 +7,7 @@ public class CrapsPlayer implements GamblingPlayer {
     private Player player;
 
     public CrapsPlayer(Player player) {
-
+        this.player = player;
     }
     
 
@@ -17,16 +17,23 @@ public class CrapsPlayer implements GamblingPlayer {
     }
 
     public Boolean placeBet(Integer bet){
-        return null;
+        if(bet > player.getMoney()){
+            return false;
+        }
+        else
+        {
+            player.setMoney(player.getMoney() - bet);
+            return true;
+        }
     }
 
     public void collectWinnings(Integer winnings){
-
+        player.setMoney(player.getMoney() + winnings);
     }
 
     // needed for testing
     public Integer getMoney(){
-        return null;
+        return player.getMoney();
     }
 }
 

@@ -7,22 +7,32 @@ import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class CrapsGame extends Game implements Gamble {
-    private CrapsPlayer player;
+    private CrapsPlayer player; //
     private Console console;
-    private List<CrapsBet> betList;
-    private CrapsRoll comeOutRoll;
+    private List<CrapsBet> betList; //
+    private CrapsRoll comeOutRoll; //
     private Boolean exit;
     private Boolean leaveBets;
     private Phase phase;
     private Pattern p;
+    private Random random;
 
 
     public CrapsGame(CrapsPlayer player){
-
+        this.player = player;
+        this.betList = new ArrayList<>();
+        this.comeOutRoll = null;
+        this.exit = false;
+        this.leaveBets = false;
+        this.phase = Phase.WALKUP;
+        this.p = Pattern.compile("(pass line \\d+)|(don't pass \\d+)|(field bet \\d+)");
+        this.random = new Random();
     }
 
     /**
@@ -50,7 +60,7 @@ public class CrapsGame extends Game implements Gamble {
      * @return Returns a string with the result. Confirmation of the bet if all was in order, an error message
      *   otherwise
      */
-    public InputResult processBet(String input){
+    public Pair<String, Boolean> processBet(String input){
         return null;
     }
 
@@ -86,14 +96,25 @@ public class CrapsGame extends Game implements Gamble {
      * Prints out a table of the bets allowed and their payout value
      */
     public String printBetPayoutTable(){
-        return null;
+        return  " ------------------------------------------------ \n" +
+                "| Pass Line bets  pay out 1:1                    |\n" +
+                "| Don't Pass bets pay out 1:1                    |\n" +
+                "| Field bets      pay out 1:1 on 3, 4, 9, 10, 11 |\n" +
+                "|                         2:1 on 2, 12           |\n" +
+                " ------------------------------------------------";
     }
 
     /**
      * Prints out instructions on how to interact with the program
      */
     public String printInstructions(){
-        return null;
+        return  "To place a Pass Line bet, enter  \"Pass Line \"  and the wager amount\n" +
+                "To place a Don't Pass bet, enter \"Don't Pass \" and the wager amount\n" +
+                "To place a Field bet, enter \"Field\"            and the wager amount\n" +
+                "If you've placed as many bets as you want, enter \"Roll\"\n" +
+                "To see your current bets, enter \"Show Bets\"\n" +
+                "To print the payout table, enter \"Payout\"\n" +
+                "To leave, enter \"exit\"";
     }
 
     /**
@@ -103,7 +124,16 @@ public class CrapsGame extends Game implements Gamble {
      * @return
      */
     public CrapsBet makeNewBet(BetType type, Integer value){
-        return null;
+        switch(type){
+            case PASS:
+                return new PassBet(value);
+            case DONTPASS:
+                return new DontPassBet(value);
+            case FIELD:
+                return new FieldBet(value);
+            default:
+                throw(new IllegalArgumentException());
+        }
     }
 
     /**
@@ -111,7 +141,7 @@ public class CrapsGame extends Game implements Gamble {
      * @param bet
      */
     protected void addBet(CrapsBet bet){
-
+        betList.add(bet);
     }
 
     /**
@@ -127,7 +157,9 @@ public class CrapsGame extends Game implements Gamble {
      * @return a new CrapsRoll object
      */
     protected CrapsRoll rollDice(){
-        return null;
+        Integer die1 = random.nextInt(5) + 1;
+        Integer die2 = random.nextInt(5) + 2;
+        return new CrapsRoll(die1, die2);
     }
 
     /**

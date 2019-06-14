@@ -49,7 +49,16 @@ public class PassBet extends CrapsBet {
     }
 
     public String printBet() {
-        return null;
+        StringBuilder sbuild = new StringBuilder("Pass Line for $");
+        sbuild.append(getValue());
+        sbuild.append("\nPoint: ");
+        if(point == null){
+            sbuild.append("TBD");
+        }
+        else{
+            sbuild.append(point.getValue());
+        }
+        return sbuild.toString();
     }
 
     @Override
