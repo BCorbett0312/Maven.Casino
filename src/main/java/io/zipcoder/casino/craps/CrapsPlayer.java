@@ -15,6 +15,19 @@ public class CrapsPlayer implements GamblingPlayer {
     public Integer bet() {
         return null;
     }
+
+    public Boolean placeBet(Integer bet){
+        return null;
+    }
+
+    public void collectWinnings(Integer winnings){
+
+    }
+
+    // needed for testing
+    public Integer getMoney(){
+        return null;
+    }
 }
 
 

@@ -62,9 +62,9 @@ public class CrapsGameTest {
     public void printBetPayoutTableTest() {
         // Arrange
         String expected = " ------------------------------------------------ \n" +
-                          "| Pass Line bets pay out  1:1                    |\n" +
+                          "| Pass Line bets  pay out 1:1                    |\n" +
                           "| Don't Pass bets pay out 1:1                    |\n" +
-                          "| Field bets pay out      1:1 on 3, 4, 9, 10, 11 |\n" +
+                          "| Field bets      pay out 1:1 on 3, 4, 9, 10, 11 |\n" +
                           "|                         2:1 on 2, 12           |\n" +
                           " ------------------------------------------------";
 
@@ -112,6 +112,41 @@ public class CrapsGameTest {
         // Assert
         Assert.assertTrue(allGood);
     }
+
+    @Test
+    public void addBetTest1(){
+        // Arrange
+        CrapsGame addBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsBet bet = new PassBet(5);
+        Integer expected = 1;
+
+        // Act
+        addBetTester.addBet(bet);
+        Integer actual = addBetTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addBetTest2(){
+        // Arrange
+        CrapsGame addBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsBet dontPass = new DontPassBet(5);
+        CrapsBet field = new FieldBet(8);
+        Integer expected = 2;
+
+        // Act
+        addBetTester.addBet(dontPass);
+        addBetTester.addBet(field);
+        Integer actual = addBetTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    //@Test
+    //public void
 
 
 

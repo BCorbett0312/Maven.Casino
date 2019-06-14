@@ -3,6 +3,7 @@ package io.zipcoder.casino.craps;
 import io.zipcoder.casino.Gamble;
 import io.zipcoder.casino.Game;
 import io.zipcoder.casino.Player;
+import org.javatuples.Triplet;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.List;
@@ -58,6 +59,10 @@ public class CrapsGame extends Game implements Gamble {
         return null;
     }
 
+    /**
+     * Prints out a list of the player's current outstanding bets
+     * @return a concatination of each bet's toString method, separated by a new line
+     */
     public String currentBets(){
         return null;
     }
@@ -110,8 +115,13 @@ public class CrapsGame extends Game implements Gamble {
         return null;
     }
 
-    private void settleBets(CrapsRoll currentRoll){
-
+    /**
+     * Iterates throw betList, removes lost bets, removes and pays out won bets
+     * @param currentRoll - the roll that all bets are checked against
+     * @return a Triplet with the bet type, the value of the bet, and the amount won
+     */
+    private Triplet<BetType, Integer, Integer > settleBets(CrapsRoll currentRoll){
+        return null;
     }
 
     // currently used only for testing
