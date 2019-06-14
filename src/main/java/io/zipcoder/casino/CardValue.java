@@ -1,9 +1,10 @@
 package io.zipcoder.casino;
 
 public enum CardValue {
-    JOKER,
+
+    JOKER ,
     ACE,
-    TWO,
+    TWO ,
     THREE,
     FOUR,
     FIVE,
@@ -15,4 +16,7 @@ public enum CardValue {
     JACK,
     QUEEN,
     KING;
+
 }
+
+

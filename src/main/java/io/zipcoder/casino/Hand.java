@@ -108,6 +108,10 @@ public class Hand {
         cards.clear();
     }
 
+    public int size() {
+        return cards.size();
+    }
+
 
     @Override
     public String toString() { return ""; }
