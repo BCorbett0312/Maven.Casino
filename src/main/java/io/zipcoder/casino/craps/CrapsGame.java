@@ -3,6 +3,7 @@ package io.zipcoder.casino.craps;
 import io.zipcoder.casino.Gamble;
 import io.zipcoder.casino.Game;
 import io.zipcoder.casino.Player;
+import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import io.zipcoder.casino.utilities.Console;
 
@@ -47,15 +48,15 @@ public class CrapsGame extends Game implements Gamble {
      * @return Returns a string with the result. Confirmation of the bet if all was in order, an error message
      *   otherwise
      */
-    public String processBet(String input){
+    public InputResult processBet(String input){
         return null;
     }
 
-    public String rollComeOut(){
+    public Pair<String, Boolean> rollComeOut(){
         return null;
     }
 
-    public String rollPoint(){
+    public Pair<String, Boolean> rollPoint(){
         return null;
     }
 
@@ -127,6 +128,15 @@ public class CrapsGame extends Game implements Gamble {
     // currently used only for testing
     protected Integer getNumberOfBets(){
         return betList.size();
+    }
+
+    protected Phase getPhase(){
+        return phase;
+    }
+
+    // DANGEROUS only for testing
+    protected void setPhase(Phase phase){
+        this.phase = phase;
     }
 
 }
