@@ -56,7 +56,9 @@ public class Hand {
      * @return the removed card.
      */
     public Card removeByIndex(int index){
-        return null;
+
+
+        return cards.remove(index);
     }
 
     /**
@@ -64,7 +66,7 @@ public class Hand {
      * @param index the position of the Card in the Hand
      * @return The Card at the indexed position.
      */
-    public Card getCardAtIndex(int index) { return null; }
+    public Card getCardAtIndex(int index) { return cards.get(index); }
 
     /**
      * Returns the CardValue at the index
@@ -91,12 +93,22 @@ public class Hand {
      * Add a card to the Arraylist in the Hand
      * @param card the Card to be added
      */
-    public void add(Card card) {}
+    public void add(Card card) {
+        cards.add(card);
+    }
 
     /**
      * @return a formatted representaion of the hand with the Cards and the position they are in
      *
      */
+
+    public Boolean isEmpty(){return cards.isEmpty();}
+
+    public void clear(){
+        cards.clear();
+    }
+
+
     @Override
     public String toString() { return ""; }
 

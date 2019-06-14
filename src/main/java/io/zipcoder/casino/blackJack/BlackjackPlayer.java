@@ -5,40 +5,59 @@ import io.zipcoder.casino.GamblingPlayer;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Player;
 
-import java.util.ArrayList;
 
-public class BlackjackPlayer extends Player implements GamblingPlayer {
+
+public class BlackjackPlayer implements GamblingPlayer {
 
     private Player player;
-    private Player dealer;
     private Hand playerHand;
-    private Hand dealerHand;
+    private Hand playerHandSplit;
 
 
     public BlackjackPlayer(Player player){
         this.player = player;
         this.playerHand = new Hand();
+        this.playerHandSplit = new Hand();
     }
-
     public BlackjackPlayer(){
-        this.dealer = new Player(0, "Dealer");
-        this.dealerHand = new Hand();
+        this.player = new Player();
+        this.playerHand = new Hand();
+    }
+    public String getPlayerName(){
+        return player.getName();
     }
 
-    public ArrayList<Card> getHand(){
-        return null;
+    public Integer getWalletBalance(){
+        return player.getMoney();
     }
 
-    public void discardHand(){
 
+    public Hand getHand(){
+        return this.playerHand;
     }
 
-    public void hit(Card cardToAdd){
-        //adds card from deck to hand
+    public Hand getSplitHand(){
+        return this.playerHandSplit;
     }
 
+    public void discardHand() {
+        playerHand.clear();
+        if (playerHandSplit != null) {
+            playerHandSplit.clear();
+        }
+    }
+
+    public void hitForPlayer(Card cardToAdd){
+        this.playerHand.add(cardToAdd);
+
+
+    }
+    public void hitForSplitHand(Card cardToAdd){
+        this.playerHandSplit.add(cardToAdd);
+
+    }
     public void newSplitHand(){
-
+        this.playerHandSplit.add(playerHand.removeByIndex(1));
     }
 
 
