@@ -124,7 +124,15 @@ public class CrapsGame extends Game implements Gamble {
      *   whether or not to start a new round as the second value
      */
     public Pair<String, Boolean> rollPoint(CrapsRoll roll){
-        return null;
+        if(roll.getValue() == 7){
+            return new Pair<>("7. Pass Line loses\n", true);
+        }
+        else if(roll.getValue().equals(comeOutRoll.getValue())){
+            return new Pair<>("Shooter hits. Pass Line wins\n", true);
+        }
+        else{
+            return new Pair<>("Shooter rolls a " + roll.getValue() + "\n", false);
+        }
     }
 
     /**
