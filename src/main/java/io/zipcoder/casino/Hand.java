@@ -123,6 +123,13 @@ public class Hand {
 
 
     @Override
-    public String toString() { return ""; }
+    public String toString() {
+        String result = "";
+
+        for(int i = 0; i < cards.size(); i++){
+            result += cards.get(i).toString() + "\n";
+        }
+
+        return result; }
 
 }

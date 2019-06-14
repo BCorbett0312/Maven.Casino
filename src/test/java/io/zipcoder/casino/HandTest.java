@@ -225,5 +225,14 @@ public class HandTest {
         Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
         Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
         Hand testHand = new Hand(card1, card2, card3);
+
+        String expected = "KING OF SPADES\n" +
+                "FOUR OF DIAMONDS\n" +
+                "EIGHT OF CLUBS"+ "\n";
+
+
+        assertEquals(expected, testHand.toString());
+
+
     }
 }
