@@ -19,17 +19,10 @@ public class BlackjackPlayer implements GamblingPlayer {
         this.playerHand = new Hand();
         this.playerHandSplit = new Hand();
     }
-
     public BlackjackPlayer(){
         this.player = new Player();
         this.playerHand = new Hand();
-
-
-
     }
-
-
-
     public String getPlayerName(){
         return player.getName();
     }
@@ -47,8 +40,6 @@ public class BlackjackPlayer implements GamblingPlayer {
         return this.playerHandSplit;
     }
 
-
-
     public void discardHand() {
         playerHand.clear();
         if (playerHandSplit != null) {
@@ -56,25 +47,17 @@ public class BlackjackPlayer implements GamblingPlayer {
         }
     }
 
-
-
     public void hitForPlayer(Card cardToAdd){
         this.playerHand.add(cardToAdd);
 
-        //adds card from deck to hand
-    }
 
+    }
     public void hitForSplitHand(Card cardToAdd){
         this.playerHandSplit.add(cardToAdd);
 
     }
-
-
-
     public void newSplitHand(){
         this.playerHandSplit.add(playerHand.removeByIndex(1));
-
-
     }
 
 

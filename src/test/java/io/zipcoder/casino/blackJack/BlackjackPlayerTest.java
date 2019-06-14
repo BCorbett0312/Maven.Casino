@@ -90,7 +90,6 @@ public class BlackjackPlayerTest {
         Hand myHand = player.getSplitHand();
         assertTrue(myHand.isEmpty());
         player.hitForSplitHand(jSpades);
-
         assertFalse(myHand.isEmpty());
     }
 
@@ -103,11 +102,7 @@ public class BlackjackPlayerTest {
         player1.hitForPlayer(jSpades);
         player1.hitForPlayer(jHearts);
 
-
-
-
         player1.newSplitHand();
-
 
         Hand expectedHand1AfterSplit = player1.getHand();
         Hand expectedHand2AfterSplit = player1.getSplitHand();
@@ -152,19 +147,7 @@ public class BlackjackPlayerTest {
 
     }
 
-//    @Test
-//    public void getDealerHandTest(){
-//        Card jSpades = new Card(SPADE, CardValue.JACK);
-//        BlackjackPlayer dealer = new BlackjackPlayer();
-//        dealer.hitForDealer(jSpades);
-//        Hand dealerHand = dealer.getDealerHand();
-//        assertEquals(dealerHand, dealer.getDealerHand());
 
-
-
-
-
-//    }
 
     @Test
     public void getSplitHandTest(){

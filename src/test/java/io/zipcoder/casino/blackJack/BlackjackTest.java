@@ -8,12 +8,12 @@ public class BlackjackTest {
 
     @Test
     public void startBlackjack() {
-
-
     }
 
     @Test
     public void checkHand() {
+
+
     }
 
     @Test
