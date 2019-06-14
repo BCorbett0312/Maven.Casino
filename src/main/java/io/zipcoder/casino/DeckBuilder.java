@@ -2,6 +2,11 @@ package io.zipcoder.casino;
 
 import java.util.ArrayList;
 
+/**
+ * DeckBuilder helps with the construction of Deck for various deck games.
+ * Each method returns this object so the methods can be chained together
+ * IMPORTANT: Remember to shuffle the deck once it is constructed and before you build it otherwise it will be made in set order.
+ */
 public class DeckBuilder {
 
     private Deck deck;
@@ -32,23 +37,51 @@ public class DeckBuilder {
      */
     public Deck build() { return deck; }
 
+
+    /**
+     * Shuffles the deck
+     * @return this
+     */
+    public DeckBuilder shuffle() {
+
+        deck.shuffleDeck();
+        return this;
+
+    }
+
     /**
      * Removes all cards from the deck
      * @return this
      */
-    public DeckBuilder clear() { return this; }
+    public DeckBuilder clear() {
+
+        deck.clear();
+        return this;
+
+    }
 
     /**
      * Returns a Boolean depending on if there are any cards in the deck
      * @return True or False
      */
-    public Boolean isEmpty() { return null; }
+    public Boolean isEmpty() {
+        return deck.isEmpty();
+    }
 
     /**
      * Add a set of cards not including jokers
      * @return this
      */
-    public DeckBuilder addSet() { return this; }
+    public DeckBuilder addSet() {
+
+        addHearts();
+        addDiamonds();
+        addClubs();
+        addSpades();
+
+        return this;
+
+    }
 
 
     /**
@@ -56,14 +89,27 @@ public class DeckBuilder {
      * @param numOfSets the number of sets you want to add
      * @return this
      */
-    public DeckBuilder addSet(int numOfSets) { return this; }
+    public DeckBuilder addSet(int numOfSets) {
+
+        for(int i = 0; i < numOfSets; i++) addSet();
+
+        return this;
+
+    }
 
 
     /**
      * Adds a set of cards with jokers to the deck
      * @return this
      */
-    public DeckBuilder addSetWithJokers() { return this; }
+    public DeckBuilder addSetWithJokers() {
+
+        addSet();
+        addJokers();
+
+        return this;
+
+    }
 
 
     /**
@@ -71,43 +117,117 @@ public class DeckBuilder {
      * @param numOfSets
      * @return this
      */
-    public DeckBuilder addSetWithJokers(int numOfSets) { return this; }
+    public DeckBuilder addSetWithJokers(int numOfSets) {
 
-    public DeckBuilder addJokers() { return this; }
+        for(int i = 0; i < numOfSets; i++) addSetWithJokers();
 
-    public DeckBuilder addHearts() { return this; }
+        return this;
 
-    public DeckBuilder addDiamonds() { return this; }
+    }
 
-    public DeckBuilder addClubs() { return this; }
+    public DeckBuilder addJokers() {
 
-    public DeckBuilder addSpades() { return this; }
+        Card[] cards = {
+                new Card(CardSuit.NONE, CardValue.JOKER),
+                new Card(CardSuit.NONE, CardValue.JOKER)
+        };
 
-    public DeckBuilder addAces() { return this; }
+        deck.add(cards);
 
-    public DeckBuilder addTwos() { return this; }
+        return this; }
 
-    public DeckBuilder addThrees() { return this; }
+    public DeckBuilder addHearts() {
 
-    public DeckBuilder addFours() { return this; }
+        Card[] cards = {
+                new Card(CardSuit.HEART, CardValue.ACE),
+                new Card(CardSuit.HEART, CardValue.TWO),
+                new Card(CardSuit.HEART, CardValue.THREE),
+                new Card(CardSuit.HEART, CardValue.FOUR),
+                new Card(CardSuit.HEART, CardValue.FIVE),
+                new Card(CardSuit.HEART, CardValue.SIX),
+                new Card(CardSuit.HEART, CardValue.SEVEN),
+                new Card(CardSuit.HEART, CardValue.EIGHT),
+                new Card(CardSuit.HEART, CardValue.NINE),
+                new Card(CardSuit.HEART, CardValue.TEN),
+                new Card(CardSuit.HEART, CardValue.JACK),
+                new Card(CardSuit.HEART, CardValue.QUEEN),
+                new Card(CardSuit.HEART, CardValue.KING)
+        };
 
-    public DeckBuilder addFives() { return this; }
+        deck.add(cards);
 
-    public DeckBuilder addSixes() { return this; }
+        return this; }
 
-    public DeckBuilder addSevens() { return this; }
+    public DeckBuilder addDiamonds() {
 
-    public DeckBuilder addEights() { return this; }
+        Card[] cards = {
+                new Card(CardSuit.DIAMOND, CardValue.ACE),
+                new Card(CardSuit.DIAMOND, CardValue.TWO),
+                new Card(CardSuit.DIAMOND, CardValue.THREE),
+                new Card(CardSuit.DIAMOND, CardValue.FOUR),
+                new Card(CardSuit.DIAMOND, CardValue.FIVE),
+                new Card(CardSuit.DIAMOND, CardValue.SIX),
+                new Card(CardSuit.DIAMOND, CardValue.SEVEN),
+                new Card(CardSuit.DIAMOND, CardValue.EIGHT),
+                new Card(CardSuit.DIAMOND, CardValue.NINE),
+                new Card(CardSuit.DIAMOND, CardValue.TEN),
+                new Card(CardSuit.DIAMOND, CardValue.JACK),
+                new Card(CardSuit.DIAMOND, CardValue.QUEEN),
+                new Card(CardSuit.DIAMOND, CardValue.KING)
+        };
 
-    public DeckBuilder addNines() { return this; }
+        deck.add(cards);
 
-    public DeckBuilder addTens() { return this; }
+        return this;
+    }
 
-    public DeckBuilder addJacks() { return this; }
+    public DeckBuilder addClubs() {
 
-    public DeckBuilder addQueens() { return this; }
+        Card[] cards = {
+                new Card(CardSuit.CLUB, CardValue.ACE),
+                new Card(CardSuit.CLUB, CardValue.TWO),
+                new Card(CardSuit.CLUB, CardValue.THREE),
+                new Card(CardSuit.CLUB, CardValue.FOUR),
+                new Card(CardSuit.CLUB, CardValue.FIVE),
+                new Card(CardSuit.CLUB, CardValue.SIX),
+                new Card(CardSuit.CLUB, CardValue.SEVEN),
+                new Card(CardSuit.CLUB, CardValue.EIGHT),
+                new Card(CardSuit.CLUB, CardValue.TEN),
+                new Card(CardSuit.CLUB, CardValue.NINE),
+                new Card(CardSuit.CLUB, CardValue.JACK),
+                new Card(CardSuit.CLUB, CardValue.QUEEN),
+                new Card(CardSuit.CLUB, CardValue.KING)
+        };
 
-    public DeckBuilder addKings() { return this; }
+        deck.add(cards);
+
+        return this;
+
+    }
+
+    public DeckBuilder addSpades() {
+
+        Card[] cards = {
+                new Card(CardSuit.SPADE, CardValue.ACE),
+                new Card(CardSuit.SPADE, CardValue.TWO),
+                new Card(CardSuit.SPADE, CardValue.THREE),
+                new Card(CardSuit.SPADE, CardValue.FOUR),
+                new Card(CardSuit.SPADE, CardValue.FIVE),
+                new Card(CardSuit.SPADE, CardValue.SIX),
+                new Card(CardSuit.SPADE, CardValue.SEVEN),
+                new Card(CardSuit.SPADE, CardValue.EIGHT),
+                new Card(CardSuit.SPADE, CardValue.NINE),
+                new Card(CardSuit.SPADE, CardValue.TEN),
+                new Card(CardSuit.SPADE, CardValue.JACK),
+                new Card(CardSuit.SPADE, CardValue.QUEEN),
+                new Card(CardSuit.SPADE, CardValue.KING)
+        };
+
+        deck.add(cards);
+
+        return this;
+    }
+
 
 
 }
