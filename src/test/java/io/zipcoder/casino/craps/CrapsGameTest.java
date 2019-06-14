@@ -155,8 +155,9 @@ public class CrapsGameTest {
     public void processBetTest1(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "field bet 5";
+        String expected = "Placed a Field bet for $5\nPlace another bet? ";
 
         // Act
         processBetTester.setPhase(Phase.POINT);
@@ -167,13 +168,15 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(1, betNum);
         Assert.assertEquals(5, wallet);
+        Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
     public void processBetTest2(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "field bet 15";
         String expected = "You've not enough minerals";
 
@@ -187,7 +190,7 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(0, betNum);
         Assert.assertEquals(10, wallet);
-        Assert.assertEquals(expected, result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
         Assert.assertFalse(result.getValue1());
     }
 
@@ -195,7 +198,7 @@ public class CrapsGameTest {
     public void processBetTest3(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "field bet 5";
 
         // Act
@@ -213,7 +216,7 @@ public class CrapsGameTest {
     public void processBetTest4(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "Pass line 5";
         String expected = "You can only place a Pass Line bet in the Come Out phase";
 
@@ -226,7 +229,7 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(0, betNum);
         Assert.assertEquals(10, wallet);
-        Assert.assertEquals(expected, result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
         Assert.assertFalse(result.getValue1());
 
     }
@@ -235,7 +238,7 @@ public class CrapsGameTest {
     public void processBetTest5(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "Pass line 5";
 
         // Act
@@ -247,14 +250,14 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(1, betNum);
         Assert.assertEquals(5, wallet);
-        Assert.assertFalse(result.getValue1());
+        Assert.assertTrue(result.getValue1());
     }
 
     @Test
     public void processBetTest6(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "Don't Pass 5";
         String expected = "You can only place a Don't Pass bet in the Come Out phase";
 
@@ -276,7 +279,7 @@ public class CrapsGameTest {
     public void processBetTest7(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame processBetTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processBetTester = new CrapsGame(cp);
         String input = "Don't pass 5";
 
         // Act
@@ -288,14 +291,14 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(1, betNum);
         Assert.assertEquals(5, wallet);
-        Assert.assertFalse(result.getValue1());
+        Assert.assertTrue(result.getValue1());
     }
 
     @Test
     public void currentBetsTest1(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame currentBetsTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame currentBetsTester = new CrapsGame(cp);
         String expected = "You don't have any bets placed\n";
 
         // Act
@@ -309,7 +312,7 @@ public class CrapsGameTest {
     public void currentBetsTest2(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame currentBetsTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame currentBetsTester = new CrapsGame(cp);
         CrapsBet bet1 = new PassBet(5);
         String expected = "Your current bets are:\n" + bet1.toString() + "\n";
 
@@ -325,7 +328,7 @@ public class CrapsGameTest {
     public void currentBetsTest3(){
         // Arrange
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
-        CrapsGame currentBetsTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame currentBetsTester = new CrapsGame(cp);
         CrapsBet bet1 = new PassBet(5);
         CrapsBet bet2 = new DontPassBet(6);
         String expected = "Your current bets are:\n" + bet1.toString() + "\n" + bet2.toString() + "\n";

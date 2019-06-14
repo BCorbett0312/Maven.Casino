@@ -32,4 +32,18 @@ public abstract class CrapsBet {
 
 enum BetType{
     PASS, DONTPASS, FIELD;
+
+    @Override
+    public String toString(){
+        switch(this){
+            case PASS:
+                return "Pass Line";
+            case DONTPASS:
+                return "Don't Pass";
+            case FIELD:
+                return "Field";
+                default:
+                    throw new IllegalArgumentException("Enum value not in enum ?!?");
+        }
+    }
 }

@@ -27,6 +27,15 @@ public class CrapsPlayer implements GamblingPlayer {
         }
     }
 
+    public Boolean canBet(Integer bet){
+        if(bet > player.getMoney()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public void collectWinnings(Integer winnings){
         player.setMoney(player.getMoney() + winnings);
     }

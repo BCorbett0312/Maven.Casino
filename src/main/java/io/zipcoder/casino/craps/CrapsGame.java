@@ -1,5 +1,6 @@
 package io.zipcoder.casino.craps;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion;
 import io.zipcoder.casino.Gamble;
 import io.zipcoder.casino.Game;
 import io.zipcoder.casino.Player;
@@ -10,6 +11,7 @@ import io.zipcoder.casino.utilities.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CrapsGame extends Game implements Gamble {
@@ -20,7 +22,8 @@ public class CrapsGame extends Game implements Gamble {
     private Boolean exit;
     private Boolean leaveBets;
     private Phase phase;
-    private Pattern p;
+    private Pattern betPattern;
+    private Pattern digitPattern;
     private Random random;
 
 
@@ -31,7 +34,8 @@ public class CrapsGame extends Game implements Gamble {
         this.exit = false;
         this.leaveBets = false;
         this.phase = Phase.WALKUP;
-        this.p = Pattern.compile("(pass line \\d+)|(don't pass \\d+)|(field bet \\d+)");
+        this.betPattern = Pattern.compile("(pass line \\d+)|(don't pass \\d+)|(field bet \\d+)");
+        this.digitPattern = Pattern.compile("\\d+");
         this.random = new Random();
     }
 
@@ -49,9 +53,7 @@ public class CrapsGame extends Game implements Gamble {
      * @param input The input that CrapsRunner gets from the user
      * @return an InputResult with the response to the user's input and whether CrapsRunner should move on
      */
-    public InputResult processInput(String input){
-        return null;
-    }
+    public InputResult processInput(String input){ return null; }
 
     /**
      * Processes a users request to bet. If the amount is valid, makes a new bet of the appropriate type and adds
@@ -61,7 +63,40 @@ public class CrapsGame extends Game implements Gamble {
      *   otherwise
      */
     public Pair<String, Boolean> processBet(String input){
-        return null;
+        String str = input.toLowerCase().substring(0,9);
+        Matcher digitMatcher = digitPattern.matcher(input);
+        digitMatcher.find();
+        Integer value = Integer.parseInt(digitMatcher.group());
+        CrapsBet bet;
+
+        switch(str){
+            case "pass line":
+                if(phase != Phase.COMEOUT){ return new Pair<String,Boolean>("You can only place a Pass Line bet in the Come Out phase", false); }
+                bet = makeNewBet(BetType.PASS, value);
+                break;
+            case "don't pas":
+                if(phase != Phase.COMEOUT){ return new Pair<String,Boolean>("You can only place a Don't Pass bet in the Come Out phase", false); }
+                bet = makeNewBet(BetType.DONTPASS, value);
+                break;
+            case "field bet":
+                bet = makeNewBet(BetType.FIELD, value);
+                break;
+            default:
+                throw new IllegalArgumentException("Not a valid BetType");
+        }
+
+        if(bet == null){
+            return new Pair<String, Boolean>("You've not enough minerals", false);
+        }
+        else{
+            StringBuilder sbuild = new StringBuilder("Placed a ");
+            sbuild.append(bet.getType());
+            sbuild.append(" bet for $");
+            sbuild.append(bet.getValue());
+            sbuild.append("\nPlace another bet? ");
+            addBet(bet);
+            return new Pair<String, Boolean>(sbuild.toString(), true);
+        }
     }
 
     /**
@@ -124,6 +159,11 @@ public class CrapsGame extends Game implements Gamble {
      * @return
      */
     public CrapsBet makeNewBet(BetType type, Integer value){
+        if(!player.canBet(value)){
+            return null;
+        }
+
+        player.placeBet(value);
         switch(type){
             case PASS:
                 return new PassBet(value);
@@ -135,6 +175,7 @@ public class CrapsGame extends Game implements Gamble {
                 throw(new IllegalArgumentException());
         }
     }
+
 
     /**
      * Adds a bet to betList

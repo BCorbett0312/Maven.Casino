@@ -64,6 +64,38 @@ public class CrapsPlayerTest {
     }
 
     @Test
+    public void canBetTest1(){
+        // Arrange
+        Integer expected = 30;
+        Player p = new Player(expected, "Sulla");
+        CrapsPlayer cp = new CrapsPlayer(p);
+
+        // Act
+        Boolean result = cp.canBet(20);
+        Integer money = cp.getMoney();
+
+        // Assert
+        Assert.assertTrue(result);
+        Assert.assertEquals(expected, money);
+    }
+
+    @Test
+    public void canBetTest2(){
+        // Arrange
+        Integer expected = 30;
+        Player p = new Player(expected, "Sulla");
+        CrapsPlayer cp = new CrapsPlayer(p);
+
+        // Act
+        Boolean result = cp.canBet(40);
+        Integer money = cp.getMoney();
+
+        // Assert
+        Assert.assertFalse(result);
+        Assert.assertEquals(expected, money);
+    }
+
+    @Test
     public void collectWinningsTest(){
         // Arrange
         Player p = new Player(10, "Sulla");
