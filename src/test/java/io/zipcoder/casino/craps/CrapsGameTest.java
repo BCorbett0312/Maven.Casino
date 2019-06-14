@@ -2,9 +2,12 @@ package io.zipcoder.casino.craps;
 
 import io.zipcoder.casino.Player;
 import org.javatuples.Pair;
+import org.javatuples.Triplet;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -795,6 +798,14 @@ public class CrapsGameTest {
         Assert.assertEquals(expected,result.getValue0());
         Assert.assertFalse(processTester.getExit());
         Assert.assertFalse(processTester.getLeaveBets());
+    }
+
+    public void reportSettledBetsTest1(){
+        Triplet<BetType, Integer, Integer> bet1 = new Triplet<>(BetType.PASS, 5, 10);
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(bet1);
+        String expected = "Your Pass Line bet for $5 payed out $10\n";
+
     }
 
 

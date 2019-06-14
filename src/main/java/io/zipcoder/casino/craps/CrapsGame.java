@@ -45,6 +45,25 @@ public class CrapsGame extends Game implements Gamble {
      * If phase is WALKUP, will instead print the payout table and list of instructions
      */
     public String nextPhase(){
+        switch(phase){
+            case WALKUP:
+                String marque = "XXXXX  XXXX    XXX   XXXXX  XXXXX\n" +
+                                "XX     X   X  X   X  X   X  XX   \n" +
+                                "XX     XXXX   XXXXX  XXXXX  XXXXX\n" +
+                                "XX     X  X   X   X  X         XX\n" +
+                                "XXXXX  X   X  X   X  X      XXXXX\n";
+
+                phase = Phase.COMEOUT;
+                return marque + "\n\n" + printBetPayoutTable() + "\n\n" + printInstructions() + "\n";
+            case COMEOUT:
+                StringBuilder sbuild = new StringBuilder();
+                CrapsRoll currentRoll = rollDice();
+                sbuild.append("Shooter rolled ");
+                sbuild.append(currentRoll.getValue());
+                sbuild.append("\n\n");
+                //sbuild.append(settleBets()
+
+        }
         return null;
     }
 
@@ -266,7 +285,11 @@ public class CrapsGame extends Game implements Gamble {
      * @param currentRoll - the roll that all bets are checked against
      * @return a Triplet with the bet type, the value of the bet, and the amount won
      */
-    private List<Triplet<BetType, Integer, Integer >> settleBets(CrapsRoll currentRoll){
+    public String settleBets(CrapsRoll currentRoll){
+        return null;
+    }
+
+    public String reportSettledBets(List<Triplet<BetType, Integer, Integer>> settleOutcomes){
         return null;
     }
 
