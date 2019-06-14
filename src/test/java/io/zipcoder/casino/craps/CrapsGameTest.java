@@ -602,6 +602,175 @@ public class CrapsGameTest {
     }
 
 
+    @Test
+    public void processInputTest5(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        String input = "show bets";
+        String expected = processTester.currentBets();
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+    }
+
+    @Test
+    public void processInputTest6(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        String input = "payout";
+        String expected = processTester.printBetPayoutTable();
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+    }
+
+    @Test
+    public void processInputTest7(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        String input = "help";
+        String expected = processTester.printInstructions();
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+    }
+
+    @Test
+    public void processInputTest8(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        String input = "exit";
+        String expected = "Goodbye\n";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertTrue(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+        Assert.assertTrue(processTester.getExit());
+    }
+
+    @Test
+    public void processInputTest9(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        String input = "roll";
+        String expected = "Rolling... \n";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertTrue(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+    }
+
+    @Test
+    public void processInputTest10(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        String input = "blargle";
+        String expected = "Improper input\nTry again: ";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected, result.getPrintOut());
+    }
+
+    @Test
+    public void processInputTest11(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        processTester.addBet(new PassBet(1));
+        String input = "exit";
+        String expected = "You have open bets, enter \"Exit\" again if you really want to leave ";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+        Assert.assertTrue(processTester.getLeaveBets());
+        Assert.assertFalse(processTester.getExit());
+    }
+
+    @Test
+    public void processInputTest12(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        processTester.setLeaveBets(true);
+        String input = "exit";
+        String expected = "Goodbye\n";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertTrue(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+        Assert.assertTrue(processTester.getExit());
+    }
+
+    @Test
+    public void processInputTest13(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        processTester.setLeaveBets(true);
+        String input = "";
+        String expected = ": ";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+        Assert.assertFalse(processTester.getExit());
+        Assert.assertFalse(processTester.getLeaveBets());
+    }
+
+    @Test
+    public void processInputTest14(){
+        // Arrange
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        processTester.setLeaveBets(true);
+        String input = "anything besides exit";
+        String expected = ": ";
+
+        // Act
+        InputResult result = processTester.processInput(input);
+
+        // Assert
+        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected,result.getPrintOut());
+        Assert.assertFalse(processTester.getExit());
+        Assert.assertFalse(processTester.getLeaveBets());
+    }
+
+
+
+
+
+
+
+
 
 
 //    @Test

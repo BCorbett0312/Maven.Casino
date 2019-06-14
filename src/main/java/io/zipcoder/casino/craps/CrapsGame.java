@@ -158,6 +158,16 @@ public class CrapsGame extends Game implements Gamble {
         this.comeOutRoll = comeOutRoll;
     }
 
+    // currently used only for testing
+    protected Boolean getLeaveBets(){
+        return leaveBets;
+    }
+
+    // DANGEROUS only for testing
+    protected void setLeaveBets(Boolean leaveBets){
+        this.leaveBets = leaveBets;
+    }
+
 }
 
 enum Phase{
