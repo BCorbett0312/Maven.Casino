@@ -46,11 +46,11 @@ public class CrapsGame extends Game implements Gamble {
     public String nextPhase(){
         switch(phase){
             case WALKUP:
-                String marque = "XXXXX  XXXX    XXX   XXXXX  XXXXX\n" +
-                                "XX     X   X  X   X  X   X  XX   \n" +
-                                "XX     XXXX   XXXXX  XXXXX  XXXXX\n" +
-                                "XX     X  X   X   X  X         XX\n" +
-                                "XXXXX  X   X  X   X  X      XXXXX\n";
+                String marque = "XXXXX  XXXX    XXX   XXXXX  XXXXX \n" +
+                                "XX     X   X  X   X  X   X  XX    \n" +
+                                "XX     XXXX   XXXXX  XXXXX  XXXXX \n" +
+                                "XX     X  X   X   X  XX        XX \n" +
+                                "XXXXX  X   X  X   X  XX     XXXXX \n";
 
                 phase = Phase.COMEOUT;
                 return marque + "\n\n" + printBetPayoutTable() + "\n\n" + printInstructions() + "\n";
@@ -285,6 +285,7 @@ public class CrapsGame extends Game implements Gamble {
      * @return a Triplet with the bet type, the value of the bet, and the amount won
      */
     public String settleBets(CrapsRoll currentRoll){
+
         return null;
     }
 
