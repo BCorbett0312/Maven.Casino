@@ -1,6 +1,5 @@
 package io.zipcoder.casino.craps;
 
-import com.sun.corba.se.impl.encoding.CodeSetConversion;
 import io.zipcoder.casino.Gamble;
 import io.zipcoder.casino.Game;
 import io.zipcoder.casino.Player;
@@ -290,7 +289,21 @@ public class CrapsGame extends Game implements Gamble {
     }
 
     public String reportSettledBets(List<Triplet<BetType, Integer, Integer>> settleOutcomes){
-        return null;
+        StringBuilder sbuild = new StringBuilder();
+        for(Triplet trip : settleOutcomes){
+            if(trip.getValue2().equals(0)){
+                sbuild.append("Your ").append(trip.getValue0()).append(" bet for $").append(trip.getValue1()).append(" lost\n");
+            }
+            else if(trip.getValue2().equals(trip.getValue1())){
+                sbuild.append("Your ").append(trip.getValue0()).append(" bet for $").append(trip.getValue1()).append(" pushed\n");
+            }
+            else{
+                sbuild.append("Your ").append(trip.getValue0()).append(" bet for $").append(trip.getValue1());
+                sbuild.append(" payed out $").append(trip.getValue2()).append("\n");
+            }
+
+        }
+        return sbuild.toString();
     }
 
     public Integer getNumberOfBets(){
