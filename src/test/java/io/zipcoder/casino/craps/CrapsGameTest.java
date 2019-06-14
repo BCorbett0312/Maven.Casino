@@ -348,12 +348,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(1,1);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "Shooter craps out\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertFalse(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -362,12 +364,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(2,1);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "Shooter craps out\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertFalse(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -376,12 +380,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(3,4);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "Natural\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertFalse(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -390,12 +396,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(5,6);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "Natural\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertFalse(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -404,6 +412,7 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(6,6);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "Shooter craps out\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
@@ -418,12 +427,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(3,1);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "The Point is 4\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -432,12 +443,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(3,2);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "The Point is 5\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -446,12 +459,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(3,3);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "The Point is 6\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -460,12 +475,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(3,5);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "The Point is 8\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -474,12 +491,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(6,3);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "The Point is 9\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test
@@ -488,12 +507,14 @@ public class CrapsGameTest {
         CrapsGame comeTester = new CrapsGame(new CrapsPlayer(new Player()));
         CrapsRoll roll = new CrapsRoll(4,6);
         comeTester.setPhase(Phase.COMEOUT);
+        String expected = "The Point is 10\n";
 
         // Act
         Pair<String, Boolean> result = comeTester.rollComeOut(roll);
 
         // Assert
         Assert.assertTrue(result.getValue1());
+        Assert.assertEquals(expected, result.getValue0());
     }
 
     @Test

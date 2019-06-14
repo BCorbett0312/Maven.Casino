@@ -106,7 +106,15 @@ public class CrapsGame extends Game implements Gamble {
      *   whether or not to move onto the Point phase as the second value
      */
     public Pair<String, Boolean> rollComeOut(CrapsRoll roll){
-        return null;
+        if(roll.getValue() == 7 || roll.getValue() == 11){
+            return new Pair<>("Natural\n", false);
+        }
+        else if(roll.getValue() == 2 || roll.getValue() == 3 || roll.getValue() == 12){
+            return new Pair<>("Shooter craps out\n", false);
+        }
+        else{
+            return new Pair<>("The Point is " + roll.getValue() +"\n", true);
+        }
     }
 
     /**
@@ -124,7 +132,16 @@ public class CrapsGame extends Game implements Gamble {
      * @return a concatination of each bet's toString method, separated by a new line
      */
     public String currentBets(){
-        return null;
+        if(betList.size() == 0){
+            return "You don't have any bets placed\n";
+        }
+
+        StringBuilder sbuild = new StringBuilder("Your current bets are:\n");
+        for(CrapsBet bet : betList){
+            sbuild.append(bet.toString());
+            sbuild.append("\n");
+        }
+        return sbuild.toString();
     }
 
     /**
@@ -208,7 +225,7 @@ public class CrapsGame extends Game implements Gamble {
      * @param currentRoll - the roll that all bets are checked against
      * @return a Triplet with the bet type, the value of the bet, and the amount won
      */
-    private Triplet<BetType, Integer, Integer > settleBets(CrapsRoll currentRoll){
+    private List<Triplet<BetType, Integer, Integer >> settleBets(CrapsRoll currentRoll){
         return null;
     }
 
