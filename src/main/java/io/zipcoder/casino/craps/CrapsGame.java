@@ -34,7 +34,7 @@ public class CrapsGame extends Game implements Gamble {
         this.exit = false;
         this.leaveBets = false;
         this.phase = Phase.WALKUP;
-        this.betPattern = Pattern.compile("(pass line \\d+)|(don't pass \\d+)|(field bet \\d+)");
+        this.betPattern = Pattern.compile("(pass line \\d+\\s*)|(don't pass \\d+\\s*)|(field bet \\d+\\s*)");
         this.digitPattern = Pattern.compile("\\d+");
         this.random = new Random();
     }
@@ -53,7 +53,13 @@ public class CrapsGame extends Game implements Gamble {
      * @param input The input that CrapsRunner gets from the user
      * @return an InputResult with the response to the user's input and whether CrapsRunner should move on
      */
-    public InputResult processInput(String input){ return null; }
+    public Pair<String, Boolean> processInput(String input){
+        input = input.toLowerCase();
+        Matcher betMatcher = betPattern.matcher(input);
+        if(betMatcher.matches()){
+
+        }
+        return null; }
 
     /**
      * Processes a users request to bet. If the amount is valid, makes a new bet of the appropriate type and adds
@@ -62,7 +68,7 @@ public class CrapsGame extends Game implements Gamble {
      * @return Returns a string with the result. Confirmation of the bet if all was in order, an error message
      *   otherwise
      */
-    public Pair<String, Boolean> processBet(String input){
+    public String processBet(String input){
         String str = input.toLowerCase().substring(0,9);
         Matcher digitMatcher = digitPattern.matcher(input);
         digitMatcher.find();
@@ -71,11 +77,11 @@ public class CrapsGame extends Game implements Gamble {
 
         switch(str){
             case "pass line":
-                if(phase != Phase.COMEOUT){ return new Pair<String,Boolean>("You can only place a Pass Line bet in the Come Out phase", false); }
+                if(phase != Phase.COMEOUT){ return "You can only place a Pass Line bet in the Come Out phase"; }
                 bet = makeNewBet(BetType.PASS, value);
                 break;
             case "don't pas":
-                if(phase != Phase.COMEOUT){ return new Pair<String,Boolean>("You can only place a Don't Pass bet in the Come Out phase", false); }
+                if(phase != Phase.COMEOUT){ return "You can only place a Don't Pass bet in the Come Out phase"; }
                 bet = makeNewBet(BetType.DONTPASS, value);
                 break;
             case "field bet":
@@ -86,16 +92,16 @@ public class CrapsGame extends Game implements Gamble {
         }
 
         if(bet == null){
-            return new Pair<String, Boolean>("You've not enough minerals", false);
+            return "You've not enough minerals";
         }
         else{
             StringBuilder sbuild = new StringBuilder("Placed a ");
             sbuild.append(bet.getType());
             sbuild.append(" bet for $");
             sbuild.append(bet.getValue());
-            sbuild.append("\nPlace another bet? ");
+            sbuild.append("\n: ");
             addBet(bet);
-            return new Pair<String, Boolean>(sbuild.toString(), true);
+            return sbuild.toString();
         }
     }
 
