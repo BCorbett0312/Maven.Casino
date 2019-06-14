@@ -160,7 +160,7 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.POINT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
@@ -179,7 +179,7 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.POINT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
@@ -187,8 +187,8 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(0, betNum);
         Assert.assertEquals(10, wallet);
-        Assert.assertEquals(expected, result.getPrintOut());
-        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected, result.getValue1());
+        Assert.assertFalse(result.getValue1());
     }
 
     @Test
@@ -200,7 +200,7 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.COMEOUT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
@@ -219,15 +219,15 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.POINT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
         // Assert
         Assert.assertEquals(0, betNum);
         Assert.assertEquals(10, wallet);
-        Assert.assertEquals(expected, result.getPrintOut());
-        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected, result.getValue1());
+        Assert.assertFalse(result.getValue1());
 
     }
 
@@ -240,14 +240,14 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.COMEOUT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
         // Assert
         Assert.assertEquals(1, betNum);
         Assert.assertEquals(5, wallet);
-        Assert.assertFalse(result.moveOn());
+        Assert.assertFalse(result.getValue1());
     }
 
     @Test
@@ -260,15 +260,15 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.POINT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
         // Assert
         Assert.assertEquals(0, betNum);
         Assert.assertEquals(10, wallet);
-        Assert.assertEquals(expected, result.getPrintOut());
-        Assert.assertFalse(result.moveOn());
+        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertFalse(result.getValue1());
 
     }
 
@@ -281,14 +281,14 @@ public class CrapsGameTest {
 
         // Act
         processBetTester.setPhase(Phase.COMEOUT);
-        InputResult result = processBetTester.processBet(input);
+        Pair<String, Boolean> result = processBetTester.processBet(input);
         int betNum = processBetTester.getNumberOfBets();
         int wallet = cp.getMoney();
 
         // Assert
         Assert.assertEquals(1, betNum);
         Assert.assertEquals(5, wallet);
-        Assert.assertFalse(result.moveOn());
+        Assert.assertFalse(result.getValue1());
     }
 
     @Test
