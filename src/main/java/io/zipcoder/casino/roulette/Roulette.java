@@ -5,37 +5,47 @@ import io.zipcoder.casino.SpinGame;
 
 public class Roulette extends SpinGame {
 
-
     private Chips chips;
     private Player player;
 
-    /**
-     *
-     * @param player - player to check balance
-     * @return - balance
-     */
-    public Integer checkBalance(Player player) {
+    // constructor
+    public Roulette (Chips chips) {
+        this.chips = chips;
+    }
+    // constructor
+    public Roulette (Player player) {
+
+        this.player = player;
+    }
+
+
+    public Integer getPlayerBalance() {
+
         return null;
     }
 
 
-    public Integer spin() { return null; }
+    public Integer spin() {
+
+        return null;
+    }
 
     /**
      *
      * @return the bet the player has placed
      */
-    public Integer bet (Player player) {
+    public Integer playerBet () {
+
         return null;
     }
 
-    /**
-     *
-     * @return the money that will be collected after the bet is placed
-     */
-    public Integer collectMoney(Player player) {
-        return null;
-    }
+
+//     * @return the money that will be collected after the bet is placed
+//     */
+//    public Integer collectPlayerMoney() {
+//
+//        return null;
+//    }
 
     /**
      *
@@ -43,6 +53,7 @@ public class Roulette extends SpinGame {
      * @return if they continue game or not
      */
     public boolean continueGame() {
+
         return false;
     }
 
@@ -52,6 +63,7 @@ public class Roulette extends SpinGame {
      * @return if they clear chips or not
      */
     public boolean clearchips() {
+
         return false;
     }
 

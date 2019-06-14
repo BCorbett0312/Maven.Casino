@@ -78,7 +78,7 @@ public class BlackjackPlayer implements GamblingPlayer {
             else {handValue += handToEvaluate.getCardAtIndex(i).getBlackJackValue(handToEvaluate.getCardAtIndex(i));}
 
         }
-        
+
         while(handValue > 21 && aces > 0){
             handValue -= 10;
             aces--;
