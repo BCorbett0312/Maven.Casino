@@ -8,6 +8,7 @@ import org.javatuples.Triplet;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CrapsGame extends Game implements Gamble {
     private CrapsPlayer player;
@@ -17,6 +18,7 @@ public class CrapsGame extends Game implements Gamble {
     private Boolean exit;
     private Boolean leaveBets;
     private Phase phase;
+    private Pattern p;
 
 
     public CrapsGame(CrapsPlayer player){
@@ -52,11 +54,23 @@ public class CrapsGame extends Game implements Gamble {
         return null;
     }
 
-    public Pair<String, Boolean> rollComeOut(){
+    /**
+     * Rolls the Come Out Phase
+     * @param roll - the roll that was made
+     * @return A Pair containing a string summarizing the result of the roll as the first value and a boolean indicating
+     *   whether or not to move onto the Point phase as the second value
+     */
+    public Pair<String, Boolean> rollComeOut(CrapsRoll roll){
         return null;
     }
 
-    public Pair<String, Boolean> rollPoint(){
+    /**
+     * Rolls the Point Phase
+     * @param roll - the roll that was made
+     * @return A Pair containing a string summarizing the result of the roll as the first value and a boolean indicating
+     *   whether or not to start a new round as the second value
+     */
+    public Pair<String, Boolean> rollPoint(CrapsRoll roll){
         return null;
     }
 
@@ -125,11 +139,11 @@ public class CrapsGame extends Game implements Gamble {
         return null;
     }
 
-    // currently used only for testing
-    protected Integer getNumberOfBets(){
+    public Integer getNumberOfBets(){
         return betList.size();
     }
 
+    // currently used only for testing
     protected Phase getPhase(){
         return phase;
     }
@@ -137,6 +151,11 @@ public class CrapsGame extends Game implements Gamble {
     // DANGEROUS only for testing
     protected void setPhase(Phase phase){
         this.phase = phase;
+    }
+
+    // DANGEROUS only for testing
+    protected void setComeOutRoll(CrapsRoll comeOutRoll){
+        this.comeOutRoll = comeOutRoll;
     }
 
 }
