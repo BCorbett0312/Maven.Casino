@@ -6,14 +6,15 @@ import java.util.ArrayList;
 
 
 public class Blackjack extends CardGame implements Gamble {
-    private BlackjackPlayer player;
+    private BlackjackPlayer gambler;
     private BlackjackPlayer dealer;
     private BlackjackMediator mediator;
 
 
 
     public Blackjack(Player player){
-
+        dealer = new BlackjackPlayer();
+        gambler = new BlackjackPlayer(player);
     }
 
     public void startBlackjack(){
@@ -21,7 +22,7 @@ public class Blackjack extends CardGame implements Gamble {
     }
 
 
-    public void checkHand(ArrayList<Hand> handToCheck){
+    public void checkHand(Hand handToCheck){
         //check hand is bust or blackjack will be called after every hit
     }
 
