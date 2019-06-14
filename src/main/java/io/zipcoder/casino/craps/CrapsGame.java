@@ -34,7 +34,7 @@ public class CrapsGame extends Game implements Gamble {
         this.exit = false;
         this.leaveBets = false;
         this.phase = Phase.WALKUP;
-        this.betPattern = Pattern.compile("(pass line \\d+\\s*)|(don't pass \\d+\\s*)|(field bet \\d+\\s*)");
+        this.betPattern = Pattern.compile("(pass line \\d+)|(don't pass \\d+)|(field bet \\d+)");
         this.digitPattern = Pattern.compile("\\d+");
         this.random = new Random();
     }
@@ -54,12 +54,39 @@ public class CrapsGame extends Game implements Gamble {
      * @return an InputResult with the response to the user's input and whether CrapsRunner should move on
      */
     public Pair<String, Boolean> processInput(String input){
-        input = input.toLowerCase();
+        input = input.toLowerCase().trim();
         Matcher betMatcher = betPattern.matcher(input);
         if(betMatcher.matches()){
-
+            return new Pair<>(processBet(input),false);
         }
-        return null; }
+
+        if(leaveBets && !input.equals("exit")){
+            leaveBets = false;
+            return new Pair<>("Enter a command: ", false);
+        }
+
+        switch(input){
+            case "show bets":
+                return new Pair<>(currentBets(), false);
+            case "payout":
+                return new Pair<>(printBetPayoutTable(), false);
+            case "help":
+                return new Pair<>(printInstructions(), false);
+            case "exit":
+                if(betList.size()!=0 && !leaveBets){
+                    leaveBets = true;
+                    return new Pair<>("You have open bets, enter \"Exit\" again if you really want to leave\n: ", false);
+                }
+                else{
+                    exit = true;
+                    return new Pair<>("Goodbye\n", true);
+                }
+            case "roll":
+                return new Pair<>("Rolling... \n",true);
+            default:
+                return new Pair<>("Invalid command\nTry again: ", false);
+        }
+    }
 
     /**
      * Processes a users request to bet. If the amount is valid, makes a new bet of the appropriate type and adds
@@ -221,7 +248,7 @@ public class CrapsGame extends Game implements Gamble {
      * @return true if yes, false if not
      */
     public Boolean getExit(){
-        return null;
+        return exit;
     }
 
     /**

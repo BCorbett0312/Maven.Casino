@@ -575,9 +575,10 @@ public class CrapsGameTest {
     @Test
     public void processInputTest1(){
         // Arrange
-        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player(10, "Sulla")));
+        processTester.setPhase(Phase.COMEOUT);
         String input = "pass line 2";
-        String expected = "Pass Line bet for 2 placed\n";
+        String expected = "Placed a Pass Line bet for $2\n: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -590,9 +591,10 @@ public class CrapsGameTest {
     @Test
     public void processInputTest2(){
         // Arrange
-        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player(100, "Sulla")));
+        processTester.setPhase(Phase.COMEOUT);
         String input = "don't pass 22";
-        String expected = "Don't Pass bet for 22 placed\n";
+        String expected = "Placed a Don't Pass bet for $22\n: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -605,9 +607,9 @@ public class CrapsGameTest {
     @Test
     public void processInputTest3(){
         // Arrange
-        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
+        CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player(10000000, "Crassus")));
         String input = "field bet 322";
-        String expected = "Field bet for 322 placed\n";
+        String expected = "Placed a Field bet for $322\n: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -622,7 +624,7 @@ public class CrapsGameTest {
         // Arrange
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         String input = "pass line";
-        String expected = "Improper input\nTry again: ";
+        String expected = "Invalid command\nTry again: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -714,7 +716,7 @@ public class CrapsGameTest {
         // Arrange
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         String input = "blargle";
-        String expected = "Improper input\nTry again: ";
+        String expected = "Invalid command\nTry again: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -730,7 +732,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         processTester.addBet(new PassBet(1));
         String input = "exit";
-        String expected = "You have open bets, enter \"Exit\" again if you really want to leave ";
+        String expected = "You have open bets, enter \"Exit\" again if you really want to leave\n: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -765,7 +767,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         processTester.setLeaveBets(true);
         String input = "";
-        String expected = ": ";
+        String expected = "Enter a command: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -783,7 +785,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         processTester.setLeaveBets(true);
         String input = "anything besides exit";
-        String expected = ": ";
+        String expected = "Enter a command: ";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
