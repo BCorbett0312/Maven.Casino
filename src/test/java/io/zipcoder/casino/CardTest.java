@@ -3,6 +3,9 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.swing.*;
+import static org.junit.Assert.*;
+
 public class CardTest {
 
 
@@ -322,5 +325,22 @@ public class CardTest {
 
     }
 
+    @Test
+    public void getBlackJackValueTest(){
+        Card card1 = new Card (CardSuit.CLUB, CardValue.JACK);
 
+        Card card2 = new Card (CardSuit.DIAMOND, CardValue.ACE);
+
+        Card card3 = new Card (null, CardValue.JOKER);
+
+
+        Integer expected1 = 11;
+        Integer expected2 = 1;
+        Integer expected3 = 0;
+
+        assertEquals(expected1, card1.getBlackJackValue(card1));
+        assertEquals(expected2, card2.getBlackJackValue(card2));
+        assertEquals(expected3, card3.getBlackJackValue(card3));
+
+    }
 }

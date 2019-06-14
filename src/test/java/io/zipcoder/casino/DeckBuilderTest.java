@@ -89,7 +89,7 @@ public class DeckBuilderTest {
         Deck deck = builder.build();
         Card[] singleSet = arrayOfSetOfCards();
         Card[] doubleSet = new Card[singleSet.length * 2];
-        
+
 
         //When
 
