@@ -7,9 +7,7 @@ import io.zipcoder.casino.Player;
 import org.junit.Test;
 
 
-
-import static io.zipcoder.casino.CardSuit.HEART;
-import static io.zipcoder.casino.CardSuit.SPADE;
+import static io.zipcoder.casino.CardSuit.*;
 import static org.junit.Assert.*;
 
 
@@ -30,6 +28,20 @@ public class BlackjackPlayerTest {
     }
 
 
+
+    @Test
+    public void BlackJackPlayerConstructorTest2(){
+        Player player1 = new Player( null, null);
+        BlackjackPlayer thisBJPlayer = new BlackjackPlayer(player1);
+
+        String expected = null;
+        Integer expectedWallet = null;
+
+        assertEquals(expected, thisBJPlayer.getPlayerName());
+        assertEquals(expectedWallet, thisBJPlayer.getWalletBalance());
+    }
+
+
     @Test
     public void BlackJackPlayerDealerConstructorTest(){
         BlackjackPlayer bjPlayer = new BlackjackPlayer();
@@ -45,8 +57,6 @@ public class BlackjackPlayerTest {
     }
 
 
-
-
     @Test
     public void discardHandTest() {
         Card kHearts = new Card(HEART, CardValue.KING);
@@ -58,11 +68,29 @@ public class BlackjackPlayerTest {
 
         assertFalse(testHand.isEmpty());
 
-
         player.discardHand();
 
         assertTrue(testHand.isEmpty());
 
+
+    }
+
+    @Test
+    public void discardHandTest2(){
+        Card card1 = new Card(HEART, CardValue.KING);
+        Card card2 = new Card(SPADE, CardValue.JACK);
+        Player testPlayer = new Player(300, "g");
+        BlackjackPlayer player = new BlackjackPlayer(testPlayer);
+        player.hitForSplitHand(card1);
+        player.hitForSplitHand(card2);
+
+
+
+        assertFalse(player.getSplitHand().isEmpty());
+
+        player.discardHand();
+
+        assertTrue(player.getSplitHand().isEmpty());
 
     }
 
@@ -78,6 +106,21 @@ public class BlackjackPlayerTest {
 
         assertFalse(myHand.isEmpty());
 
+    }
+
+    @Test
+    public void hitForPlayerTest2(){
+        Card nullCard = new Card(null, null);
+        Player player1 = new Player(33, "Clive");
+        BlackjackPlayer player = new BlackjackPlayer(player1);
+        Hand myHand = player.getHand();
+        assertTrue(myHand.isEmpty());
+
+
+
+        player.hitForPlayer(nullCard);
+        assertFalse(myHand.isEmpty());
+        assertEquals(1, myHand.size());
     }
 
 
@@ -118,18 +161,73 @@ public class BlackjackPlayerTest {
     }
 
     @Test
-    public void getHandValue() {
+    public void getHandValue1() {
         Player genPlayer = new Player(500, "Edward");
         BlackjackPlayer player1 = new BlackjackPlayer(genPlayer);
-        Card jSpades = new Card(SPADE, CardValue.JACK);
-        Card jHearts = new Card(HEART, CardValue.JACK);
-        player1.hitForPlayer(jSpades);
-        player1.hitForPlayer(jHearts);
-
+        Card card1 = new Card(SPADE, CardValue.JACK);
+        Card card2 = new Card(HEART, CardValue.JACK);
+        player1.hitForPlayer(card1);
+        player1.hitForPlayer(card2);
 
         Integer expected = 20;
 
-        assertEquals(expected, player1.getHandValue());
+        assertEquals(expected, player1.getHandValue(player1.getHand()));
+    }
+
+    @Test
+    public void getHandValueTest2(){
+        Player genPlayer = new Player(500, "Edward");
+        BlackjackPlayer player1 = new BlackjackPlayer(genPlayer);
+        Card card1 = new Card(SPADE, CardValue.ACE);
+        Card card2 = new Card(HEART, CardValue.ACE);
+        player1.hitForPlayer(card1);
+        player1.hitForPlayer(card2);
+
+        Integer expected = 12;
+        assertEquals(expected, player1.getHandValue(player1.getHand()));
+    }
+
+    @Test
+    public void getHandValueTest3(){
+        Player genPlayer = new Player(500, "Edward");
+        BlackjackPlayer player1 = new BlackjackPlayer(genPlayer);
+        Card card1 = new Card(CLUB, CardValue.KING);
+        Card card2 = new Card(DIAMOND, CardValue.QUEEN);
+        player1.hitForPlayer(card1);
+        player1.hitForPlayer(card2);
+
+
+        Integer expected = 20;
+        assertEquals(expected, player1.getHandValue(player1.getHand()));
+
+    }
+
+    @Test
+    public void getHandValueTest4(){
+        Player genPlayer = new Player(500, "Edward");
+        BlackjackPlayer player1 = new BlackjackPlayer(genPlayer);
+        Card card1 = new Card(SPADE, CardValue.FIVE);
+        Card card2 = new Card(HEART, CardValue.THREE);
+        player1.hitForPlayer(card1);
+        player1.hitForPlayer(card2);
+
+        Integer expected = 8;
+        assertEquals(expected, player1.getHandValue(player1.getHand()));
+    }
+
+
+    @Test
+    public void getHandValueTest5(){
+        Player genPlayer = new Player(500, "Edward");
+        BlackjackPlayer player1 = new BlackjackPlayer(genPlayer);
+        Card card1 = new Card(SPADE, CardValue.ACE);
+        Card card2 = new Card(HEART, CardValue.FOUR);
+        player1.hitForPlayer(card1);
+        player1.hitForPlayer(card2);
+
+        Integer expected = 15;
+
+        assertEquals(expected, player1.getHandValue(player1.getHand()));
     }
 
     @Test
