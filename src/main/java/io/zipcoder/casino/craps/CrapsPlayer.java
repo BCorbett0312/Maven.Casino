@@ -15,6 +15,10 @@ public class CrapsPlayer implements GamblingPlayer {
     public Integer bet() {
         return null;
     }
+
+    public Integer bet(Integer amount){
+        return null;
+    }
 }
 
 

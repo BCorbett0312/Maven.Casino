@@ -65,6 +65,10 @@ public class CrapsGame extends Game implements Gamble {
 
     }
 
+    @Override
+    public Integer payOut(Integer amount) {
+        return null;
+    }
 }
 
 enum Phase{

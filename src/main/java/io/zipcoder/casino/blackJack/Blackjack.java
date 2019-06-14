@@ -9,6 +9,11 @@ public class Blackjack extends CardGame implements Gamble {
     private BlackjackPlayer gambler;
     private BlackjackPlayer dealer;
     private BlackjackMediator mediator;
+    private Deck deck;
+    private Integer playerHand;
+    private Integer playerSplitHand;
+    private Integer dealerHand;
+    private Integer theBet;
 
 
 
@@ -18,31 +23,41 @@ public class Blackjack extends CardGame implements Gamble {
     }
 
     public void startBlackjack(){
-
+        mediator.welcomeToBJ();
+        Boolean desireToPlay = true;
+        while (desireToPlay){
+            playRound();
+        }
     }
 
 
     public void checkHand(Hand handToCheck){
-        //check hand is bust or blackjack will be called after every hit
+
     }
 
-
-    public void offerInsurance(){
-        //gives player chance for insurance if dealer has Ace showing
+    public void playRound(){
+        getNewDeck();
+        gambler.discardHand();
+        dealer.discardHand();
+        gambler.bet();
+        dealInitialHands();
+        showInitialDeal();
+        playerTurn();
+        dealerTurn();
+        keepPlaying();
     }
+
 
 
     public void getNewDeck(){
-        //called when deck item has 10 or less cards
+        this.deck = new Deck();
+        deck.shuffleDeck();
     }
 
     public Boolean keepPlaying(){
         return null;
     }
 
-    public String hitOrStay(){
-        return null;
-    }
 
     public void dealerTurn(){
 
@@ -50,6 +65,18 @@ public class Blackjack extends CardGame implements Gamble {
 
     public void playerTurn(){
 
+
+    }
+
+    public void dealInitialHands(){
+
+    }
+
+    public void showInitialDeal(){
+
+    }
+    public String hitOrStay(){
+        return null;
     }
 
     public void doubleDown(){
@@ -60,4 +87,8 @@ public class Blackjack extends CardGame implements Gamble {
         //create a second hand for player using 1 of each card of starting hand and dealing a single card to each hand
     }
 
+
+    public Integer payOut(Integer amount) {
+        return null;
+    }
 }
