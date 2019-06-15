@@ -60,14 +60,13 @@ public class Blackjack extends CardGame implements Gamble {
     }
 
     public void playRound(){
-
-
         getNewDeck();
         gambler.discardHand();
         dealer.discardHand();
         gambler.bet();
         dealInitialHands();
         showInitialDeal();
+        
         //checkBlackJack();
 
         playerTurn();
