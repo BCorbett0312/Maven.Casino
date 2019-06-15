@@ -318,7 +318,7 @@ public class CrapsGameTest {
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
         CrapsGame currentBetsTester = new CrapsGame(cp);
         CrapsBet bet1 = new PassBet(5);
-        String expected = "Your current bets are:\n" + bet1.toString() + "\n";
+        String expected = "Your current bets are:\n" + bet1.printBet() + "\n";
 
         // Act
         currentBetsTester.addBet(bet1);
@@ -335,7 +335,7 @@ public class CrapsGameTest {
         CrapsGame currentBetsTester = new CrapsGame(cp);
         CrapsBet bet1 = new PassBet(5);
         CrapsBet bet2 = new DontPassBet(6);
-        String expected = "Your current bets are:\n" + bet1.toString() + "\n" + bet2.toString() + "\n";
+        String expected = "Your current bets are:\n" + bet1.printBet() + "\n" + bet2.printBet() + "\n";
 
         // Act
         currentBetsTester.addBet(bet1);
@@ -818,6 +818,7 @@ public class CrapsGameTest {
 
     @Test
     public void reportSettledBetsTest2(){
+        // Arrange
         CrapsGame reportTester = new CrapsGame(new CrapsPlayer((new Player(100, "Sulla"))));
         List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
         String expected = "";
@@ -831,6 +832,7 @@ public class CrapsGameTest {
 
     @Test
     public void reportSettledBetsTest3(){
+        // Arrange
         CrapsGame reportTester = new CrapsGame(new CrapsPlayer((new Player(100, "Sulla"))));
         Triplet<BetType, Integer, Integer> bet1 = new Triplet<>(BetType.PASS, 5, 0);
         List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
@@ -885,11 +887,330 @@ public class CrapsGameTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testSettleBets1(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new PassBet(5);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(3,4);
 
+        Integer expectedFunds = 110;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.PASS, 5, 10));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
 
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
 
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
 
+    @Test
+    public void testSettleBets2(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new PassBet(5);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(1,1);
 
+        Integer expectedFunds = 100;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.PASS, 5, 0));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets3(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new PassBet(5);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(3,5);
+
+        Integer expectedFunds = 100;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 1;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets4(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new DontPassBet(15);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(6,5);
+
+        Integer expectedFunds = 100;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.DONTPASS, 15, 0));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets5(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new DontPassBet(15);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(6,6);
+
+        Integer expectedFunds = 115;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.DONTPASS, 15, 15));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets6(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new DontPassBet(15);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(6,5);
+
+        Integer expectedFunds = 100;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.DONTPASS, 15, 0));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets7(){
+        // Assert
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new FieldBet(20);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(6,5);
+
+        Integer expectedFunds = 140;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.FIELD, 20, 40));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets8(){
+        // Assert
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new FieldBet(20);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(2,5);
+
+        Integer expectedFunds = 100;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.FIELD, 20, 0));
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 0;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets9(){
+        // Assert
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new FieldBet(20);
+        CrapsBet bet2 = new PassBet(10);
+        settleTester.addBet(bet);
+        settleTester.addBet(bet2);
+        CrapsRoll roll = new CrapsRoll(6,4);
+
+        Integer expectedFunds = 140;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        report.add(new Triplet<>(BetType.FIELD, 20, 40));
+        //report.add(new Trip)
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 1;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void testSettleBets10() {
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsBet bet = new PassBet(50);
+        settleTester.addBet(bet);
+        CrapsRoll roll = new CrapsRoll(3, 5);
+
+        Integer expectedFunds = 100;
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        String expectedReport = settleTester.reportSettledBets(report);
+        Integer expectedBets = 1;
+
+        // Act
+        String actualReport = settleTester.settleBets(roll);
+        Integer actualFunds = cp.getMoney();
+        Integer actualBets = settleTester.getNumberOfBets();
+
+        // Assert
+        Assert.assertEquals(expectedBets, actualBets);
+        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedReport, actualReport);
+
+        // Arrange II
+        Integer expectedBets2 = 0;
+        Integer expectedFunds2 = 200;
+        report.add(new Triplet<>(BetType.PASS, 50, 100));
+        String expectedReport2 = settleTester.reportSettledBets(report);
+
+        // Act II
+        String actualReport2 = settleTester.settleBets(roll);
+        Integer actualFunds2 = cp.getMoney();
+        Integer actualBets2 = settleTester.getNumberOfBets();
+
+        // Assert II
+        Assert.assertEquals(expectedBets2, actualBets2);
+        Assert.assertEquals(expectedFunds2, actualFunds2);
+        Assert.assertEquals(expectedReport2, actualReport2);
+    }
+
+    @Test
+    public void testSettleBets11(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame settleTester = new CrapsGame(cp);
+        CrapsRoll roll = new CrapsRoll(6,4);
+
+        CrapsBet bet1 = new FieldBet(5);
+        CrapsBet bet2 = new FieldBet(5);
+        CrapsBet bet3 = new PassBet(50);
+        CrapsBet bet4 = new FieldBet(5);
+        CrapsBet bet5 = new FieldBet(5);
+        CrapsBet bet6 = new FieldBet(5);
+        CrapsBet bet7 = new DontPassBet(15);
+        CrapsBet bet8 = new FieldBet(5);
+        CrapsBet bet9 = new FieldBet(5);
+        CrapsBet bet10 = new FieldBet(5);
+        CrapsBet bet11 = new FieldBet(500);
+
+        settleTester.addBet(bet1);
+        settleTester.addBet(bet2);
+        settleTester.addBet(bet3);
+        settleTester.addBet(bet4);
+        settleTester.addBet(bet5);
+        settleTester.addBet(bet6);
+        settleTester.addBet(bet7);
+        settleTester.addBet(bet8);
+        settleTester.addBet(bet9);
+        settleTester.addBet(bet10);
+        settleTester.addBet(bet11);
+
+        Integer moneyExpected = 1180;
+        String expected = "Your current bets are:\n" +
+                          "Pass Line for $50\n" +
+                          "Point: 10\n" +
+                          "Don't Pass for $15\n" +
+                          "Point: 10\n";
+
+        // Act
+        settleTester.settleBets(roll);
+        Integer moneyActual = cp.getMoney();
+        String actual = settleTester.currentBets();
+
+        // Assert
+        Assert.assertEquals(moneyExpected,moneyActual);
+        Assert.assertEquals(expected,actual);
+    }
 
 
 

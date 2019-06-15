@@ -8,6 +8,7 @@ import org.javatuples.Triplet;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -44,6 +45,7 @@ public class CrapsGame extends Game implements Gamble {
      * If phase is WALKUP, will instead print the payout table and list of instructions
      */
     public String nextPhase(){
+        StringBuilder sbuild = new StringBuilder();
         switch(phase){
             case WALKUP:
                 String marque = "XXXXX  XXXX    XXX   XXXXX  XXXXX \n" +
@@ -55,15 +57,41 @@ public class CrapsGame extends Game implements Gamble {
                 phase = Phase.COMEOUT;
                 return marque + "\n\n" + printBetPayoutTable() + "\n\n" + printInstructions() + "\n";
             case COMEOUT:
-                StringBuilder sbuild = new StringBuilder();
-                CrapsRoll currentRoll = rollDice();
-                sbuild.append("Shooter rolled ");
-                sbuild.append(currentRoll.getValue());
-                sbuild.append("\n\n");
-                //sbuild.append(settleBets()
+                CrapsRoll comeRoll = rollDice();
+                sbuild.append("Shooter rolled ").append(comeRoll.getValue()).append("\n\n");
 
+                Pair<String, Boolean> comeResult = rollComeOut(comeRoll);
+                sbuild.append(comeResult.getValue0()).append("\n");
+
+                String comeReport = settleBets(comeRoll);
+                if(!comeReport.equals("")){
+                    sbuild.append(comeReport).append("\n\n");
+                }
+
+                if(comeResult.getValue1()){
+                    phase = Phase.POINT;
+                }
+                sbuild.append(": ");
+                return sbuild.toString();
+            case POINT:
+                CrapsRoll pointRoll = rollDice();
+                sbuild.append("Shooter rolled ").append(pointRoll.getValue()).append("\n\n");
+
+                Pair<String, Boolean> pointResult = rollPoint(pointRoll);
+                sbuild.append(pointResult.getValue0()).append("\n");
+
+                String pointReport = settleBets(pointRoll);
+                if(!pointReport.equals("")){
+                    sbuild.append(pointReport).append("\n\n");
+                }
+
+                if(pointResult.getValue1()){
+                    phase = Phase.COMEOUT;
+                }
+                sbuild.append(": ");
+            default:
+                throw new IllegalArgumentException("Enum type phase not in enum Phase, somehow");
         }
-        return null;
     }
 
     /**
@@ -197,7 +225,7 @@ public class CrapsGame extends Game implements Gamble {
 
         StringBuilder sbuild = new StringBuilder("Your current bets are:\n");
         for(CrapsBet bet : betList){
-            sbuild.append(bet.toString());
+            sbuild.append(bet.printBet());
             sbuild.append("\n");
         }
         return sbuild.toString();
@@ -285,8 +313,23 @@ public class CrapsGame extends Game implements Gamble {
      * @return a Triplet with the bet type, the value of the bet, and the amount won
      */
     public String settleBets(CrapsRoll currentRoll){
+        List<Triplet<BetType, Integer, Integer>> report = new ArrayList<>();
+        Iterator itr = betList.iterator();
+        while(itr.hasNext()){
+            CrapsBet bet = (CrapsBet)itr.next();
+            bet.checkRoll(currentRoll);
+            if(bet.hasWon()){
+                report.add(new Triplet<>(bet.getType(),bet.getValue(),bet.payout()));
+                player.collectWinnings(bet.payout());
+                itr.remove();
+            }
+            else if(bet.hasLost()){
+                report.add(new Triplet<>(bet.getType(),bet.getValue(),0));
+                itr.remove();
+            }
+        }
 
-        return null;
+        return reportSettledBets(report);
     }
 
     public String reportSettledBets(List<Triplet<BetType, Integer, Integer>> settleOutcomes){
@@ -335,6 +378,7 @@ public class CrapsGame extends Game implements Gamble {
     protected void setLeaveBets(Boolean leaveBets){
         this.leaveBets = leaveBets;
     }
+
 
 }
 
