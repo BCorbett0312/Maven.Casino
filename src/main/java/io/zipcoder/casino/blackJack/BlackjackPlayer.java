@@ -8,7 +8,7 @@ import io.zipcoder.casino.Player;
 
 
 public class BlackjackPlayer implements GamblingPlayer {
-
+    private Blackjack table;
     private Player player;
     private Hand playerHand;
     private Hand playerHandSplit;

@@ -13,7 +13,7 @@ public class BlackjackMediator {
 
 
     public BlackjackMediator(){
-        blackJScanner = new Scanner(System.in);
+
     }
 
 
@@ -86,6 +86,16 @@ public class BlackjackMediator {
         }
 
         return gameAction;
+    }
+
+    public Boolean keepPlaying(){
+        System.out.println("Would you like to keep playing?");
+        response = blackJScanner.next();
+
+        if (response.toLowerCase().equals("yes") || response.toLowerCase().equals("y")){
+            return true;
+        }
+        else{return false;}
     }
 
 
