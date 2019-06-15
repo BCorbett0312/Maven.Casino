@@ -3,6 +3,8 @@ package io.zipcoder.casino.blackJack;
 import io.zipcoder.casino.*;
 import org.junit.Test;
 
+import static io.zipcoder.casino.CardSuit.SPADE;
+import static io.zipcoder.casino.CardValue.THREE;
 import static org.junit.Assert.*;
 
 public class BlackjackTest {
@@ -16,7 +18,7 @@ public class BlackjackTest {
         Player player = new Player(500, "Testy McTesterFace");
 
         BlackjackPlayer dealer = new BlackjackPlayer();
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
 
         Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
         Blackjack table = new Blackjack(player);
@@ -67,7 +69,7 @@ public class BlackjackTest {
     public void checkBlackJackTest4(){
         Player player = new Player(500, "Testy McTesterFace");
         BlackjackPlayer gambler = new BlackjackPlayer(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
         Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
         Blackjack table = new Blackjack(player);
 
@@ -80,48 +82,6 @@ public class BlackjackTest {
 
     }
 
-
-
-
-//    @Test
-//    public void checkBlackJackOnSplit1(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//
-//        gambler.hitForSplitHand(card1);
-//        gambler.hitForSplitHand(card5);
-//
-//        assertTrue(table.checkBlackJackOnSplit());
-//
-//    }
-
-
-//    @Test
-//    public void checkBlackJackOnSplit2(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//
-//        gambler.hitForSplitHand(card2);
-//        gambler.hitForSplitHand(card5);
-//
-//        assertFalse(table.checkBlackJackOnSplit());
-//
-//    }
 
 
     @Test
@@ -149,7 +109,7 @@ public class BlackjackTest {
 
         Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
 
-        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card4 = new Card(CardSuit.HEART, THREE);
 
         BlackjackPlayer gambler = table.getGambler();
 
@@ -160,39 +120,7 @@ public class BlackjackTest {
     }
 
 
-//    @Test
-//    public void playerCanDoubleSplitTest1(){
-//        Player player = new Player(0, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//
-//        gambler.hitForSplitHand(card2);
-//        gambler.hitForSplitHand(card2);
-//
-//        assertTrue(table.playerCanDoubleSplit());
-//    }
 
-//    @Test
-//    public void playerCanDoubleSplitTest2(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//
-//
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//
-//        gambler.hitForSplitHand(card2);
-//        gambler.hitForSplitHand(card3);
-//
-//        assertTrue(table.playerCanDoubleSplit());
-//    }
 
 
     @Test
@@ -221,7 +149,7 @@ public class BlackjackTest {
     public void dealerTurnTest2(){
         Player player = new Player(500, "Testy McTesterFace");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
 
         Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
 
@@ -243,7 +171,7 @@ public class BlackjackTest {
     public void dealerTurnTest3(){
         Player player = new Player(500, "Testy McTesterFace");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
         Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
 
 
@@ -268,7 +196,7 @@ public class BlackjackTest {
     public void checkBustTest1(){
         Player player = new Player(500, "Testy McTesterFace");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
         Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
 
         BlackjackPlayer dealer = table.getDealer();
@@ -299,40 +227,7 @@ public class BlackjackTest {
     }
 
 
-//    @Test
-//    public void checkSplitBustTest1(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//
-//
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//
-//        gambler.hitForSplitHand(card1);
-//        gambler.hitForSplitHand(card2);
-//        gambler.hitForSplitHand(card1);
-//
-//        assertTrue(table.checkBustSplit(gambler));
-//    }
 
-//    @Test
-//    public void checkSplitBustTest2(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//
-//        gambler.hitForSplitHand(card2);
-//        gambler.hitForSplitHand(card2);
-//        gambler.hitForSplitHand(card2);
-//
-//        assertFalse(table.checkBustSplit(gambler));
-//    }
 
 
 
@@ -340,7 +235,7 @@ public class BlackjackTest {
     public void determineWinnerAfterDealTest1(){
         Player player = new Player(500, "Testy McTesterFace");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
 
         Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
         table.setInitialBet(200);
@@ -365,7 +260,7 @@ public class BlackjackTest {
     public void determineWinnerAfterDealTest2(){
         Player player = new Player(500, "Testy McTesterFace");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
 
         Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
 
@@ -387,7 +282,7 @@ public class BlackjackTest {
     public void determineWinnerAfterDealTest3(){
         Player player = new Player(500, "Testy McTesterFace");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
 
         Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
         table.setInitialBet(500);
@@ -409,120 +304,7 @@ public class BlackjackTest {
 
 
 
-//    @Test
-//    public void determineIfPlayerCanSplitTest1(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        gambler.hitForPlayer(card1);
-//        gambler.hitForPlayer(card1);
-//
-//        assertTrue(table.playerCanSplit());
-//
-//    }
 
-//    @Test
-//    public void determineIfPlayerCanSplitTest2(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        gambler.hitForPlayer(card1);
-//        gambler.hitForPlayer(card2);
-//
-//        assertFalse(table.playerCanSplit());
-//
-//    }
-
-//    @Test
-//    public void determineIfPlayerCanSplitTest3(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        gambler.hitForPlayer(card5);
-//        gambler.hitForPlayer(card5);
-//
-//        assertTrue(table.playerCanSplit());
-//
-//    }
-//
-//    @Test
-//    public void determineIfPlayerCanSplitTest4(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        gambler.hitForPlayer(card4);
-//        gambler.hitForPlayer(card3);
-//
-//        assertFalse(table.playerCanSplit());
-//
-//    }
-
-//    @Test
-//    public void determineIfPlayerCanSplitTest5(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        gambler.hitForPlayer(card3);
-//        gambler.hitForPlayer(card3);
-//
-//        assertTrue(table.playerCanSplit());
-//
-//    }
 
 
 
@@ -611,351 +393,24 @@ public class BlackjackTest {
 
     }
 
-//    @Test
-//    public void checkWinnerTest1(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card1);
-//        dealerHand.add(card3);
-//
-//        gamblerHand.add(card2);
-//
-//        String expected = "The Dealer Wins";
-//
-//        assertEquals(expected, table.checkWinner());
-//
-//    }
 
-//    @Test
-//    public void checkWinnerTest2(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//
-//        Hand gamblerHand = gambler.getHand();
-//
-//        Hand dealerHand = dealer.getHand();
-//
-//        gamblerHand.add(card1);
-//        gamblerHand.add(card3);
-//
-//        dealerHand.add(card2);
-//
-//        String expected = "You Win";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-
-
-//    @Test
-//    public void checkWinnerTest3(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card1);
-//        dealerHand.add(card3);
-//
-//        gamblerHand.add(card2);
-//
-//        gamblerSplit.add(card4);
-//
-//        String expected = "You lost both hands";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//
-//    @Test
-//    public void checkWinnerTest4(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        table.setBust(false);
-//        table.setDealerBust(false);
-////        table.setBustSplit(false);
-//
-//
-//        Hand gamblerHand = gambler.getHand();
-//
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card1);
-//        gamblerHand.add(card1);
-//
-//
-//        String expected = "You Push";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//    @Test
-//    public void checkWinnerTest5(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//
-//        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card4);
-//        gamblerSplit.add(card3);
-//
-//        gamblerHand.add(card2);
-//
-//        String expected = "You won both hands";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//    @Test
-//    public void checkWinnerTest6(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card3);
-//        gamblerHand.add(card4);
-//        gamblerSplit.add(card1);
-//
-//        String expected = "You lost one hand and won the other";
-//
-//        assertEquals(expected, table.checkWinner());
-//
-//    }
-//
-//    @Test
-//    public void checkWinnerTest6inverse(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
-//
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card3);
-//        gamblerSplit.add(card4);
-//        gamblerHand.add(card1);
-//
-//        String expected = "You lost one hand and won the other";
-//
-//        assertEquals(expected, table.checkWinner());
-//
-//    }
-//
-//
-//
-//    @Test
-//    public void checkWinnerTest7(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//
-//        gamblerHand.add(card1);
-//        dealerHand.add(card1);
-//        gamblerSplit.add(card3);
-//
-//        String expected = "You tied with one hand and lost the other.";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//    @Test
-//    public void checkWinnerTest7Inverse(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//
-//        gamblerSplit.add(card1);
-//        dealerHand.add(card1);
-//        gamblerHand.add(card3);
-//
-//        String expected = "You tied with one hand and lost the other.";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//
-//
-//
-//    @Test
-//    public void checkWinnerTest8(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//        table.setBust(false);
-//        table.setDealerBust(false);
-//        table.setBustSplit(false);
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card1);
-//        gamblerHand.add(card1);
-//        gamblerSplit.add(card5);
-//
-//        String expected = "You tied with one hand and won the other.";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//    @Test
-//    public void checkWinnerTest8inverse(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        dealerHand.add(card1);
-//        gamblerSplit.add(card1);
-//        gamblerHand.add(card5);
-//
-//        String expected = "You tied with one hand and won the other.";
-//
-//        assertEquals(expected, table.checkWinner());
-//    }
-//
-//
-//
-//    @Test
-//    public void checkWinnerTest9(){
-//        Player player = new Player(500, "Testy McTesterFace");
-//        Blackjack table = new Blackjack(player);
-//        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
-//
-//        BlackjackPlayer dealer = table.getDealer();
-//        BlackjackPlayer gambler = table.getGambler();
-//
-//        Hand gamblerHand = gambler.getHand();
-//        Hand gamblerSplit = gambler.getSplitHand();
-//        Hand dealerHand = dealer.getHand();
-//
-//        gamblerHand.add(card1);
-//        dealerHand.add(card1);
-//        gamblerSplit.add(card1);
-//    }
 
     @Test
     public void displayTableTest(){
         Player player = new Player (400, "testy");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
 
         BlackjackPlayer gambler = table.getGambler();
+        BlackjackPlayer dealer = table.getDealer();
 
         gambler.hitForPlayer(card1);
+        dealer.hitForPlayer(card1);
 
-        String expected = "Your hand is as follows KING OF SPADES\n" +
-                " and the current count is 10";
+        String expected = "Your hand is as follows \n" +
+                "KING OF SPADES\n" +
+                " and the current count is 10\n" +
+                "The Dealer is showing KING";
 
 
         assertEquals(expected, table.displayTable());
@@ -968,31 +423,26 @@ public class BlackjackTest {
     public void displayTableTest2(){
         Player player = new Player (400, "testy");
         Blackjack table = new Blackjack(player);
-        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card1 = new Card (SPADE, CardValue.KING);
+        Card card2 = new Card (SPADE, THREE);
 
         BlackjackPlayer gambler = table.getGambler();
+        BlackjackPlayer dealer = table.getDealer();
 
         gambler.hitForPlayer(card1);
-        gambler.hitForSplitHand(card1);
+        dealer.hitForPlayer(card2);
 
-        String expected = "Your hand is as follows KING OF SPADES\n" +
+
+        String expected = "Your hand is as follows \n" +
+                "KING OF SPADES\n" +
                 " and the current count is 10\n" +
-                " Your split hand is as follows KING OF SPADES\n" +
-                " and the current count is 10";
+                "The Dealer is showing THREE";
 
 
         assertEquals(expected, table.displayTable());
     }
 
-//    @Test
-//    public void payOut(){
-//        Player player = new Player (400, "testy");
-//        Blackjack table = new Blackjack(player);
-//        table.setEndGameState(0);
-//        Integer expected = 400;
-//
-//        assertEquals(expected, table.payOut());
-//    }
+
 
     @Test
     public void payOutNull(){

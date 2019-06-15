@@ -105,7 +105,6 @@ public class BlackjackPlayer implements GamblingPlayer {
     public Integer addToWallet(Integer amount){
         Integer newWallet = player.getMoney() + amount;
         player.setMoney(newWallet);
-        return player.getMoney();
-    }
+        return player.getMoney();}
 
 }
