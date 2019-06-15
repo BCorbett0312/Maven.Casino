@@ -8,7 +8,7 @@ import io.zipcoder.casino.Player;
 
 
 public class BlackjackPlayer implements GamblingPlayer {
-
+    private Blackjack table;
     private Player player;
     private Hand playerHand;
     private Hand playerHandSplit;
@@ -88,9 +88,15 @@ public class BlackjackPlayer implements GamblingPlayer {
     }
 
 
-    @Override
+
     public Integer bet() {
         return null;
+    }
+
+    public Integer bet(Integer amount) {
+        Integer newWallet = player.getMoney()-amount;
+        player.setMoney(newWallet);
+        return amount;
     }
 
 }

@@ -26,9 +26,9 @@ public Integer bet() {
 }
 
 
-
-
-
+    public Integer bet(Integer amount) {
+        return null;
+    }
 
 
 }
