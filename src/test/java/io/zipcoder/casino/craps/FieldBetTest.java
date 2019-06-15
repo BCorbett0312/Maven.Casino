@@ -274,8 +274,8 @@ public class FieldBetTest {
     @Test
     public void printBetTest1(){
         // Arrange
-        CrapsBet bet = new DontPassBet(5);
-        String expected = "Field for $5";
+        CrapsBet bet = new FieldBet(5);
+        String expected = "Field bet for $5";
 
         // Act
         String actual = bet.printBet();
@@ -286,8 +286,8 @@ public class FieldBetTest {
 
     @Test public void printBetTest2(){
         // Arrange
-        CrapsBet bet = new DontPassBet(8);
-        String expected = "Don't Pass for $8\nPoint: 10";
+        CrapsBet bet = new FieldBet(8);
+        String expected = "Field bet for $8";
 
         // Act
         String actual = bet.printBet();

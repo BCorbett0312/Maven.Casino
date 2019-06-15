@@ -87,8 +87,7 @@ public class BlackjackPlayer implements GamblingPlayer {
         return handValue;
     }
 
-
-
+    @Override
     public Integer bet() {
         return null;
     }
