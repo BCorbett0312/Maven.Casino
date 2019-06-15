@@ -253,8 +253,8 @@ public class BlackjackPlayerTest {
         Card jHearts = new Card(HEART, CardValue.JACK);
         Player player1 = new Player (null, "Gregory");
         BlackjackPlayer player = new BlackjackPlayer(player1);
-        player.hitForPlayer(jSpades);
-        player.hitForPlayer(jHearts);
+        player.hitForSplitHand(jSpades);
+        player.hitForSplitHand(jHearts);
         Hand playerSplitHand = player.getSplitHand();
         assertEquals(playerSplitHand, player.getSplitHand());
     }

@@ -185,6 +185,214 @@ public class BlackjackTest {
     public void playerTurn() {
 
 
+    }
+
+
+    @Test
+    public void determineWinnerAfterDealTest1(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+        dealer.hitForPlayer(card1);
+        dealer.hitForPlayer(card5);
+
+        gambler.hitForPlayer(card1);
+        gambler.hitForPlayer(card5);
+
+        table.determineIfWinnerAfterDeal();
+
+
+    }
+
+    @Test
+    public void determineWinnerAfterDealTest2(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+        dealer.hitForPlayer(card1);
+        dealer.hitForPlayer(card5);
+
+        table.determineIfWinnerAfterDeal();
+
+    }
+
+    @Test
+    public void determineWinnerAfterDealTest3(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card (CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card( CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        gambler.hitForPlayer(card1);
+        gambler.hitForPlayer(card5);
+
+        table.determineIfWinnerAfterDeal();
+
+
+    }
+
+    @Test
+    public void determineWinnerAfterDealTest4() {
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        table.determineIfWinnerAfterDeal();
+
+    }
+
+
+    @Test
+    public void determineIfPlayerCanSplitTest1(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        gambler.hitForPlayer(card1);
+        gambler.hitForPlayer(card1);
+
+        assertTrue(table.playerCanSplit());
+
+    }
+
+    @Test
+    public void determineIfPlayerCanSplitTest2(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        gambler.hitForPlayer(card1);
+        gambler.hitForPlayer(card2);
+
+        assertFalse(table.playerCanSplit());
+
+    }
+
+    @Test
+    public void determineIfPlayerCanSplitTest3(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        gambler.hitForPlayer(card5);
+        gambler.hitForPlayer(card5);
+
+        assertTrue(table.playerCanSplit());
+
+    }
+
+    @Test
+    public void determineIfPlayerCanSplitTest4(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        gambler.hitForPlayer(card4);
+        gambler.hitForPlayer(card3);
+
+        assertFalse(table.playerCanSplit());
+
+    }
+
+    @Test
+    public void determineIfPlayerCanSplitTest5(){
+        Player player = new Player(500, "Testy McTesterFace");
+        Blackjack table = new Blackjack(player);
+        Card card1 = new Card(CardSuit.SPADE, CardValue.KING);
+        Card card2 = new Card(CardSuit.DIAMOND, CardValue.FOUR);
+        Card card3 = new Card(CardSuit.CLUB, CardValue.EIGHT);
+        Card card4 = new Card(CardSuit.HEART, CardValue.THREE);
+        Card card5 = new Card(CardSuit.HEART, CardValue.ACE);
+
+        BlackjackPlayer dealer = table.getDealer();
+        BlackjackPlayer gambler = table.getGambler();
+
+        Hand gamblerHand = gambler.getHand();
+        Hand dealerHand = dealer.getHand();
+
+        gambler.hitForPlayer(card3);
+        gambler.hitForPlayer(card3);
+
+        assertTrue(table.playerCanSplit());
 
     }
 
@@ -211,10 +419,6 @@ public class BlackjackTest {
 
     }
 
-    @Test
-    public void stayTest(){
-
-    }
 
     @Test
     public void dealInitialHandTest1(){

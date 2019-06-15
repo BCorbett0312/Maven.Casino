@@ -25,21 +25,21 @@ public class BlackjackMediator {
 
 
 
-    public Boolean buyInsurance(){
-        System.out.println("Would you like to buy insurance");
-        response = blackJScanner.nextLine().toLowerCase();
-        if(response.equals("yes")|| response.equals("y")) {
-            playerWants = true;
-        }
-        else if(response.equals("no")||response.equals("n")){
-            playerWants = false;
-        }
-        else{
-            System.out.println("Please enter Yes or No");
-            buyInsurance();}
-        return playerWants;
-
-    }
+//    public Boolean buyInsurance(){
+//        System.out.println("Would you like to buy insurance");
+//        response = blackJScanner.nextLine().toLowerCase();
+//        if(response.equals("yes")|| response.equals("y")) {
+//            playerWants = true;
+//        }
+//        else if(response.equals("no")||response.equals("n")){
+//            playerWants = false;
+//        }
+//        else{
+//            System.out.println("Please enter Yes or No");
+//            buyInsurance();}
+//        return playerWants;
+//
+//    }
 
     public Integer firstGameActionWithSplit(){
         System.out.println("What would you like to do?" + "\n 1) Hit" + "\n 2) Stay" +
