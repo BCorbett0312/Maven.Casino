@@ -10,6 +10,10 @@ public class Mediator {
      */
     public void menu() {}
 
+    public void getPlayerName(){
+
+    }
+
     public String getInput() { return null; }
 
     public void printMenuItems() {}

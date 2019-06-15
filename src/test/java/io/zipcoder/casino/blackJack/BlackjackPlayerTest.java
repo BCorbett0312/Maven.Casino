@@ -253,29 +253,52 @@ public class BlackjackPlayerTest {
         Card jHearts = new Card(HEART, CardValue.JACK);
         Player player1 = new Player (null, "Gregory");
         BlackjackPlayer player = new BlackjackPlayer(player1);
-        player.hitForPlayer(jSpades);
-        player.hitForPlayer(jHearts);
+        player.hitForSplitHand(jSpades);
+        player.hitForSplitHand(jHearts);
         Hand playerSplitHand = player.getSplitHand();
         assertEquals(playerSplitHand, player.getSplitHand());
     }
 
     @Test
-    public void bet1() {
+    public void addToWalletTest(){
         BlackjackPlayer player1 = new BlackjackPlayer();
-        assertNull(player1.bet());
+
+
+        Integer expected = 500;
+
+        assertEquals(expected, player1.addToWallet(500));
+
     }
 
     @Test
-    public void bet2() {
-        Player thisPlayer = new Player(600, "Ben");
-        BlackjackPlayer test = new BlackjackPlayer(thisPlayer);
+    public void addToWalletTest2(){
+        Player player = new Player (500, "Charles");
+        BlackjackPlayer thisPlayer = new BlackjackPlayer(player);
 
-        Integer toBet = 200;
-        Integer expected = 400;
-        test.bet(toBet);
+        Integer expected = 600;
 
-
-        assertEquals(expected, test.getWalletBalance());
+        assertEquals(expected, thisPlayer.addToWallet(100));
 
     }
+
+
+//    @Test
+//    public void bet1() {
+//        BlackjackPlayer player1 = new BlackjackPlayer();
+//        assertNull(player1.bet());
+//    }
+//
+//    @Test
+//    public void bet2() {
+//        Player thisPlayer = new Player(600, "Ben");
+//        BlackjackPlayer test = new BlackjackPlayer(thisPlayer);
+//
+//        Integer toBet = 200;
+//        Integer expected = 400;
+//        test.bet(toBet);
+//
+//
+//        assertEquals(expected, test.getWalletBalance());
+//
+//    }
 }

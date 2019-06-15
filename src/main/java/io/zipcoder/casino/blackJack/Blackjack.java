@@ -1,53 +1,55 @@
 package io.zipcoder.casino.blackJack;
 
+
 import io.zipcoder.casino.*;
-
-
+import io.zipcoder.casino.utilities.Console;
 
 
 public class Blackjack extends CardGame implements Gamble {
     private BlackjackPlayer gambler;
     private BlackjackPlayer dealer;
-    private BlackjackMediator mediator;
+
     private Deck deck;
+    Console console = new Console(System.in, System.out);
+
+    private Integer endGameState;
+    private Integer initialBet;
+    private Integer totalBet;
+    private Boolean stay;
+    private Boolean bust;
+    private Boolean desireToPlay;
 
 
-    private Integer playerHand;
-    private Integer playerSplitHand;
-    private Integer dealerHand;
-    private Integer theBet;
-    private DeckBuilder builder;
-    Boolean stay;
 
-
-
-    public Blackjack(Player player){
+    public Blackjack(Player player) {
         dealer = new BlackjackPlayer();
         gambler = new BlackjackPlayer(player);
         deck = new DeckBuilder().addSet().build();
+        initialBet = 0;
+        totalBet = 0;
     }
 
-    public void startBlackjack(){
-        mediator.welcomeToBJ();
-        Boolean desireToPlay = true;
-        while (desireToPlay){
-            playRound();
-            desireToPlay = keepPlaying();
-        }
-    }
-
-    protected BlackjackPlayer getDealer(){
+    protected BlackjackPlayer getDealer() {
         return dealer;
     }
 
-    protected BlackjackPlayer getGambler(){
+    protected BlackjackPlayer getGambler() {
         return gambler;
     }
 
+    public void startBlackjack() {
+        String welcome = "Welcome to BlackJack";
+        console.println(welcome);
+        desireToPlay = true;
+        while (desireToPlay) {
+            initializeGame();
+            desireToPlay = keepPlaying();
+        }
 
+    }
 
-
-    public Boolean checkBlackJack(BlackjackPlayer playerToCheck){
+    //This checks if the specified player has blackjack when dealt
+    public Boolean checkBlackJack(BlackjackPlayer playerToCheck) {
         Boolean result = false;
 
         if (playerToCheck.getHandValue(playerToCheck.getHand()) == 21) {
@@ -55,157 +57,252 @@ public class Blackjack extends CardGame implements Gamble {
 
         }
         return result;
-
-
     }
 
-    public void playRound(){
+
+    //This prepares the table for play
+    public void initializeGame() {
         getNewDeck();
         gambler.discardHand();
         dealer.discardHand();
         gambler.bet();
         dealInitialHands();
-        showInitialDeal();
-        
-        //checkBlackJack();
+        console.println(showInitialDeal());
+        determineIfWinnerAfterDeal();}
 
+
+
+    //This starts a round of blackjack if dealer or player doesnt have blackjack
+    public void playRound() {
         playerTurn();
-        dealerTurn();
+
+
+        if(!bust){
+            console.println(dealer.getHand().toString());
+            dealerTurn();
+            checkBust(dealer);
+
+        }
         checkWinner();
-        //settleBets();
+        payOut();
     }
-
-
-
-    public void getNewDeck(){
+    // This gets a fresh deck every game
+    public void getNewDeck() {
         this.deck = new DeckBuilder().addSet().build();
 
     }
 
-    public Boolean keepPlaying(){
-        return null;
-    }
 
 
-    public void dealerTurn(){
+
+    //This is what happens on the dealers Turn;
+    protected void dealerTurn() {
         Boolean dealerPlay = true;
-        while(dealerPlay) {
 
-            if (dealerActionSelection(dealer.getHand()) == 1) {
-                dealer.hitForPlayer(deck.draw());
-            }
-            else if(dealerActionSelection(dealer.getHand())== 2){
+        while (dealerPlay) {
+            if (dealer.getHandValue(dealer.getHand()) >= 17 && dealer.getHandValue(dealer.getHand()) <=21){
+                String output = "The dealer stays at " + dealer.getHandValue(dealer.getHand());
+                console.println(output);
                 dealerPlay = false;
+
             }
+            else if (dealer.getHandValue(dealer.getHand()) < 17) {
+                dealer.hitForPlayer(deck.draw());
+                console.println(dealer.getHand().toString());
+                dealerPlay = true;
+
+            }
+            else{dealerPlay = false;
+            String output = "The dealer busts with " + dealer.getHandValue(dealer.getHand());
+            console.println(output);
+            }
+        }
+    }
+    //This is the players turn
+    protected void playerTurn() {
+        stay = false;
+        bust = false;
+
+        while (!stay && !bust ) {
+         if (playerCanDouble()) {
+                playerCanDoublePlay();
+                checkBust(gambler);
+            } else {
+                hitOrStay();
+            }
+            checkBust(gambler);
+        }
+
 
         }
 
-    }
-
-    public void playerTurn(){
 
 
-    }
 
-    public Integer dealerActionSelection(Hand hand){
-        if(dealer.getHandValue(hand) > 21){
-            return 3;
+    //This checks if a player busts and sets the variable
+    protected boolean checkBust(BlackjackPlayer playerToCheck){
+        bust = false;
+        if (playerToCheck.getHandValue(playerToCheck.getHand()) > 21){
+            bust = true;
         }
-        else if(dealer.getHandValue(hand) > 17 && dealer.getHandValue(hand)<= 21){
-            return 2;
-        }
-        else {return 1;}
+        return bust;}
 
+
+    //This is the game action selections based on possible plays
+    protected void hitOrStay(){
+        switch(nextGameAction()){
+            case 1:
+                gambler.hitForPlayer(deck.draw());
+                console.println(displayTable());
+                break;
+            case 2:
+                stay = true;
+                break;
+        }
     }
 
-    public void dealInitialHands(){
+
+
+    protected void playerCanDoublePlay(){
+        switch(firstGameActionNoSplit()){
+            case 1:
+                gambler.hitForPlayer(deck.draw());
+                console.println(displayTable());
+                break;
+            case 2:
+                stay = true;
+                break;
+            case 3:
+                totalBet = totalBet + initialBet;
+                gambler.hitForPlayer(deck.draw());
+                console.println(displayTable());
+                gambler.bet(initialBet);
+                stay = true;
+                break;
+        }
+    }
+
+
+    protected Boolean playerCanDouble(){
+        Boolean result = false;
+        if(initialBet <= gambler.getWalletBalance() && gambler.getHand().size() == 2) {
+            result = true;
+            }
+        return result;
+    }
+
+
+    public void setInitialBet(Integer amount){
+        initialBet = amount;
+    }
+
+
+    protected void determineIfWinnerAfterDeal(){
+        if(checkBlackJack(dealer) && checkBlackJack(gambler)){
+            String toPrint = "You both have Blackjack.  You push.";
+            console.println(toPrint);
+            endGameState = initialBet;}
+
+        else if(checkBlackJack(dealer) && !checkBlackJack(gambler)){
+            String toPrint = "The dealer has Blackjack, you lose";
+            console.println(toPrint);
+            endGameState = 0;
+        }
+        else if(!checkBlackJack(dealer) && checkBlackJack(gambler)){
+            String toPrint = "You have Blackjack, the dealer loses";
+            console.println(toPrint);
+            endGameState = initialBet * 2;
+        }
+        else {
+            playRound();
+        }
+    }
+
+    protected void dealInitialHands(){
         deck.shuffleDeck();
-
         gambler.hitForPlayer(deck.draw());
-
         dealer.hitForPlayer(deck.draw());
-
         gambler.hitForPlayer(deck.draw());
-
         dealer.hitForPlayer(deck.draw());
     }
 
-    public String showInitialDeal(){
+    protected String showInitialDeal(){
         String initialHands = "";
-
         initialHands += "The dealer is showing "+ dealer.getHand().getCardAtIndex(0).getValue()+
                 "\nYou have " + gambler.getHand().getCardAtIndex(0).getValue()+ " "+
                 gambler.getHand().getCardAtIndex(1).getValue();
-
-
         return initialHands;
     }
 
-    public String checkWinner(){
-        Integer dealerHandValue = dealer.getHandValue(dealer.getHand());
-        Integer gamblerHandValue = gambler.getHandValue(gambler.getHand());
-        Integer gamblerSplitHandValue = gambler.getHandValue(gambler.getSplitHand());
+    protected void setBust(Boolean toSet){
+        bust = toSet;
+    }
 
-        String winner = "";
+    protected void checkWinner() {
 
-
-        if(gambler.getSplitHand().size() != 0) {
-            if ((dealerHandValue > gamblerHandValue && (dealerHandValue < gamblerSplitHandValue))){
-                winner = "You lost one hand and won the other";
-            }
-            else if ((dealerHandValue < gamblerHandValue && (dealerHandValue > gamblerSplitHandValue))){
-                winner = "You lost one hand and won the other";
-            }
-
-            else if (dealerHandValue < gamblerSplitHandValue
-                    && dealerHandValue < gamblerHandValue) {
-                winner = "You won both hands";
-            }
-            else if (dealerHandValue > gamblerSplitHandValue
-                    && dealerHandValue > gamblerHandValue){
-                winner = "You lost both hands";
-            }
-            else if (dealerHandValue == gamblerHandValue
-                    && dealerHandValue == gamblerSplitHandValue){
-                winner = "You pushed with both hands";
-
-            }
-            else if ((dealerHandValue == gamblerHandValue) &&
-                    dealerHandValue > gamblerSplitHandValue){
-                winner = "You tied with one hand and lost the other.";
-            }
-            else if ((dealerHandValue == gamblerSplitHandValue
-                    && dealerHandValue > gamblerHandValue)){
-                winner = "You tied with one hand and lost the other.";
-            }
-            else if ((dealerHandValue == gamblerHandValue &&
-                    dealerHandValue < gamblerSplitHandValue)){
-                winner = "You tied with one hand and won the other.";
-            }
-            else if ((dealerHandValue == gamblerSplitHandValue
-                    && dealerHandValue < gamblerHandValue)){
-                winner = "You tied with one hand and won the other.";
-            }
-
+        if(dealer.getHandValue(dealer.getHand()) > gambler.getHandValue(gambler.getHand()) && dealer.getHandValue(dealer.getHand()) <= 21) {
+            endGameState = 0;
+        }
+        if(dealer.getHandValue(dealer.getHand())< gambler.getHandValue(gambler.getHand()) && gambler.getHandValue(gambler.getHand()) <= 21) {
+            endGameState = initialBet*2;
+        }
+        if(dealer.getHandValue(dealer.getHand()) == gambler.getHandValue(gambler.getHand())) {
+            endGameState = initialBet;
         }
 
-        else if (dealerHandValue > gamblerHandValue){
-            winner = "The Dealer Wins";
-        }
-
-        else if(gamblerHandValue > dealerHandValue){
-            winner = "You Win";
-        }
-
-        else if (dealerHandValue == gamblerHandValue){
-            winner = "You Push";
-        }
-
-        return winner;
     }
 
 
+    protected Integer getEndGameState(){
+        return endGameState;
+    }
+
+    protected void setEndGameState(Integer amount){
+        endGameState = amount;
+    }
+
+    public void payOut() {
+        gambler.addToWallet(endGameState);
+    }
+
+    @Override
     public Integer payOut(Integer amount) {
-        return null;
+        return null;}
+
+
+    public Integer firstGameActionNoSplit(){
+        String toPrint = "What would you like to do?" + "\n 1) Hit" + "\n 2) Stay" +
+                "\n 3) Double";
+        return console.getIntegerInput(toPrint);
     }
+
+    public Integer nextGameAction(){
+        String toPrint = "What would you like to do?" + "\n 1) Hit" + "\n 2) Stay";
+        return console.getIntegerInput(toPrint);
+    }
+
+    public Boolean keepPlaying(){
+        String toPrint = "You have " + gambler.getWalletBalance()+ "\nWould you like to keep playing?" + "\n1) Yes" + "\n2) No";
+        switch(console.getIntegerInput(toPrint)){
+            case 1:
+                desireToPlay = true;
+                break;
+            case 2:
+                desireToPlay = false;
+                break;
+        }
+
+        return desireToPlay;
+    }
+
+
+    protected String displayTable(){
+
+        String tableState = "Your hand is as follows "+ "\n"+gambler.getHand().toString() + " and the current count is " +
+                gambler.getHandValue(gambler.getHand())+ "\nThe Dealer is showing " +dealer.getHand().getCardAtIndex(0).getValue();
+
+        return tableState;
+    }
+
+
 }
