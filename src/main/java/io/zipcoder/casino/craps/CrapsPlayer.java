@@ -9,12 +9,8 @@ public class CrapsPlayer implements GamblingPlayer {
     public CrapsPlayer(Player player) {
         this.player = player;
     }
-    
 
-    @Override
-    public Integer bet() {
-        return null;
-    }
+
 
     public Boolean placeBet(Integer bet){
         if(bet > player.getMoney()){
@@ -41,9 +37,20 @@ public class CrapsPlayer implements GamblingPlayer {
     }
 
     // needed for testing
-    public Integer getMoney(){
+    public Integer getMoney() {
         return player.getMoney();
     }
+
+    @Override
+    public Integer bet() {
+        return null;
+    }
+
+    @Override
+    public Integer bet(Integer amount) {
+        return null;
+    }
+
 }
 
 

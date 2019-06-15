@@ -374,11 +374,18 @@ public class CrapsGame extends Game implements Gamble {
         return leaveBets;
     }
 
+
     // DANGEROUS only for testing
     protected void setLeaveBets(Boolean leaveBets){
         this.leaveBets = leaveBets;
     }
 
+
+
+    @Override
+    public Integer payOut(Integer amount) {
+        return null;
+    }
 
 }
 

@@ -258,4 +258,24 @@ public class BlackjackPlayerTest {
         Hand playerSplitHand = player.getSplitHand();
         assertEquals(playerSplitHand, player.getSplitHand());
     }
+
+    @Test
+    public void bet1() {
+        BlackjackPlayer player1 = new BlackjackPlayer();
+        assertNull(player1.bet());
+    }
+
+    @Test
+    public void bet2() {
+        Player thisPlayer = new Player(600, "Ben");
+        BlackjackPlayer test = new BlackjackPlayer(thisPlayer);
+
+        Integer toBet = 200;
+        Integer expected = 400;
+        test.bet(toBet);
+
+
+        assertEquals(expected, test.getWalletBalance());
+
+    }
 }
