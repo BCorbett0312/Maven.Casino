@@ -60,13 +60,13 @@ public class Card implements Comparable<Card> {
                 numValue = 10;
                 break;
             case JACK:
-                numValue = 11;
+                numValue = 10;
                 break;
             case QUEEN:
-                numValue = 12;
+                numValue = 10;
                 break;
             case KING:
-                numValue = 13;
+                numValue = 10;
                 break;
 
         }
