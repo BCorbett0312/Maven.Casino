@@ -51,6 +51,10 @@ public class CrapsPlayer implements GamblingPlayer {
         return null;
     }
 
+    public Player getPlayer(){
+        return this.player;
+    }
+
 }
 
 

@@ -69,6 +69,7 @@ public class CrapsGame extends Game implements Gamble {
                 }
 
                 if(comeResult.getValue1()){
+                    comeOutRoll = comeRoll;
                     phase = Phase.POINT;
                 }
                 sbuild.append(": ");
@@ -86,9 +87,11 @@ public class CrapsGame extends Game implements Gamble {
                 }
 
                 if(pointResult.getValue1()){
+                    comeOutRoll = null;
                     phase = Phase.COMEOUT;
                 }
                 sbuild.append(": ");
+                return sbuild.toString();
             default:
                 throw new IllegalArgumentException("Enum type phase not in enum Phase, somehow");
         }

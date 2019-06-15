@@ -9,10 +9,16 @@ public class CrapsMediator {
     private Console consul;
 
     public CrapsMediator(Player player, Console consul){
+        this.player = new CrapsPlayer(player);
+        this.consul = consul;
 
     }
 
     public Player play(){
-        return null;
+
+        CrapsGame game = new CrapsGame(player);
+        CrapsRunner runner = new CrapsRunner(game, consul);
+        runner.runGame();
+        return player.getPlayer();
     }
 }
