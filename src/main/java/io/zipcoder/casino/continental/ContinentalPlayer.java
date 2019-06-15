@@ -9,6 +9,38 @@ public class ContinentalPlayer {
 
     private Player player;
     private Hand hand;
+    private Boolean steal;
+    private Integer points;
 
+    public ContinentalPlayer() {
+        player = new Player();
+    }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
+
+    public Boolean getSteal() {
+        return steal;
+    }
+
+    public void setSteal(Boolean steal) {
+        this.steal = steal;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
 }

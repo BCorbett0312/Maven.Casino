@@ -15,8 +15,12 @@ public class Continental extends CardGame{
     private Hand dealerHand;
     private List<ValueSet> valueSets;
     private List<StraightSet> straightSets;
+    private Integer round;
 
 
+    private void startGame() {}
+
+    public void deal() {}
     /**
      * @return gets card from top of Deck.
      */
@@ -24,7 +28,13 @@ public class Continental extends CardGame{
         return null;
     }
 
+    /**
+     *
+     * @return gets card from the top of the Pile
+     */
     public Card drawFromPile() { return null; }
+
+    public void addToPile(Card card) { }
 
     /**
      * This method compares all cards see if they have the same value.
@@ -37,11 +47,26 @@ public class Continental extends CardGame{
         return null;
     }
 
-    /**
-     *
-     */
+    public Boolean isStraight(Card card1, Card card2, Card card3, Card card4) {
+        return null;
+    }
+
+    public void peformSteal() {}
 
 
+    public String displaySets() {
+        return null;
+    }
+
+    public void makeValueSet(Card card1, Card card2, Card card3) {}
+
+    public void makeStraightSet(Card card1, Card card2, Card card3, Card card4) {}
+
+    public Boolean addToSet(ContinentalSet set) {
+        return null;
+    }
+
+    public void nextTurn() {}
 
 
 }

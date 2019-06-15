@@ -4,12 +4,15 @@ import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardValue;
 
 import java.util.Set;
+import java.util.TreeSet;
 
-public class ValueSet {
+public class ValueSet implements ContinentalSet{
 
     private Set<Card> set;
 
     public ValueSet() {
+
+        set = new TreeSet<>();
 
     }
 
