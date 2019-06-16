@@ -2,67 +2,73 @@ package io.zipcoder.casino.GoFish;
 
 import io.zipcoder.casino.*;
 
+import java.util.ArrayList;
+import io.zipcoder.casino.utilities.Console;
+
+
+
 public class GoFish extends CardGame {
 
     private GoFishMediator mediator;
     private Deck deck;
-    private Hand hand;
-    private GoFishPlayer player;
+    private Hand handPlayerA;
+    private GoFishPlayer playerA;
+    private GoFishPlayer comp;
+    private Hand compHand;
+    Integer numBook;
+    Boolean gameOver;
+    Boolean playing;
 
-    public GoFish (){}
+    Console console = new Console(System.in, System.out);
 
-    /**
-     * asks another player for the card you want but you have to have one of the numbers first
-     */
-    public void askCard (GoFishMediator mediator, GoFishPlayer player, Hand hand){}
 
-    /**
-     * if another player asks you for a card and you have it ... give it to them.
-     */
-    public void giveCard(Hand hand, GoFishPlayer player ) {}
+    public GoFish (GoFishPlayer playerA){
+        this.playerA = playerA;
+        this.handPlayerA= new Hand ();
+        deck = new DeckBuilder().addSet().shuffle().build();
 
-    /**
-     * get the card from another player
-     */
+    }
 
-    public void receiveCard (GoFishPlayer player, Hand hand){}
+    public String checkBooks(String value){
+        int count=0;
+        ArrayList<Card> cards = new ArrayList<>();
+        for(Card c: cards){
+            if(c.getValue().equals(value)){
+                count++;
+                if(count == 4)
+                    numBook++;
+                cards.remove(c);
+            }
+        }
+        return "You're number of books is "+ numBook;
+    }
 
-    /**
-     * take card off hand
-     */
+    public void deal() {
+        for (int x=0;x<7;x++){
+            playerA.getHand().add(deck.draw());
+            comp.getHand().add(deck.draw());
+        }
 
-    public void removeCard (GoFishPlayer player, Hand hand){}
+    }
 
-    /**
-     * take card from card when the other player doesn't have the card you want
-     * if the card from the deck matches the number you asked for ....another turn
-     */
+    public void checkHand(GoFishPlayer playerA){
+        if(((playerA.getHand()).size() == 0 ) ){
+            gameOver = true;
+        } else playing = true;
+    }
 
-    public void takeFromDeck (Deck deck, Hand hand){}
+    public void checkDeck (){
+        if(deck.isEmpty())
+            gameOver= true;
+    }
 
-    /**
-     * if you have 4 cards of the same number put them down...they called it a book on wiki
-     */
+    public void rules () {
+        console.println("You and your opponent will each receive 7 cards each. When it is your turn, you can choose a card and ask your opponent if they have a card of that value");
+        console.println("If they do, they'll give them to you. If not, you may take a card from the deck. Then it is your opponent's turn.");
+        console.println("A book is when you have four cards of the same value. The player with the most books wins. The game ends when either your run out of cards in your hand ");
+        console.println("or the deck runs out of cards. Enjoy the game and maybe you will even win!");
 
-    public void putCardsDown (Hand hand){}
-
-    /**
-     * player with the most number of books after the deck runs out wins!
-     */
-
-    public void win (Integer count, String win){}
-
-    /**
-     * if you didn't win you probably lost
-     */
-    public void lose (Integer count, String lose) {}
-
-    /**
-     * if the player doesn't have the card println GO FISH
-     */
-    public void goFish (String goFish){}
-    
-
+    }
 
 
 
