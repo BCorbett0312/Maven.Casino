@@ -60,35 +60,27 @@ public class CrapsGame extends Game implements Gamble {
                 CrapsRoll comeRoll = rollDice();
                 sbuild.append("Shooter rolled ").append(comeRoll.getValue()).append("\n\n");
 
-                Pair<String, Boolean> comeResult = rollComeOut(comeRoll);
-                sbuild.append(comeResult.getValue0()).append("\n");
+                String comeResult = rollComeOut(comeRoll);
+                sbuild.append(comeResult).append("\n");
 
                 String comeReport = settleBets(comeRoll);
                 if(!comeReport.equals("")){
                     sbuild.append(comeReport).append("\n\n");
                 }
 
-                if(comeResult.getValue1()){
-                    comeOutRoll = comeRoll;
-                    phase = Phase.POINT;
-                }
                 return sbuild.toString();
             case POINT:
                 CrapsRoll pointRoll = rollDice();
                 sbuild.append("Shooter rolled ").append(pointRoll.getValue()).append("\n\n");
 
-                Pair<String, Boolean> pointResult = rollPoint(pointRoll);
-                sbuild.append(pointResult.getValue0()).append("\n");
+                String pointResult = rollPoint(pointRoll);
+                sbuild.append(pointResult).append("\n");
 
                 String pointReport = settleBets(pointRoll);
                 if(!pointReport.equals("")){
                     sbuild.append(pointReport).append("\n\n");
                 }
 
-                if(pointResult.getValue1()){
-                    comeOutRoll = null;
-                    phase = Phase.COMEOUT;
-                }
                 return sbuild.toString();
             default:
                 throw new IllegalArgumentException("Enum type phase not in enum Phase, somehow");
@@ -187,15 +179,16 @@ public class CrapsGame extends Game implements Gamble {
      * @return A Pair containing a string summarizing the result of the roll as the first value and a boolean indicating
      *   whether or not to move onto the Point phase as the second value
      */
-    public Pair<String, Boolean> rollComeOut(CrapsRoll roll){
+    public String rollComeOut(CrapsRoll roll){
         if(roll.getValue() == 7 || roll.getValue() == 11){
-            return new Pair<>("Natural\n", false);
+            return "Natural\n";
         }
         else if(roll.getValue() == 2 || roll.getValue() == 3 || roll.getValue() == 12){
-            return new Pair<>("Shooter craps out\n", false);
+            return "Shooter craps out\n";
         }
         else{
-            return new Pair<>("The Point is " + roll.getValue() +"\n", true);
+            phase = Phase.POINT;
+            return "The Point is " + roll.getValue() +"\n";
         }
     }
 
@@ -205,15 +198,17 @@ public class CrapsGame extends Game implements Gamble {
      * @return A Pair containing a string summarizing the result of the roll as the first value and a boolean indicating
      *   whether or not to start a new round as the second value
      */
-    public Pair<String, Boolean> rollPoint(CrapsRoll roll){
+    public String rollPoint(CrapsRoll roll){
         if(roll.getValue() == 7){
-            return new Pair<>("7. Pass Line loses\n", true);
+            phase = Phase.COMEOUT;
+            return "7. Pass Line loses\n";
         }
         else if(roll.getValue().equals(comeOutRoll.getValue())){
-            return new Pair<>("Shooter hits. Pass Line wins\n", true);
+            phase = Phase.COMEOUT;
+            return "Shooter hits. Pass Line wins\n";
         }
         else{
-            return new Pair<>("Play continues\n", false);
+            return "Play continues\n";
         }
     }
 
