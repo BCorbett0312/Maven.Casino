@@ -21,6 +21,7 @@ public class Blackjack extends CardGame implements Gamble {
 
 
 
+
     public Blackjack(Player player) {
         dealer = new BlackjackPlayer();
         gambler = new BlackjackPlayer(player);
@@ -77,9 +78,15 @@ public class Blackjack extends CardGame implements Gamble {
             console.println(dealer.getHand().toString());
             dealerTurn();
             checkBust(dealer);
+            checkWinner();
+            payOut();
         }
-        checkWinner();
-        payOut();
+        if(bust){
+            endGameState = 0;
+            String busted = "You bust.  Too Bad.";
+            console.println(busted);
+        }
+
     }
 
     // This gets a fresh deck every game
