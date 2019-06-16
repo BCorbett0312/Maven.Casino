@@ -21,7 +21,7 @@ public class CrapsRunner {
 
             Boolean moveOn = false;
             while(!moveOn){
-                String input = consul.getStringInput("");
+                String input = consul.getStringInput("Enter a command");
                 Pair<String,Boolean> inputResult = game.processInput(input);
                 consul.print(inputResult.getValue0());
                 moveOn = inputResult.getValue1();

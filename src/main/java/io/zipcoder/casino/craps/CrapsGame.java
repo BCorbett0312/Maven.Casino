@@ -72,7 +72,6 @@ public class CrapsGame extends Game implements Gamble {
                     comeOutRoll = comeRoll;
                     phase = Phase.POINT;
                 }
-                sbuild.append(": ");
                 return sbuild.toString();
             case POINT:
                 CrapsRoll pointRoll = rollDice();
@@ -90,7 +89,6 @@ public class CrapsGame extends Game implements Gamble {
                     comeOutRoll = null;
                     phase = Phase.COMEOUT;
                 }
-                sbuild.append(": ");
                 return sbuild.toString();
             default:
                 throw new IllegalArgumentException("Enum type phase not in enum Phase, somehow");
@@ -111,7 +109,7 @@ public class CrapsGame extends Game implements Gamble {
 
         if(leaveBets && !input.equals("exit")){
             leaveBets = false;
-            return new Pair<>("Enter a command: ", false);
+            return new Pair<>("\n", false);
         }
 
         switch(input){
@@ -124,7 +122,7 @@ public class CrapsGame extends Game implements Gamble {
             case "exit":
                 if(betList.size()!=0 && !leaveBets){
                     leaveBets = true;
-                    return new Pair<>("You have open bets, enter \"Exit\" again if you really want to leave\n: ", false);
+                    return new Pair<>("You have open bets. Enter \"Exit\" again if you really want to leave\n", false);
                 }
                 else{
                     exit = true;
@@ -132,8 +130,10 @@ public class CrapsGame extends Game implements Gamble {
                 }
             case "roll":
                 return new Pair<>("Rolling... \n",true);
+            case "wallet":
+                return new  Pair<>(playerFunds(), false);
             default:
-                return new Pair<>("Invalid command\nTry again: ", false);
+                return new Pair<>("Invalid command\n", false);
         }
     }
 
@@ -168,14 +168,14 @@ public class CrapsGame extends Game implements Gamble {
         }
 
         if(bet == null){
-            return "You've not enough minerals";
+            return "You've not enough minerals\n";
         }
         else{
             StringBuilder sbuild = new StringBuilder("Placed a ");
             sbuild.append(bet.getType());
             sbuild.append(" bet for $");
             sbuild.append(bet.getValue());
-            sbuild.append("\n: ");
+            sbuild.append("\n\n");
             addBet(bet);
             return sbuild.toString();
         }
@@ -213,7 +213,7 @@ public class CrapsGame extends Game implements Gamble {
             return new Pair<>("Shooter hits. Pass Line wins\n", true);
         }
         else{
-            return new Pair<>("Shooter rolls a " + roll.getValue() + "\n", false);
+            return new Pair<>("Play continues\n", false);
         }
     }
 
@@ -252,11 +252,12 @@ public class CrapsGame extends Game implements Gamble {
     public String printInstructions(){
         return  "To place a Pass Line bet, enter  \"Pass Line \"  and the wager amount\n" +
                 "To place a Don't Pass bet, enter \"Don't Pass \" and the wager amount\n" +
-                "To place a Field bet, enter \"Field\"            and the wager amount\n" +
+                "To place a Field bet, enter \"Field bet\"        and the wager amount\n" +
                 "If you've placed as many bets as you want, enter \"Roll\"\n" +
                 "To see your current bets, enter \"Show Bets\"\n" +
                 "To print the payout table, enter \"Payout\"\n" +
-                "To leave, enter \"exit\"";
+                "To see your available funds, enter \"Wallet\"\n" +
+                "To leave, enter \"exit\"\n";
     }
 
     /**
@@ -351,6 +352,10 @@ public class CrapsGame extends Game implements Gamble {
 
         }
         return sbuild.toString();
+    }
+
+    public String playerFunds(){
+        return "You have $" + player.getMoney() + " in your wallet\n\n";
     }
 
     public Integer getNumberOfBets(){
