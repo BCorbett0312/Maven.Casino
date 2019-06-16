@@ -232,6 +232,12 @@ public class BlackjackPlayerTest {
 
     @Test
     public void bet() {
+        Player player = new Player (700, "Charles");
+        BlackjackPlayer thisPlayer = new BlackjackPlayer(player);
+
+        Integer expected = 600;
+
+        assertEquals(expected, thisPlayer.bet(100));
     }
 
     @Test
@@ -282,23 +288,4 @@ public class BlackjackPlayerTest {
     }
 
 
-//    @Test
-//    public void bet1() {
-//        BlackjackPlayer player1 = new BlackjackPlayer();
-//        assertNull(player1.bet());
-//    }
-//
-//    @Test
-//    public void bet2() {
-//        Player thisPlayer = new Player(600, "Ben");
-//        BlackjackPlayer test = new BlackjackPlayer(thisPlayer);
-//
-//        Integer toBet = 200;
-//        Integer expected = 400;
-//        test.bet(toBet);
-//
-//
-//        assertEquals(expected, test.getWalletBalance());
-//
-//    }
 }

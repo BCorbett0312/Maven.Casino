@@ -13,7 +13,7 @@ public class Casino {
     public Player player;
 
     Console console = new Console(System.in, System.out);
-
+    Boolean playAgain;
 
     public Casino(){
 
@@ -21,15 +21,19 @@ public class Casino {
 
 
     public void start(){
-
-
         welcomeToTheCasino();
         getPlayerInfo();
 
-        Integer userChoice = getGameChoice();
-        gameSelector(userChoice);
+        playAgain = true;
+        while(playAgain) {
+            Integer userChoice = getGameChoice();
+            gameSelector(userChoice);
+
+        }
 
     }
+
+
 
 
     public void getPlayerInfo(){
@@ -45,7 +49,7 @@ public class Casino {
     }
 
     public Integer getGameChoice(){
-        String gameChoice = "What game would you like to play?" +
+        String gameChoice = "Welcome to the lobby" + "\nWhat game would you like to play?" +
                 "\n1) Blackjack" + "\n2) Continental" + "\n3) Craps"+ "\n4) GoFish" + "\n5) Roulette" + "\n6) Slots";
         return console.getIntegerInput(gameChoice);
 
@@ -75,6 +79,18 @@ public class Casino {
                 //Slots slots
         }
 
+    }
+    public void keepPlaying(){
+        String wantToPlay = "Do you want to play again?" +"\n1) Yes" + "\n2) No";
+        Integer play = console.getIntegerInput(wantToPlay);
+        switch (play){
+            case 1:
+                playAgain = true;
+                break;
+            case 2:
+                playAgain = false;
+                break;
+        }
     }
 
 
