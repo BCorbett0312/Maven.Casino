@@ -1269,8 +1269,7 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(expected, actual);
     }
-
-
+    
 
 
 //    @Test
