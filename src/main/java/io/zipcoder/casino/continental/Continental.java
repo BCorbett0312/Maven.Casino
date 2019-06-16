@@ -2,6 +2,7 @@ package io.zipcoder.casino.continental;
 
 import io.zipcoder.casino.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,7 +16,23 @@ public class Continental extends CardGame{
     private Hand dealerHand;
     private List<ValueSet> valueSets;
     private List<StraightSet> straightSets;
+    private PlayerOrder<ContinentalPlayer> playerOrder;
     private Integer round;
+
+    public Continental() {
+        DeckBuilder builder = new DeckBuilder();
+        deck = builder.addSetWithJokers(2).shuffle().build();
+        pile = new Stack<>();
+        player = new ContinentalPlayer();
+        valueSets = new LinkedList<>();
+        straightSets = new LinkedList<>();
+        playerOrder = new PlayerOrder<>();
+        round = 6;
+    }
+
+    public Continental(Player player) {
+
+    }
 
 
     private void startGame() {}

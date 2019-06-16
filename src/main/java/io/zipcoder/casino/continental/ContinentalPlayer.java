@@ -14,6 +14,7 @@ public class ContinentalPlayer {
 
     public ContinentalPlayer() {
         player = new Player();
+        hand = new Hand();
     }
 
     public Player getPlayer() {
@@ -22,10 +23,6 @@ public class ContinentalPlayer {
 
     public Hand getHand() {
         return hand;
-    }
-
-    public void setHand(Hand hand) {
-        this.hand = hand;
     }
 
     public Boolean getSteal() {
