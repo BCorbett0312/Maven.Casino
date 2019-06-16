@@ -18,6 +18,7 @@ public class GoFish extends CardGame {
     Integer numBook;
     Boolean gameOver;
     Boolean playing;
+    Boolean switchTurns;
 
     Console console = new Console(System.in, System.out);
 
@@ -69,6 +70,21 @@ public class GoFish extends CardGame {
         console.println("or the deck runs out of cards. Enjoy the game and maybe you will even win!");
 
     }
+
+    public void playerFromDeck(){
+        playerA.getHand().add(deck.draw());
+    }
+
+    public void compFromDeck(){
+        comp.getHand().add(deck.draw());
+    }
+
+    public void showCards(){
+        handPlayerA.toString();
+    }
+
+    
+
 
 
 
