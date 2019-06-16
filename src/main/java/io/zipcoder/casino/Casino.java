@@ -5,6 +5,7 @@ import io.zipcoder.casino.GoFish.GoFish;
 import io.zipcoder.casino.blackJack.Blackjack;
 import io.zipcoder.casino.continental.Continental;
 import io.zipcoder.casino.craps.CrapsGame;
+import io.zipcoder.casino.craps.CrapsMediator;
 import io.zipcoder.casino.roulette.Roulette;
 import io.zipcoder.casino.utilities.Console;
 
@@ -67,7 +68,8 @@ public class Casino {
                 Continental continental = new Continental();
                 break;
             case 3:
-                //CrapsGame craps = new CrapsGame(player);
+                CrapsMediator crapsMed = new CrapsMediator(player, console);
+                crapsMed.play();
                 break;
             case 4:
                 GoFish goFish = new GoFish();
