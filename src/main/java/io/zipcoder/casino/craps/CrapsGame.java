@@ -188,6 +188,7 @@ public class CrapsGame extends Game implements Gamble {
         }
         else{
             phase = Phase.POINT;
+            comeOutRoll = roll;
             return "The Point is " + roll.getValue() +"\n";
         }
     }
@@ -201,10 +202,12 @@ public class CrapsGame extends Game implements Gamble {
     public String rollPoint(CrapsRoll roll){
         if(roll.getValue() == 7){
             phase = Phase.COMEOUT;
+            comeOutRoll = null;
             return "7. Pass Line loses\n";
         }
         else if(roll.getValue().equals(comeOutRoll.getValue())){
             phase = Phase.COMEOUT;
+            comeOutRoll = null;
             return "Shooter hits. Pass Line wins\n";
         }
         else{
@@ -381,6 +384,11 @@ public class CrapsGame extends Game implements Gamble {
     // DANGEROUS only for testing
     protected void setLeaveBets(Boolean leaveBets){
         this.leaveBets = leaveBets;
+    }
+
+    // for testing only
+    protected CrapsRoll getComeOutRoll(){
+        return comeOutRoll;
     }
 
 

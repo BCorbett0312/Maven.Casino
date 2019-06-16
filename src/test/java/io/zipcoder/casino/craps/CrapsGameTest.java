@@ -359,10 +359,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -377,10 +379,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -392,13 +396,16 @@ public class CrapsGameTest {
         String expected = "Natural\n";
         Phase phaseExpected = Phase.COMEOUT;
 
+
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -413,10 +420,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -431,10 +440,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -449,10 +460,13 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
+
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -467,10 +481,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -485,10 +501,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -503,10 +521,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -521,10 +541,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -539,10 +561,12 @@ public class CrapsGameTest {
         // Act
         String result = comeTester.rollComeOut(roll);
         Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -559,10 +583,12 @@ public class CrapsGameTest {
         // Act
         String result = pointTester.rollPoint(roll);
         Phase phaseActual = pointTester.getPhase();
+        CrapsRoll actualComeOutRoll = pointTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualComeOutRoll);
     }
 
     @Test
@@ -579,10 +605,12 @@ public class CrapsGameTest {
         // Act
         String result = pointTester.rollPoint(roll);
         Phase phaseActual = pointTester.getPhase();
+        CrapsRoll actualComeOutRoll = pointTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualComeOutRoll);
     }
 
     @Test
@@ -599,10 +627,12 @@ public class CrapsGameTest {
         // Act
         String result = pointTester.rollPoint(roll);
         Phase phaseActual = pointTester.getPhase();
+        CrapsRoll actualComeOutRoll = pointTester.getComeOutRoll();
 
         // Assert
         Assert.assertEquals(expected, result);
         Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(comeOut.getValue(),actualComeOutRoll.getValue());
     }
 
     @Test
@@ -1269,7 +1299,7 @@ public class CrapsGameTest {
         // Assert
         Assert.assertEquals(expected, actual);
     }
-    
+
 
 
 //    @Test

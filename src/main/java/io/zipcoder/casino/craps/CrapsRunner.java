@@ -23,7 +23,7 @@ public class CrapsRunner {
             while(!moveOn){
                 String input = consul.getStringInput("Enter a command");
                 Pair<String,Boolean> inputResult = game.processInput(input);
-                consul.print(inputResult.getValue0());
+                consul.print(inputResult.getValue0()+ "\n");
                 moveOn = inputResult.getValue1();
             }
         }
