@@ -30,6 +30,28 @@ public class GoFish extends CardGame {
 
     }
 
+
+    public void newGame(){
+        playing = true;
+        gameOver=false;
+        deal();
+        //check for books
+    }
+
+    public void startGame (){
+        newGame();
+        while(playing){
+            console.getStringInput("Do you want to play Go Fish?");
+            
+        }
+    }
+
+
+
+
+
+
+
     public String checkBooks(String value){
         int count=0;
         ArrayList<Card> cards = new ArrayList<>();
@@ -83,7 +105,7 @@ public class GoFish extends CardGame {
         handPlayerA.toString();
     }
 
-    
+
 
 
 
