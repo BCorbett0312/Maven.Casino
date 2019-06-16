@@ -3,6 +3,9 @@ package io.zipcoder.casino.GoFish;
 import io.zipcoder.casino.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import io.zipcoder.casino.utilities.Console;
 
 
@@ -22,6 +25,7 @@ public class GoFish extends CardGame {
 
     Console console = new Console(System.in, System.out);
 
+    public GoFish() {}
 
     public GoFish (GoFishPlayer playerA){
         this.playerA = playerA;
@@ -35,7 +39,8 @@ public class GoFish extends CardGame {
         playing = true;
         gameOver=false;
         deal();
-        //check for books
+        checkBooks(handPlayerA);
+        checkBooks(compHand);
     }
 
     public void startGame (){
@@ -52,18 +57,20 @@ public class GoFish extends CardGame {
 
 
 
-    public String checkBooks(String value){
+    public String checkBooks(Hand hand){
         int count=0;
-        ArrayList<Card> cards = new ArrayList<>();
-        for(Card c: cards){
-            if(c.getValue().equals(value)){
+
+        List<Card> cards = Arrays.asList(hand.getCards());
+        int value = -1;
+
+        for(int x = 0; x< cards.size();x++){
+            if(cards.get(x).equals(cards.get(x+1))) {
                 count++;
                 if(count == 4)
                     numBook++;
-                cards.remove(c);
             }
         }
-        return "You're number of books is "+ numBook;
+        return "Your number of books is "+ numBook;
     }
 
     public void deal() {
