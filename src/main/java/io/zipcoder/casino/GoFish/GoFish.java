@@ -42,7 +42,7 @@ public class GoFish extends CardGame {
         newGame();
         while(playing){
             console.getStringInput("Do you want to play Go Fish?");
-            
+
         }
     }
 
