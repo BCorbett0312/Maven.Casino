@@ -22,6 +22,7 @@ public class Blackjack extends CardGame implements Gamble {
 
 
 
+
     public Blackjack(Player player) {
         dealer = new BlackjackPlayer();
         gambler = new BlackjackPlayer(player);
@@ -75,7 +76,6 @@ public class Blackjack extends CardGame implements Gamble {
         if(!bust){
             console.println(dealer.getHand().toString());
             dealerTurn();
-            checkBust(dealer);
             checkWinner();
             payOut();}
         if(bust){
@@ -135,6 +135,8 @@ public class Blackjack extends CardGame implements Gamble {
         if (playerToCheck.getHandValue(playerToCheck.getHand()) > 21){
             bust = true;}
         return bust;}
+
+
 
     protected void hitOrStay(Integer gameAction){
         switch(gameAction){
@@ -297,9 +299,5 @@ public class Blackjack extends CardGame implements Gamble {
 
         String tableState = "Your hand is as follows "+ "\n"+gambler.getHand().toString() + " and the current count is " +
                 gambler.getHandValue(gambler.getHand())+ "\nThe Dealer is showing " +dealer.getHand().getCardAtIndex(0).getValue();
-
-        return tableState;
-    }
-
-
+        return tableState;}
 }
