@@ -34,6 +34,15 @@ public class Blackjack extends CardGame implements Gamble {
 
     }
 
+    public Blackjack(Player player, Console console){
+        dealer = new BlackjackPlayer();
+        gambler = new BlackjackPlayer(player);
+        deck = new DeckBuilder().addSet().build();
+        this.console = console;
+        mediator = new BlackJackMediator();
+        initialBet = 0;
+    }
+
     protected BlackjackPlayer getDealer() {
         return dealer;
     }

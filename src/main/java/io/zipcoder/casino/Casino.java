@@ -62,7 +62,7 @@ public class Casino {
 
         switch (userChoice){
             case 1:
-                Blackjack bj = new Blackjack(player);
+                Blackjack bj = new Blackjack(player, console);
                 bj.startBlackjack();
                 break;
             case 2:
