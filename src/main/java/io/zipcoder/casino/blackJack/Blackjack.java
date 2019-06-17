@@ -45,7 +45,7 @@ public class Blackjack extends CardGame implements Gamble {
         desireToPlay = true;
         while (desireToPlay) {
             initializeGame();
-            desireToPlay = keepPlaying();
+            desireToPlay = keepPlaying(askKeepPlaying());
         }
 
     }
@@ -54,12 +54,11 @@ public class Blackjack extends CardGame implements Gamble {
     protected Boolean checkBlackJack(BlackjackPlayer playerToCheck) {
         Boolean result = false;
         if (playerToCheck.getHandValue(playerToCheck.getHand()) == 21) {
-            result = true;
-        }
+            result = true;}
         return result;}
 
 
-    //This prepares the table for play
+
     private void initializeGame() {
         getNewDeck();
         gambler.discardHand();
@@ -71,30 +70,26 @@ public class Blackjack extends CardGame implements Gamble {
 
 
 
-    //This starts a round of blackjack if dealer or player doesnt have blackjack
-    protected void playRound() {
+    private void playRound() {
         playerTurn();
         if(!bust){
             console.println(dealer.getHand().toString());
             dealerTurn();
             checkBust(dealer);
             checkWinner();
-            payOut();
-        }
+            payOut();}
         if(bust){
             endGameState = 0;
             String busted = "You bust.  Too Bad.";
-            console.println(busted);
-        }
-
+            console.println(busted);}
     }
 
-    // This gets a fresh deck every game
-    private void getNewDeck() {
+
+    protected Deck getNewDeck() {
         this.deck = new DeckBuilder().addSet().build();
+        return deck;
     }
 
-    //This is what happens on the dealers Turn;
     protected void dealerTurn() {
         Boolean dealerPlay = true;
 
@@ -124,49 +119,51 @@ public class Blackjack extends CardGame implements Gamble {
 
         while (!stay && !bust ) {
             if (playerCanDouble()) {
-                playerCanDoublePlay();
+                playerCanDoublePlay(firstGameActionNoSplit());
+                console.println(displayTable());
                 checkBust(gambler);
             } else {
-                hitOrStay();
+                hitOrStay(nextGameAction());
+                console.println(displayTable());
             }
             checkBust(gambler);
         }
     }
-    //This checks if a player busts and sets the variable
+
     protected boolean checkBust(BlackjackPlayer playerToCheck){
         bust = false;
         if (playerToCheck.getHandValue(playerToCheck.getHand()) > 21){
-            bust = true;
-        }
+            bust = true;}
         return bust;}
 
-    //This is the game action selections based on possible plays
-    protected void hitOrStay(){
-        switch(nextGameAction()){
+    protected void hitOrStay(Integer gameAction){
+        switch(gameAction){
             case 1:
                 gambler.hitForPlayer(deck.draw());
-                console.println(displayTable());
                 break;
             case 2:
                 stay = true;
                 break;
         }
     }
+    protected Boolean getStay(){
+        return stay;
+    }
 
+    protected void setStay(Boolean setTo){
+        stay = setTo;
+    }
 
-
-    protected void playerCanDoublePlay(){
-        switch(firstGameActionNoSplit()){
+    protected void playerCanDoublePlay(Integer gameAction){
+        switch(gameAction){
             case 1:
                 gambler.hitForPlayer(deck.draw());
-                console.println(displayTable());
                 break;
             case 2:
                 stay = true;
                 break;
             case 3:
                 gambler.hitForPlayer(deck.draw());
-                console.println(displayTable());
                 gambler.bet(initialBet);
                 initialBet += initialBet;
                 stay = true;
@@ -178,16 +175,13 @@ public class Blackjack extends CardGame implements Gamble {
     protected Boolean playerCanDouble(){
         Boolean result = false;
         if(initialBet <= gambler.getWalletBalance() && gambler.getHand().size() == 2) {
-            result = true;
-            }
-        return result;
-    }
+            result = true;}
+        return result;}
 
 
     protected void setInitialBet(Integer amount){
         initialBet = amount;
     }
-
 
     protected void determineIfWinnerAfterDeal(){
         if(checkBlackJack(dealer) && checkBlackJack(gambler)){
@@ -196,7 +190,6 @@ public class Blackjack extends CardGame implements Gamble {
             endGameState = initialBet;
             payOut();
         }
-
         else if(checkBlackJack(dealer) && !checkBlackJack(gambler)){
             String toPrint = "The dealer has Blackjack, you lose";
             console.println(toPrint);
@@ -209,10 +202,8 @@ public class Blackjack extends CardGame implements Gamble {
             payOut();
         }
         else {
-            playRound();
-        }
+            playRound();}
     }
-
     protected void dealInitialHands(){
         deck.shuffleDeck();
         gambler.hitForPlayer(deck.draw());
@@ -220,7 +211,6 @@ public class Blackjack extends CardGame implements Gamble {
         gambler.hitForPlayer(deck.draw());
         dealer.hitForPlayer(deck.draw());
     }
-
     protected String showInitialDeal(){
         String initialHands = "";
         initialHands += "The dealer is showing "+ dealer.getHand().getCardAtIndex(0).getValue()+
@@ -232,6 +222,8 @@ public class Blackjack extends CardGame implements Gamble {
     protected void setBust(Boolean toSet){
         bust = toSet;
     }
+
+    protected Boolean getBust(){return bust;}
 
     protected void checkWinner() {
 
@@ -261,11 +253,11 @@ public class Blackjack extends CardGame implements Gamble {
         endGameState = amount;
     }
 
-    public void payOut() {
+    protected void payOut() {
         gambler.addToWallet(endGameState);
     }
 
-    @Override
+
     public Integer payOut(Integer amount) {
         return null;}
 
@@ -281,9 +273,14 @@ public class Blackjack extends CardGame implements Gamble {
         return console.getIntegerInput(toPrint);
     }
 
-    public Boolean keepPlaying(){
-        String toPrint = "You have " + gambler.getWalletBalance()+ "\nWould you like to keep playing?" + "\n1) Yes" + "\n2) No";
-        switch(console.getIntegerInput(toPrint)){
+    public Integer askKeepPlaying() {
+        String toPrint = "You have " + gambler.getWalletBalance() + "\nWould you like to keep playing?" + "\n1) Yes" + "\n2) No";
+        return console.getIntegerInput(toPrint);
+    }
+
+
+    public Boolean keepPlaying(Integer gameAction){
+        switch(gameAction){
             case 1:
                 desireToPlay = true;
                 break;
