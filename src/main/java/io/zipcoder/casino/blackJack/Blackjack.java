@@ -231,19 +231,38 @@ public class Blackjack extends CardGame implements Gamble {
 
         if(dealer.getHandValue(dealer.getHand()) > gambler.getHandValue(gambler.getHand()) && dealer.getHandValue(dealer.getHand()) <= 21) {
             endGameState = 0;
+            printDealerWins();
         }
 
         if(dealer.getHandValue(dealer.getHand()) > gambler.getHandValue(gambler.getHand()) && dealer.getHandValue(dealer.getHand()) > 21){
             endGameState = initialBet*2;
+            printGamblerWins(endGameState);
         }
 
         if(dealer.getHandValue(dealer.getHand())< gambler.getHandValue(gambler.getHand()) && gambler.getHandValue(gambler.getHand()) <= 21) {
             endGameState = initialBet*2;
+            printGamblerWins(endGameState);
         }
         if(dealer.getHandValue(dealer.getHand()) == gambler.getHandValue(gambler.getHand())) {
             endGameState = initialBet;
+            printPush();
         }
 
+    }
+
+    protected void printPush(){
+        String push = "You and the dealer tied.  You get your bet back.";
+        console.println(push);
+    }
+
+    protected void printGamblerWins(Integer amount){
+        String gamblerWins = "You win " + amount;
+        console.println(gamblerWins);
+    }
+
+    protected void printDealerWins(){
+        String dealerWins = "The dealer wins.  Sorry.";
+        console.println(dealerWins);
     }
 
 
@@ -293,6 +312,8 @@ public class Blackjack extends CardGame implements Gamble {
 
         return desireToPlay;
     }
+
+
 
 
     protected String displayTable(){
