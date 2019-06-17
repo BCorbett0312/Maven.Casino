@@ -75,12 +75,19 @@ public class Card implements Comparable<Card> {
 
 
     public int compareTo(Card card) {
-        return 0;
+
+        int compare = compareSuitTo(card) * 14 + compareValueTo(card);
+        return compare;
+
     }
 
-    public int compareValueTo(Card card) { return 0; }
+    public int compareValueTo(Card card) {
+        return value.compareTo(card.getValue());
+    }
 
-    public int compareSuitTo(Card card) { return 0; }
+    public int compareSuitTo(Card card) {
+        return suit.compareTo(card.getSuit());
+    }
 
     @Override
     public String toString() {

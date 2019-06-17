@@ -308,6 +308,35 @@ public class DeckTest {
         Assert.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void isEmptyTest1() {
+
+        //Given
+        Deck deck = new Deck();
+
+        Assert.assertTrue(deck.isEmpty());
+
+    }
+
+    @Test
+    public void isEmptyTest2() {
+
+        //Given
+        Card card1 = new Card(CardSuit.SPADE, CardValue.FIVE);
+        Card card2 = new Card(CardSuit.SPADE, CardValue.SEVEN);
+        Card card3 = new Card(CardSuit.HEART, CardValue.ACE);
+        Card card4 = new Card(CardSuit.CLUB, CardValue.THREE);
+        Card card5 = new Card(CardSuit.NONE, CardValue.JOKER);
+        Card[] cards = {card1, card2, card3, card4, card5};
+
+        Deck deck = new Deck();
+        deck.add(cards);
+        deck.clear();
+
+        //Then
+        Assert.assertTrue(deck.isEmpty());
+    }
+
     public Boolean assertArraysDoNotEqual(Card[] cards1, Card[] cards2) {
 
         if(cards1.length == cards2.length) {

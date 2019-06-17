@@ -237,7 +237,7 @@ public class CardTest {
         Card card2 = new Card(CardSuit.SPADE, CardValue.THREE);
 
         //When
-        Integer expected = 2;
+        Integer expected = -2;
         Integer actual = card1.compareSuitTo(card2);
 
         //Then
@@ -285,7 +285,7 @@ public class CardTest {
         Card card2 = new Card(CardSuit.DIAMOND, CardValue.THREE);
 
         //When
-        Integer expected = -13;
+        Integer expected = -14;
         Integer actual = card1.compareTo(card2);
 
         //Then
@@ -301,7 +301,7 @@ public class CardTest {
         Card card2 = new Card(CardSuit.DIAMOND, CardValue.THREE);
 
         //When
-        Integer expected = -25;
+        Integer expected = 27;
         Integer actual = card1.compareTo(card2);
 
         //Then

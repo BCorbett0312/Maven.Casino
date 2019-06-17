@@ -130,6 +130,6 @@ public class Hand {
             result += cards.get(i).toString() + "\n";
         }
 
-        return result; }
-
+        return result;
+    }
 }

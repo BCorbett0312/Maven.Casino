@@ -15,7 +15,7 @@ public enum CardValue {
     TEN,
     JACK,
     QUEEN,
-    KING;
+    KING
 
 }
 

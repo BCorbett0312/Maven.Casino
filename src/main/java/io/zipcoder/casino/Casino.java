@@ -65,7 +65,8 @@ public class Casino {
                 bj.startBlackjack();
                 break;
             case 2:
-                Continental continental = new Continental();
+                Continental continental = new Continental(player, console);
+                continental.startGame();
                 break;
             case 3:
                 //CrapsGame craps = new CrapsGame(player);
