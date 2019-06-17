@@ -75,7 +75,7 @@ public class GoFish extends CardGame {
                  rules();
                  break;
              case "no" :
-                 //exit
+                 playing=false;
                  break;
          }
         newGame();
@@ -98,7 +98,7 @@ public class GoFish extends CardGame {
 
     public String getGuess(){
         if(asking == playerA){
-         number = console.getStringInput("It's your turn. Here are your cards. What card do you want?" +
+         number = console.getStringInput("It's your turn. Here are your cards."+ showCards()+" What card do you want?" +
                 "\n Enter the card number. ace,two,three,four,five,six,seven,eight,nine,ten,jack,queen,king");
         return number;}
        else {
@@ -164,8 +164,9 @@ public class GoFish extends CardGame {
 
 
 
-    public void showCards(){
-        handPlayerA.toString();
+    public String showCards(){
+       return playerA.getHand().toString();
+
     }
 
     public void passCard(Hand giving,Hand asking,CardValue value) {
