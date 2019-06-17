@@ -8,9 +8,9 @@ import io.zipcoder.casino.utilities.Console;
 public class Blackjack extends CardGame implements Gamble {
     private BlackjackPlayer gambler;
     private BlackjackPlayer dealer;
-
+    private BlackJackMediator mediator;
     private Deck deck;
-    Console console = new Console(System.in, System.out);
+    private Console console;
 
     private Integer endGameState;
     private Integer initialBet;
@@ -27,6 +27,8 @@ public class Blackjack extends CardGame implements Gamble {
         dealer = new BlackjackPlayer();
         gambler = new BlackjackPlayer(player);
         deck = new DeckBuilder().addSet().build();
+        console = new Console(System.in, System.out);
+        mediator = new BlackJackMediator();
         initialBet = 0;
 
 
@@ -41,22 +43,45 @@ public class Blackjack extends CardGame implements Gamble {
     }
 
     public void startBlackjack() {
-        String welcome = "Welcome to BlackJack";
-        console.println(welcome);
+        mediator.welcomeToBlackJack();
         desireToPlay = true;
         while (desireToPlay) {
             initializeGame();
-            desireToPlay = keepPlaying(askKeepPlaying());
+            desireToPlay = keepPlaying(mediator.askKeepPlaying(gambler));
         }
 
     }
 
-    //This checks if the specified player has blackjack when dealt
-    protected Boolean checkBlackJack(BlackjackPlayer playerToCheck) {
-        Boolean result = false;
-        if (playerToCheck.getHandValue(playerToCheck.getHand()) == 21) {
-            result = true;}
-        return result;}
+    protected Deck getNewDeck() {
+        this.deck = new DeckBuilder().addSet().build();
+        return deck;
+    }
+
+    protected Boolean getStay(){
+        return stay;
+    }
+
+    protected void setStay(Boolean setTo){
+        stay = setTo;
+    }
+    protected void setBust(Boolean toSet){
+        bust = toSet;
+    }
+
+    protected Boolean getBust(){return bust;
+    }
+
+    protected Integer getEndGameState(){
+        return endGameState;
+    }
+
+    protected void setEndGameState(Integer amount){
+        endGameState = amount;
+    }
+
+    protected void setInitialBet(Integer amount){
+        initialBet = amount;
+    }
 
 
 
@@ -78,17 +103,31 @@ public class Blackjack extends CardGame implements Gamble {
             dealerTurn();
             checkWinner();
             payOut();}
-        if(bust){
+        if(bust) {
             endGameState = 0;
-            String busted = "You bust.  Too Bad.";
-            console.println(busted);}
+            mediator.playerBust();
+        }
+
     }
 
+    //This is the players turn
+    protected void playerTurn() {
+        stay = false;
+        bust = false;
 
-    protected Deck getNewDeck() {
-        this.deck = new DeckBuilder().addSet().build();
-        return deck;
+        while (!stay && !bust ) {
+            if (playerCanDouble()) {
+                playerCanDoublePlay(mediator.firstGameActionNoSplit());
+                console.println(displayTable());
+                checkBust(gambler);
+            } else {
+                hitOrStay(mediator.nextGameAction());
+                console.println(displayTable());
+            }
+            checkBust(gambler);
+        }
     }
+
 
     protected void dealerTurn() {
         Boolean dealerPlay = true;
@@ -112,23 +151,17 @@ public class Blackjack extends CardGame implements Gamble {
             }
         }
     }
-    //This is the players turn
-    protected void playerTurn() {
-        stay = false;
-        bust = false;
 
-        while (!stay && !bust ) {
-            if (playerCanDouble()) {
-                playerCanDoublePlay(firstGameActionNoSplit());
-                console.println(displayTable());
-                checkBust(gambler);
-            } else {
-                hitOrStay(nextGameAction());
-                console.println(displayTable());
-            }
-            checkBust(gambler);
-        }
-    }
+
+    //This checks if the specified player has blackjack when dealt
+    protected Boolean checkBlackJack(BlackjackPlayer playerToCheck) {
+        Boolean result = false;
+        if (playerToCheck.getHandValue(playerToCheck.getHand()) == 21) {
+            result = true;}
+        return result;}
+
+
+
 
     protected boolean checkBust(BlackjackPlayer playerToCheck){
         bust = false;
@@ -148,13 +181,7 @@ public class Blackjack extends CardGame implements Gamble {
                 break;
         }
     }
-    protected Boolean getStay(){
-        return stay;
-    }
 
-    protected void setStay(Boolean setTo){
-        stay = setTo;
-    }
 
     protected void playerCanDoublePlay(Integer gameAction){
         switch(gameAction){
@@ -181,25 +208,20 @@ public class Blackjack extends CardGame implements Gamble {
         return result;}
 
 
-    protected void setInitialBet(Integer amount){
-        initialBet = amount;
-    }
+
 
     protected void determineIfWinnerAfterDeal(){
         if(checkBlackJack(dealer) && checkBlackJack(gambler)){
-            String toPrint = "You both have Blackjack.  You push.";
-            console.println(toPrint);
+            mediator.blackJackPush();
             endGameState = initialBet;
             payOut();
         }
         else if(checkBlackJack(dealer) && !checkBlackJack(gambler)){
-            String toPrint = "The dealer has Blackjack, you lose";
-            console.println(toPrint);
+            mediator.blackJackDealerWin();
             endGameState = 0;
         }
         else if(!checkBlackJack(dealer) && checkBlackJack(gambler)){
-            String toPrint = "You have Blackjack, the dealer loses";
-            console.println(toPrint);
+            mediator.blackJackGamblerWin();
             endGameState = initialBet * 2;
             payOut();
         }
@@ -213,6 +235,7 @@ public class Blackjack extends CardGame implements Gamble {
         gambler.hitForPlayer(deck.draw());
         dealer.hitForPlayer(deck.draw());
     }
+
     protected String showInitialDeal(){
         String initialHands = "";
         initialHands += "The dealer is showing "+ dealer.getHand().getCardAtIndex(0).getValue()+
@@ -221,58 +244,33 @@ public class Blackjack extends CardGame implements Gamble {
         return initialHands;
     }
 
-    protected void setBust(Boolean toSet){
-        bust = toSet;
-    }
 
-    protected Boolean getBust(){return bust;}
 
     protected void checkWinner() {
 
         if(dealer.getHandValue(dealer.getHand()) > gambler.getHandValue(gambler.getHand()) && dealer.getHandValue(dealer.getHand()) <= 21) {
             endGameState = 0;
-            printDealerWins();
+            mediator.printDealerWins();
         }
 
         if(dealer.getHandValue(dealer.getHand()) > gambler.getHandValue(gambler.getHand()) && dealer.getHandValue(dealer.getHand()) > 21){
             endGameState = initialBet*2;
-            printGamblerWins(endGameState);
+            mediator.printGamblerWins(endGameState);
         }
 
         if(dealer.getHandValue(dealer.getHand())< gambler.getHandValue(gambler.getHand()) && gambler.getHandValue(gambler.getHand()) <= 21) {
             endGameState = initialBet*2;
-            printGamblerWins(endGameState);
+            mediator.printGamblerWins(endGameState);
         }
         if(dealer.getHandValue(dealer.getHand()) == gambler.getHandValue(gambler.getHand())) {
             endGameState = initialBet;
-            printPush();
+            mediator.printPush();
         }
 
     }
 
-    protected void printPush(){
-        String push = "You and the dealer tied.  You get your bet back.";
-        console.println(push);
-    }
-
-    protected void printGamblerWins(Integer amount){
-        String gamblerWins = "You win " + amount;
-        console.println(gamblerWins);
-    }
-
-    protected void printDealerWins(){
-        String dealerWins = "The dealer wins.  Sorry.";
-        console.println(dealerWins);
-    }
 
 
-    protected Integer getEndGameState(){
-        return endGameState;
-    }
-
-    protected void setEndGameState(Integer amount){
-        endGameState = amount;
-    }
 
     protected void payOut() {
         gambler.addToWallet(endGameState);
@@ -282,22 +280,6 @@ public class Blackjack extends CardGame implements Gamble {
     public Integer payOut(Integer amount) {
         return null;}
 
-
-    public Integer firstGameActionNoSplit(){
-        String toPrint = "What would you like to do?" + "\n 1) Hit" + "\n 2) Stay" +
-                "\n 3) Double";
-        return console.getIntegerInput(toPrint);
-    }
-
-    public Integer nextGameAction(){
-        String toPrint = "What would you like to do?" + "\n 1) Hit" + "\n 2) Stay";
-        return console.getIntegerInput(toPrint);
-    }
-
-    public Integer askKeepPlaying() {
-        String toPrint = "You have " + gambler.getWalletBalance() + "\nWould you like to keep playing?" + "\n1) Yes" + "\n2) No";
-        return console.getIntegerInput(toPrint);
-    }
 
 
     public Boolean keepPlaying(Integer gameAction){
@@ -312,8 +294,6 @@ public class Blackjack extends CardGame implements Gamble {
 
         return desireToPlay;
     }
-
-
 
 
     protected String displayTable(){
