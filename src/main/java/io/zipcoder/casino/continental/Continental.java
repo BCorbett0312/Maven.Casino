@@ -1,16 +1,17 @@
 package io.zipcoder.casino.continental;
 
 import io.zipcoder.casino.*;
+import io.zipcoder.casino.utilities.Console;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 
 public class Continental extends CardGame{
 
     private LinkedList<ContinentalPlayer> order;
 
+    private ContinentalMediator mediator;
+    private Console console;
 
     private ContinentalPlayer player;
     private Hand computer;
@@ -27,6 +28,7 @@ public class Continental extends CardGame{
 
         player = new ContinentalPlayer();
         computer = new Hand();
+        console = new Console(System.in, System.out);
 
         DeckBuilder builder = new DeckBuilder();
         deck = builder.addSetWithJokers().shuffle().build();
@@ -38,9 +40,12 @@ public class Continental extends CardGame{
         gameOver = false;
     }
 
-    public Continental (Player player) {
+    public Continental (Player player, Console console) {
         this.player = new ContinentalPlayer(player);
         computer = new Hand();
+
+        this.console = console;
+
 
         DeckBuilder builder = new DeckBuilder();
         deck = builder.addSetWithJokers().shuffle().build();
@@ -58,6 +63,7 @@ public class Continental extends CardGame{
     public void startGame() {
 
         deal();
+        discard(drawFromDeck());
         while(!gameOver) {
             playerTurn();
             if(gameOver) break;
@@ -67,19 +73,49 @@ public class Continental extends CardGame{
     }
 
     public void playerTurn() {
-        if(ContinentalMediator.deckOrPileDraw()){
-            drawFromDeck();
+        ContinentalMediator.println("YOUR TURN" , console);
+        ContinentalMediator.println("Top of Pile: " + showTopCardOnPile(), console);
+
+        ContinentalMediator.println("Your Hand: \n" + player.getHand().toString(), console);
+
+        if(ContinentalMediator.deckOrPileDraw(console)){
+            player.addToHand(drawFromDeck());
         }
         else {
-            drawFromPile();
+            player.addToHand(drawFromPile());
         }
-        isWinningHand();
-        discard(ContinentalMediator.selectCard(player.getHand()));
+        ContinentalMediator.println("Your Hand: \n" + player.getHand().toString(), console);
+
+        discard(ContinentalMediator.selectCard(player.getHand(), console));
+        if(isWinningHand(player.getHand())){
+            ContinentalMediator.println("You Win", console);
+            gameOver = true;
+        }
+
 
 
     }
 
     public void computerTurn() {
+
+        Random random = new Random();
+
+        ContinentalMediator.println("COMPUTER TURN", console);
+
+
+        if(random.nextBoolean()){
+            computer.add(drawFromDeck());
+        }
+        else {
+            computer.add(drawFromPile());
+        }
+
+
+        discard(computer.removeByIndex(random.nextInt(computer.size())));
+        if(isWinningHand(computer)){
+            ContinentalMediator.println("You Lost", console);
+            gameOver = true;
+        }
 
     }
 
@@ -147,8 +183,32 @@ public class Continental extends CardGame{
         return isSame;
     }
 
-    protected Boolean isWinningHand() {
-        return null;
+    protected Boolean isWinningHand(Hand hand) {
+
+        HashMap<CardValue, Integer> sets = new HashMap<>();
+
+        for(int i = 0; i < hand.size(); i++) {
+            CardValue key = hand.getValueAtIndex(i);
+            if(sets.containsKey(key)) {
+                sets.replace(key, sets.get(key) + 1);
+            }
+            else {
+                sets.put(key, 1);
+            }
+        }
+
+        LinkedList<CardValue> keys = new LinkedList<>(sets.keySet());
+        Integer numOfSets = 0;
+        for(CardValue key : keys) {
+            if(sets.get(key).equals(3)) numOfSets++;
+        }
+
+        if (numOfSets.equals(2)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public ContinentalPlayer getPlayer() {
