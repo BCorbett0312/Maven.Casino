@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 
 import io.zipcoder.casino.GoFish.GoFish;
+import io.zipcoder.casino.GoFish.GoFishPlayer;
 import io.zipcoder.casino.blackJack.Blackjack;
 import io.zipcoder.casino.continental.Continental;
 import io.zipcoder.casino.craps.CrapsGame;
@@ -70,7 +71,9 @@ public class Casino {
                 //CrapsGame craps = new CrapsGame(player);
                 break;
             case 4:
-                GoFish goFish = new GoFish();
+                GoFishPlayer bob = new GoFishPlayer(player);
+                GoFish goFish = new GoFish(bob);
+                goFish.startGame();
                 break;
             case 5:
                 Roulette roulette = new Roulette(player);
