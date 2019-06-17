@@ -117,7 +117,7 @@ public class GoFish extends CardGame {
         List<Card> cards = new ArrayList<>(Arrays.asList(hand.getCards())) ;
         int value = -1;
 
-        for(int x = 0; x< cards.size();x++){
+        for(int x = 0; x< cards.size()-1;x++){
             if(cards.get(x).equals(cards.get(x+1))) {
                 count++;
                 if(count == 4)
