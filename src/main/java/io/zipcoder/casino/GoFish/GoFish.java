@@ -89,6 +89,7 @@ public class GoFish extends CardGame {
             checkBooks(asking.getHand());
              checkHand(asking);
              checkDeck();
+             exit();
             switchPartner();
 
          }
@@ -304,7 +305,19 @@ public class GoFish extends CardGame {
 
         }
 
-    }
+        public void exit () {
+            String exit = console.getStringInput("Do you want to quit playing? yes or no");
+            switch(exit){
+                case "yes":
+                    playing = false;
+                    break;
+                case "no" :
+                    playing=true;
+                    break;
+
+        }
+
+    }}
 
 
 
