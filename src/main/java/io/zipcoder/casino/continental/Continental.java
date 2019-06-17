@@ -55,6 +55,7 @@ public class Continental extends CardGame{
 
         round = 6;
         gameOver = false;
+
     }
 
 
