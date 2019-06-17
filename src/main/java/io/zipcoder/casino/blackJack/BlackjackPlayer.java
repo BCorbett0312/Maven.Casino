@@ -4,14 +4,14 @@ import io.zipcoder.casino.Card;
 import io.zipcoder.casino.GamblingPlayer;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Player;
-
+import io.zipcoder.casino.utilities.Console;
 
 
 public class BlackjackPlayer implements GamblingPlayer {
-
     private Player player;
     private Hand playerHand;
     private Hand playerHandSplit;
+    private Console console = new Console(System.in, System.out);
 
 
     public BlackjackPlayer(Player player){
@@ -87,10 +87,23 @@ public class BlackjackPlayer implements GamblingPlayer {
         return handValue;
     }
 
-
     @Override
     public Integer bet() {
-        return null;
+        String wantToBet = "How much would you like to bet?";
+        Integer betAmount = console.getIntegerInput(wantToBet);
+        Integer newWallet = player.getMoney()-betAmount;
+        player.setMoney(newWallet);
+        return betAmount;
     }
+
+    public Integer bet(Integer amount) {
+        Integer newWallet = player.getMoney()-amount;
+        player.setMoney(newWallet);
+        return player.getMoney();
+    }
+    public Integer addToWallet(Integer amount){
+        Integer newWallet = player.getMoney() + amount;
+        player.setMoney(newWallet);
+        return player.getMoney();}
 
 }

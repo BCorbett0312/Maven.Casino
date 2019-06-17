@@ -232,6 +232,12 @@ public class BlackjackPlayerTest {
 
     @Test
     public void bet() {
+        Player player = new Player (700, "Charles");
+        BlackjackPlayer thisPlayer = new BlackjackPlayer(player);
+
+        Integer expected = 600;
+
+        assertEquals(expected, thisPlayer.bet(100));
     }
 
     @Test
@@ -253,9 +259,33 @@ public class BlackjackPlayerTest {
         Card jHearts = new Card(HEART, CardValue.JACK);
         Player player1 = new Player (null, "Gregory");
         BlackjackPlayer player = new BlackjackPlayer(player1);
-        player.hitForPlayer(jSpades);
-        player.hitForPlayer(jHearts);
+        player.hitForSplitHand(jSpades);
+        player.hitForSplitHand(jHearts);
         Hand playerSplitHand = player.getSplitHand();
         assertEquals(playerSplitHand, player.getSplitHand());
     }
+
+    @Test
+    public void addToWalletTest(){
+        BlackjackPlayer player1 = new BlackjackPlayer();
+
+
+        Integer expected = 500;
+
+        assertEquals(expected, player1.addToWallet(500));
+
+    }
+
+    @Test
+    public void addToWalletTest2(){
+        Player player = new Player (500, "Charles");
+        BlackjackPlayer thisPlayer = new BlackjackPlayer(player);
+
+        Integer expected = 600;
+
+        assertEquals(expected, thisPlayer.addToWallet(100));
+
+    }
+
+
 }
