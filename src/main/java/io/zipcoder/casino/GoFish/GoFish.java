@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
+import java.util.Random;
 
 import io.zipcoder.casino.utilities.Console;
-import org.graalvm.compiler.lir.amd64.AMD64Binary;
+
 
 
 public class GoFish extends CardGame {
@@ -21,7 +22,7 @@ public class GoFish extends CardGame {
     private Hand compHand;
     GoFishPlayer asking;
     GoFishPlayer giving;
-
+    Random random=new Random();
 
     Integer numBook;
     Integer playerBooks;
@@ -40,6 +41,7 @@ public class GoFish extends CardGame {
         this.playerA = playerA;
         this.handPlayerA= new Hand ();
         deck = new DeckBuilder().addSet().shuffle().build();
+        this.comp = new GoFishPlayer(new Player());
 
     }
 
@@ -51,7 +53,7 @@ public class GoFish extends CardGame {
         gameOver=false;
         deal();
         checkBooks(handPlayerA);
-        checkBooks(compHand);
+        checkBooks(comp.getHand());
     }
 
     public void switchPartner() {
@@ -82,7 +84,7 @@ public class GoFish extends CardGame {
          giving=comp;
 
          while(playing){
-
+            getGuess();
             askedCard(number, giving.getHand(),asking.getHand());
             checkBooks(asking.getHand());
              checkHand(asking);
@@ -100,9 +102,9 @@ public class GoFish extends CardGame {
                 "\n Enter the card number. ace,two,three,four,five,six,seven,eight,nine,ten,jack,queen,king");
         return number;}
        else {
-            return null;
+             compGuess();
 
-    }}
+    }return null;}
 
 
 
@@ -112,7 +114,7 @@ public class GoFish extends CardGame {
     public String checkBooks(Hand hand){
         int count=0;
 
-        List<Card> cards = Arrays.asList(hand.getCards());
+        List<Card> cards = new ArrayList<>(Arrays.asList(hand.getCards())) ;
         int value = -1;
 
         for(int x = 0; x< cards.size();x++){
@@ -242,7 +244,7 @@ public class GoFish extends CardGame {
             break;
     }}
 
-    public void goFish (Hand giving,Hand asking,,CardValue value){
+    public void goFish (Hand giving,Hand asking,CardValue value){
         Card card1 = new Card(CardSuit.CLUB,value);
         Card card2= new Card(CardSuit.SPADE,value);
         Card card3=new Card(CardSuit.DIAMOND,value);
@@ -257,9 +259,50 @@ public class GoFish extends CardGame {
         if(!(giving.contains(card3))){
             console.println("GO FISH!");
             playerFromDeck(asking);}
-        if(!(giving.contains(card4)){
+        if(!(giving.contains(card4))){
             console.println("GO FISH!");
             playerFromDeck(asking);}
+    }
+
+    public CardValue compGuess (){
+
+        number = Integer.valueOf((random.nextInt(10)+1)).toString();
+        switch(number) {
+            case "1":
+                return CardValue.ACE;
+
+            case "2":
+                return CardValue.TWO;
+
+            case "3":
+                return CardValue.THREE;
+
+            case "4":
+                return CardValue.FOUR;
+
+            case "5":
+                return CardValue.FIVE;
+
+            case "6":
+                return CardValue.SIX;
+
+            case "7":
+                return CardValue.SEVEN;
+
+            case "8":
+                return CardValue.EIGHT;
+
+            case "9":
+                return CardValue.NINE;
+
+            case "10":
+                return CardValue.TEN;
+
+        }
+            return null;
+
+        }
+
     }
 
 
@@ -269,4 +312,3 @@ public class GoFish extends CardGame {
 
 
 
-}
