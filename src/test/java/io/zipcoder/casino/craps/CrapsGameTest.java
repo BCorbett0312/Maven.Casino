@@ -84,11 +84,12 @@ public class CrapsGameTest {
         // Arrange
         String expected = "To place a Pass Line bet, enter  \"Pass Line \"  and the wager amount\n" +
                           "To place a Don't Pass bet, enter \"Don't Pass \" and the wager amount\n" +
-                          "To place a Field bet, enter \"Field\"            and the wager amount\n" +
+                          "To place a Field bet, enter \"Field bet\"        and the wager amount\n" +
                           "If you've placed as many bets as you want, enter \"Roll\"\n" +
                           "To see your current bets, enter \"Show Bets\"\n" +
                           "To print the payout table, enter \"Payout\"\n" +
-                          "To leave, enter \"exit\"";
+                          "To see your available funds, enter \"Wallet\"\n" +
+                          "To leave, enter \"exit\"\n";
 
         // Act
         String actual = makeBetTester.printInstructions();
@@ -160,7 +161,7 @@ public class CrapsGameTest {
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
         CrapsGame processBetTester = new CrapsGame(cp);
         String input = "field bet 5";
-        String expected = "Placed a Field bet for $5\n: ";
+        String expected = "Placed a Field bet for $5\n\n";
 
         // Act
         processBetTester.setPhase(Phase.POINT);
@@ -180,7 +181,7 @@ public class CrapsGameTest {
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
         CrapsGame processBetTester = new CrapsGame(cp);
         String input = "field bet 15";
-        String expected = "You've not enough minerals";
+        String expected = "You've not enough minerals\n";
 
         // Act
         processBetTester.setPhase(Phase.POINT);
@@ -201,7 +202,7 @@ public class CrapsGameTest {
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
         CrapsGame processBetTester = new CrapsGame(cp);
         String input = "field bet 5";
-        String expected = "Placed a Field bet for $5\n: ";
+        String expected = "Placed a Field bet for $5\n\n";
 
         // Act
         processBetTester.setPhase(Phase.COMEOUT);
@@ -243,7 +244,7 @@ public class CrapsGameTest {
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
         CrapsGame processBetTester = new CrapsGame(cp);
         String input = "Pass line 5";
-        String expected = "Placed a Pass Line bet for $5\n: ";
+        String expected = "Placed a Pass Line bet for $5\n\n";
 
         // Act
         processBetTester.setPhase(Phase.COMEOUT);
@@ -284,7 +285,7 @@ public class CrapsGameTest {
         CrapsPlayer cp = new CrapsPlayer(new Player(10, "Sulla"));
         CrapsGame processBetTester = new CrapsGame(cp);
         String input = "Don't pass 5";
-        String expected = "Placed a Don't Pass bet for $5\n: ";
+        String expected = "Placed a Don't Pass bet for $5\n\n";
 
         // Act
         processBetTester.setPhase(Phase.COMEOUT);
@@ -353,13 +354,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(1,1);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "Shooter craps out\n";
+        Phase phaseExpected = Phase.COMEOUT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertFalse(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -369,13 +374,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(2,1);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "Shooter craps out\n";
+        Phase phaseExpected = Phase.COMEOUT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertFalse(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -385,13 +394,18 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(3,4);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "Natural\n";
+        Phase phaseExpected = Phase.COMEOUT;
+
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertFalse(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -401,13 +415,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(5,6);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "Natural\n";
+        Phase phaseExpected = Phase.COMEOUT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertFalse(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -417,12 +435,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(6,6);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "Shooter craps out\n";
+        Phase phaseExpected = Phase.COMEOUT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertFalse(result.getValue1());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualRoll);
     }
 
     @Test
@@ -432,13 +455,18 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(3,1);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "The Point is 4\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
+
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -448,13 +476,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(3,2);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "The Point is 5\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -464,13 +496,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(3,3);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "The Point is 6\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -480,13 +516,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(3,5);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "The Point is 8\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -496,13 +536,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(6,3);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "The Point is 9\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -512,13 +556,17 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(4,6);
         comeTester.setPhase(Phase.COMEOUT);
         String expected = "The Point is 10\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = comeTester.rollComeOut(roll);
+        String result = comeTester.rollComeOut(roll);
+        Phase phaseActual = comeTester.getPhase();
+        CrapsRoll actualRoll = comeTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(roll, actualRoll);
     }
 
     @Test
@@ -530,13 +578,17 @@ public class CrapsGameTest {
         pointTester.setPhase(Phase.POINT);
         pointTester.setComeOutRoll(comeOut);
         String expected = "7. Pass Line loses\n";
+        Phase phaseExpected = Phase.COMEOUT;
 
         // Act
-        Pair<String, Boolean> result = pointTester.rollPoint(roll);
+        String result = pointTester.rollPoint(roll);
+        Phase phaseActual = pointTester.getPhase();
+        CrapsRoll actualComeOutRoll = pointTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualComeOutRoll);
     }
 
     @Test
@@ -548,13 +600,17 @@ public class CrapsGameTest {
         pointTester.setPhase(Phase.POINT);
         pointTester.setComeOutRoll(comeOut);
         String expected = "Shooter hits. Pass Line wins\n";
+        Phase phaseExpected = Phase.COMEOUT;
 
         // Act
-        Pair<String, Boolean> result = pointTester.rollPoint(roll);
+        String result = pointTester.rollPoint(roll);
+        Phase phaseActual = pointTester.getPhase();
+        CrapsRoll actualComeOutRoll = pointTester.getComeOutRoll();
 
         // Assert
-        Assert.assertTrue(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertNull(actualComeOutRoll);
     }
 
     @Test
@@ -565,14 +621,18 @@ public class CrapsGameTest {
         CrapsRoll roll = new CrapsRoll(3,2);
         pointTester.setPhase(Phase.POINT);
         pointTester.setComeOutRoll(comeOut);
-        String expected = "Shooter rolls a 5\n";
+        String expected = "Play continues\n";
+        Phase phaseExpected = Phase.POINT;
 
         // Act
-        Pair<String, Boolean> result = pointTester.rollPoint(roll);
+        String result = pointTester.rollPoint(roll);
+        Phase phaseActual = pointTester.getPhase();
+        CrapsRoll actualComeOutRoll = pointTester.getComeOutRoll();
 
         // Assert
-        Assert.assertFalse(result.getValue1());
-        Assert.assertEquals(expected, result.getValue0());
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(phaseExpected, phaseActual);
+        Assert.assertEquals(comeOut.getValue(),actualComeOutRoll.getValue());
     }
 
     @Test
@@ -581,7 +641,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player(10, "Sulla")));
         processTester.setPhase(Phase.COMEOUT);
         String input = "pass line 2";
-        String expected = "Placed a Pass Line bet for $2\n: ";
+        String expected = "Placed a Pass Line bet for $2\n\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -597,7 +657,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player(100, "Sulla")));
         processTester.setPhase(Phase.COMEOUT);
         String input = "don't pass 22";
-        String expected = "Placed a Don't Pass bet for $22\n: ";
+        String expected = "Placed a Don't Pass bet for $22\n\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -612,7 +672,7 @@ public class CrapsGameTest {
         // Arrange
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player(10000000, "Crassus")));
         String input = "field bet 322";
-        String expected = "Placed a Field bet for $322\n: ";
+        String expected = "Placed a Field bet for $322\n\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -627,7 +687,7 @@ public class CrapsGameTest {
         // Arrange
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         String input = "pass line";
-        String expected = "Invalid command\nTry again: ";
+        String expected = "Invalid command\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -719,7 +779,7 @@ public class CrapsGameTest {
         // Arrange
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         String input = "blargle";
-        String expected = "Invalid command\nTry again: ";
+        String expected = "Invalid command\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -735,7 +795,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         processTester.addBet(new PassBet(1));
         String input = "exit";
-        String expected = "You have open bets, enter \"Exit\" again if you really want to leave\n: ";
+        String expected = "You have open bets. Enter \"Exit\" again if you really want to leave\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -770,7 +830,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         processTester.setLeaveBets(true);
         String input = "";
-        String expected = "Enter a command: ";
+        String expected = "\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -788,7 +848,7 @@ public class CrapsGameTest {
         CrapsGame processTester = new CrapsGame(new CrapsPlayer(new Player()));
         processTester.setLeaveBets(true);
         String input = "anything besides exit";
-        String expected = "Enter a command: ";
+        String expected = "\n";
 
         // Act
         Pair<String, Boolean> result = processTester.processInput(input);
@@ -1212,6 +1272,33 @@ public class CrapsGameTest {
         Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void playerFundsTest1(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(100, "Sulla"));
+        CrapsGame game = new CrapsGame(cp);
+        String expected = "You have $100 in your wallet\n\n";
+
+        // Act
+        String actual = game.playerFunds();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void playerFundsTest2(){
+        // Arrange
+        CrapsPlayer cp = new CrapsPlayer(new Player(593056, "Crassus"));
+        CrapsGame game = new CrapsGame(cp);
+        String expected = "You have $593056 in your wallet\n\n";
+
+        // Act
+        String actual = game.playerFunds();
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
 
 
 
