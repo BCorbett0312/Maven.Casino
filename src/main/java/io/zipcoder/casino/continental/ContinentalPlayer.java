@@ -1,5 +1,6 @@
 package io.zipcoder.casino.continental;
 
+import io.zipcoder.casino.Card;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Player;
 
@@ -9,35 +10,31 @@ public class ContinentalPlayer {
 
     private Player player;
     private Hand hand;
-    private Boolean steal;
-    private Integer points;
+    private Boolean placed;
 
     public ContinentalPlayer() {
-        player = new Player();
         hand = new Hand();
+        placed = false;
+        player = new Player();
     }
 
-    public Player getPlayer() {
-        return player;
+    public ContinentalPlayer(Player player) {
+        hand = new Hand();
+        this.player = player;
+    }
+
+
+    public Boolean playableSets() {
+        return null;
     }
 
     public Hand getHand() {
         return hand;
     }
 
-    public Boolean getSteal() {
-        return steal;
+    public void addToHand(Card card) {
+        hand.add(card);
     }
 
-    public void setSteal(Boolean steal) {
-        this.steal = steal;
-    }
 
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
 }

@@ -9,81 +9,154 @@ import java.util.Stack;
 
 public class Continental extends CardGame{
 
+    private LinkedList<ContinentalPlayer> order;
+
+
+    private ContinentalPlayer player;
+    private Hand computer;
+
     private Deck deck;
     private Stack<Card> pile;
-    private ContinentalPlayer player;
-    private ContinentalMediator mediator;
-    private Hand dealerHand;
-    private List<ValueSet> valueSets;
-    private List<StraightSet> straightSets;
-    private PlayerOrder<ContinentalPlayer> playerOrder;
+
+    private LinkedList<ContinentalSet> sets;
+
     private Integer round;
+    private Boolean gameOver;
 
-    public Continental() {
-        DeckBuilder builder = new DeckBuilder();
-        deck = builder.addSetWithJokers(2).shuffle().build();
-        pile = new Stack<>();
+    public Continental () {
+
         player = new ContinentalPlayer();
-        valueSets = new LinkedList<>();
-        straightSets = new LinkedList<>();
-        playerOrder = new PlayerOrder<>();
+        computer = new Hand();
+
+        DeckBuilder builder = new DeckBuilder();
+        deck = builder.addSetWithJokers().shuffle().build();
+        pile = new Stack<>();
+
+        sets = new LinkedList<>();
+
         round = 6;
+        gameOver = false;
     }
 
-    public Continental(Player player) {
+    public Continental (Player player) {
+        this.player = new ContinentalPlayer(player);
+        computer = new Hand();
 
+        DeckBuilder builder = new DeckBuilder();
+        deck = builder.addSetWithJokers().shuffle().build();
+        pile = new Stack<>();
+
+        sets = new LinkedList<>();
+
+        round = 6;
+        gameOver = false;
     }
 
 
-    private void startGame() {}
 
-    public void deal() {}
+
+    public void startGame() {
+
+        deal();
+        while(!gameOver) {
+            playerTurn();
+            if(gameOver) break;
+            computerTurn();
+        }
+
+    }
+
+    public void playerTurn() {
+        if(ContinentalMediator.deckOrPileDraw()){
+            drawFromDeck();
+        }
+        else {
+            drawFromPile();
+        }
+        isWinningHand();
+        discard(ContinentalMediator.selectCard(player.getHand()));
+
+
+    }
+
+    public void computerTurn() {
+
+    }
+
     /**
-     * @return gets card from top of Deck.
+     * Deals six cards to the player and the computer
+     */
+    public void deal() {
+
+        for (int i = 0; i < 6; i++) {
+            player.addToHand(drawFromDeck());
+            computer.add(drawFromDeck());
+        }
+
+    }
+
+    /**
+     * Takes a card from the top of the Deck
+     * @return
      */
     public Card drawFromDeck() {
-        return null;
+        return deck.draw();
     }
 
     /**
-     *
-     * @return gets card from the top of the Pile
+     * Takes a card from the top of the Pile
+     * @return
      */
-    public Card drawFromPile() { return null; }
-
-    public void addToPile(Card card) { }
+    public Card drawFromPile() {
+        return pile.pop();
+    }
 
     /**
-     * This method compares all cards see if they have the same value.
-     * @param card1 This is a card from a Hand
-     * @param card2 This is a card from a Hand
-     * @param card3 This is a card from a Hand
-     * @return True or False depending if the values match or not
+     * Gets the string representation of the top card on the pile
+     * @return
      */
-    public Boolean isThreeOfAKind(Card card1, Card card2, Card card3){
+    public String showTopCardOnPile() {
+        return pile.peek().toString();
+    }
+
+
+    /**
+     * sends a selected card to the Pile
+     * @param card the selected card
+     */
+    public void discard(Card card) {
+        pile.push(card);
+    }
+
+    protected Boolean isThreeOfAKind(Card card1, Card card2, Card card3) {
+
+        if(card1.getValue() == CardValue.JOKER) {
+            if(card2.compareValueTo(card3) == 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        Boolean isSame = true;
+
+        if((card2.getValue() != CardValue.JOKER) && (card1.compareValueTo(card2) != 0)) isSame = false;
+        if((card3.getValue() != CardValue.JOKER) && (card1.compareValueTo(card3) != 0)) isSame = false;
+
+        return isSame;
+    }
+
+    protected Boolean isWinningHand() {
         return null;
     }
 
-    public Boolean isStraight(Card card1, Card card2, Card card3, Card card4) {
-        return null;
+    public ContinentalPlayer getPlayer() {
+        return player;
     }
 
-    public void peformSteal() {}
-
-
-    public String displaySets() {
-        return null;
+    public Hand getComputer() {
+        return computer;
     }
-
-    public void makeValueSet(Card card1, Card card2, Card card3) {}
-
-    public void makeStraightSet(Card card1, Card card2, Card card3, Card card4) {}
-
-    public Boolean addToSet(ContinentalSet set) {
-        return null;
-    }
-
-    public void nextTurn() {}
-
 
 }
