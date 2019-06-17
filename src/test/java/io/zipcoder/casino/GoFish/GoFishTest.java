@@ -19,31 +19,6 @@ public class GoFishTest {
     public void tearDown() throws Exception {
     }
 
-    //    @Test
-//    public void checkBooksTest () {
-//        Player player = new Player();
-//        GoFishPlayer playerA = new GoFishPlayer(player);
-//
-//        Card card = new Card(CardSuit.SPADE, CardValue.TWO);
-//        Card card1 = new Card(CardSuit.CLUB,CardValue.THREE);
-//        Card card2= new Card(CardSuit.SPADE,CardValue.THREE);
-//        Card card3=new Card(CardSuit.DIAMOND,CardValue.THREE);
-//        Card card4 = new Card(CardSuit.HEART,CardValue.THREE);
-//
-//        Hand handPlayerA = new Hand ();
-//        handPlayerA.add(card);
-//        handPlayerA.add(card1);
-//        handPlayerA.add(card2);
-//        handPlayerA.add(card3);
-//        handPlayerA.add(card4);
-//
-//        Integer expected = 1;
-//        Integer actual = handPlayerA.checkBooks();
-//
-//        Assert.assertEquals(expected,actual);
-//
-//    }
-
     @Test
     public void deal() {
         Deck deck = new Deck();
@@ -61,6 +36,14 @@ public class GoFishTest {
 
         Assert.assertEquals(expected,actual);
     }
+
+
+
+
+
+
+
+
 
 
 }
